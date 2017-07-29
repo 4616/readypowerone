@@ -16,15 +16,15 @@ public class Enemy : MonoBehaviour, ICombat {
 	
 	// Update is called once per frame
 	void Update () {
-		this.FindPlayer() 
+        this.FindPlayer();
 	}
 
 	void FindPlayer () {
-		Player.GetPosition();
+		Player.GetPlayer().GetPosition();
 	}
 
 	void DealDamage(){
-		Player.TakeDamage(Enemy.damage);
+		Player.GetPlayer().TakeDamage(damage);
 	}
 
 }
