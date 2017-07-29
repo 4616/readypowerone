@@ -1,1 +1,4 @@
-/[Tt]emp/
+Library/*
+*.sln
+Assembly-CSharp-Editor*
+Temp/*
