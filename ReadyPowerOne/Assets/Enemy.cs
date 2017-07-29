@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour, ICombat {
 	void TimeManagment (){
 
 		if(attackCoolDown > 0){
-			Debug.Log("Cooling down");
+			//Debug.Log("Cooling down");
 			attackCoolDown -= attackSpeed; 
 			attackCoolDown = Mathf.Max(attackCoolDown, 0);
 		}
@@ -89,6 +89,5 @@ public class Enemy : MonoBehaviour, ICombat {
     public void TakeDamage(float damage) {
         Debug.Log("Enemy takes " + damage + " damage.  Not implemented");
     }
-
 }
 
