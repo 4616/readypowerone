@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, ICombat {
 
+    public LineRenderer phazer;
+
     public static Player player_ = null;
 
     public float moveSpeed = 1f;
@@ -37,9 +39,22 @@ public class Player : MonoBehaviour, ICombat {
             energy -= Time.deltaTime;
         }
 
+        if (Input.GetKey(KeyCode.Space)) {
+            phazer.gameObject.SetActive(true);
+            ResetPhaser();
+        } else {
+            phazer.gameObject.SetActive(false);
+        }
+
         if (energy <= 0f) {
             Debug.Log("Out of Energy!");
             Time.timeScale = 0f;
+        }
+    }
+
+    public void ResetPhaser() {
+        for (int i = 0; i < phazer.positionCount; i++) {
+            phazer.SetPosition(i, new Vector3(Random.Range(-0.2f, 0.2f), i, 0f));
         }
     }
 
