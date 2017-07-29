@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4317297277487124}
   - component: {fileID: 212099828507762968}
-  - component: {fileID: 114648414920822246}
+  - component: {fileID: 114330992166923620}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Untagged
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114648414920822246
+--- !u!114 &114330992166923620
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   energy: 10
   moveSpeed: 0.1
   damage: 1
-  range: 1.5
+  range: 1
   armor: 0
 --- !u!212 &212099828507762968
 SpriteRenderer:
