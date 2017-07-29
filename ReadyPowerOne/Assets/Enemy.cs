@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour, ICombat {
 	public float moveSpeed = 0.1f;
 	public float damage = 1f;
 	public float range = 1f;
+	public float detectRange = 1f;
 	public float armor = 0f;
 
 
@@ -19,23 +20,30 @@ public class Enemy : MonoBehaviour, ICombat {
 	
 	// Update is called once per frame
 	void Update () {
-		bool attackable = InRange();
-		//Debug.Log(attackable);
+		bool playerDetected = InDetectRange();
+
+		Debug.Log(playerDetected);		
+		if(playerDetected){
+			Debug.Log("Player detected! Moving towards player now.");
+			this.transform.position = Vector3.MoveTowards(this.transform.position, FindPlayer(), Time.deltaTime * this.moveSpeed);
+		}
+
+		
 
 
         //this.FindPlayer();
 
 	}
 
-	bool InRange() {
+	bool InDetectRange () {
 
 		float target_distance = Vector3.Distance(this.transform.position,FindPlayer());
-		//Debug.Log(this.range);
-		bool attackable = false;
-		if (target_distance < this.range){
-			attackable = true;
+		Debug.Log(this.range);
+		bool playerDetected = false;
+		if (target_distance < this.detectRange){
+			playerDetected = true;
 			}
-		return attackable; 
+		return playerDetected; 
 	}
 
 // 	public Vector3 GetPosition(){

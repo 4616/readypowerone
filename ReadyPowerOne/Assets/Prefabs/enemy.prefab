@@ -57,6 +57,7 @@ MonoBehaviour:
   moveSpeed: 0.1
   damage: 1
   range: 1
+  detectRange: 10
   armor: 0
 --- !u!212 &212099828507762968
 SpriteRenderer:
