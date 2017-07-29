@@ -73,5 +73,9 @@ public class Enemy : MonoBehaviour, ICombat {
 // 		Player.GetPlayer().TakeDamage(damage);
 // 	}
 
+    public void TakeDamage(float damage) {
+        Debug.Log("Enemy takes " + damage + " damage.  Not implemented");
+    }
+
 }
 

@@ -65,12 +65,14 @@ public class Drill : MonoBehaviour, ICombat {
 
 
 
-	//public void CheckDeath(){
-	//	if(health < 0){
-	//		Destroy(gameObject, 0.05f);
-	//	}
-	//}
+    //public void CheckDeath(){
+    //	if(health < 0){
+    //		Destroy(gameObject, 0.05f);
+    //	}
+    //}
 
-
+    public void TakeDamage(float damage) {
+        Debug.Log("Drill takes " + damage + " damage.  Not implemented");
+    }
 
 }
