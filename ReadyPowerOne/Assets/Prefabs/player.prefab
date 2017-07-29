@@ -160,7 +160,7 @@ MonoBehaviour:
   moveSpeed: 1
   rotationSpeed: 90
   energy: 100
-  health: 100
+  health: 1000
   phaserCost: 2
 --- !u!114 &114933901826246116
 MonoBehaviour:
