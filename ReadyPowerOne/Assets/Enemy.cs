@@ -27,9 +27,10 @@ public class Enemy : MonoBehaviour, ICombat {
 		// bool playerDetected = InDetectRange();
 		float target_distance = DistanceToPlayer();
 
-		//Debug.Log(playerDetected);		
+		//Debug.Log("in update function");
+		Debug.Log(target_distance);		
 		if(target_distance <= detectRange){
-			//Debug.Log("Player detected! Moving towards player now.");
+			Debug.Log("Player detected! Moving towards player now.");
 			this.transform.position = Vector3.MoveTowards(this.transform.position, FindPlayer(), Time.deltaTime * this.moveSpeed);
 		}
 
@@ -50,6 +51,7 @@ public class Enemy : MonoBehaviour, ICombat {
 	}
 
 	void AttackPlayer (){
+		Debug.Log("Player takes " + damage + " damage.");
 		Player.GetPlayer().TakeDamage(this.damage);
 		attackCoolDown = attackSpeed; 
 	}
