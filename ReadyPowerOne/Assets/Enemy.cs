@@ -5,10 +5,10 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, ICombat {
 	public float health = 10f;
 	public float energy = 10f;
-	public float moveSpeed = 0.1f;
+	public float moveSpeed = 1f;
 	public float damage = 1f;
 	public float attackRange = 1f;
-	public float detectRange = 1f;
+	public float detectRange = 10f;
 	public float armor = 0f;
 	public float attackSpeed = 1f;
 	public float attackCoolDown = 1f;
