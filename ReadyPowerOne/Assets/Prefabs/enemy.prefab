@@ -80,11 +80,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   energy: 10
-  moveSpeed: 0.1
+  moveSpeed: 1
   damage: 1
   attackRange: 1
   detectRange: 10
   armor: 0
+  attackSpeed: 1
+  attackCoolDown: 1
 --- !u!212 &212099828507762968
 SpriteRenderer:
   m_ObjectHideFlags: 1

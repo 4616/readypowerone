@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour, ICombat {
 	// Use this for initialization
 	void Start () {
 		Debug.Log("Enemy initialized!");
-		
 	}
 	
 	// Update is called once per frame
@@ -87,7 +86,16 @@ public class Enemy : MonoBehaviour, ICombat {
 // 	}
 
     public void TakeDamage(float damage) {
-        Debug.Log("Enemy takes " + damage + " damage.  Not implemented");
+        Debug.Log("Enemy takes " + damage + " damage.");
+        this.health -= damage;
+        if(this.health <= 0){
+        	Die();
+
+        }
+    }
+
+    public void Die (){
+    	Object.Destroy(this.gameObject);
     }
 
 }
