@@ -59,10 +59,22 @@ public class Drill : MonoBehaviour, ICombat {
 			*/
 		}
 
-	void GetPlayerRange () {
+	void OnCollisionStay2D(Collision2D coll) {
+  	if (coll.gameObject.GetComponent<Player>() != null) {
+    	state = state.Active;
+    }
+  }
 
+	public float GetEnergy () {
+		private float energyTransfer = this.rechargeRate * Time.deltaTime
+		if (this.energy > energyTransfer){
+			this.energy -= energyTransfer;
+			return energyTransfer;
+		} else {
+			state = state.Inactive;
+			return 0;
+		}
 	}
-
 
 
 	//public void CheckDeath(){
