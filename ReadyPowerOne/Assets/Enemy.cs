@@ -7,9 +7,11 @@ public class Enemy : MonoBehaviour, ICombat {
 	public float energy = 10f;
 	public float moveSpeed = 0.1f;
 	public float damage = 1f;
-	public float range = 1f;
+	public float attackRange = 1f;
 	public float detectRange = 1f;
 	public float armor = 0f;
+	public float attackSpeed = 1f;
+	public float attackCoolDown = 1f;
 
 
 	// Use this for initialization
@@ -20,25 +22,49 @@ public class Enemy : MonoBehaviour, ICombat {
 	
 	// Update is called once per frame
 	void Update () {
-		bool playerDetected = InDetectRange();
+		TimeManagment();
 
-		Debug.Log(playerDetected);		
-		if(playerDetected){
-			Debug.Log("Player detected! Moving towards player now.");
+
+		// bool playerDetected = InDetectRange();
+		float target_distance = DistanceToPlayer();
+
+		//Debug.Log(playerDetected);		
+		if(target_distance <= detectRange){
+			//Debug.Log("Player detected! Moving towards player now.");
 			this.transform.position = Vector3.MoveTowards(this.transform.position, FindPlayer(), Time.deltaTime * this.moveSpeed);
 		}
 
-		
+		if(attackCoolDown <= 0){
+			if(target_distance <= attackRange){
+				AttackPlayer();
+			}
+		}
+	}
 
+	void TimeManagment (){
 
-        //this.FindPlayer();
+		if(attackCoolDown > 0){
+			Debug.Log("Cooling down");
+			attackCoolDown -= attackSpeed; 
+			attackCoolDown = Mathf.Max(attackCoolDown, 0);
+		}
+	}
+
+	void AttackPlayer (){
+		Player.GetPlayer().TakeDamage(this.damage);
+		attackCoolDown = attackSpeed; 
+	}
+
+	float DistanceToPlayer (){
+		float target_distance = Vector3.Distance(this.transform.position,FindPlayer());
+		return target_distance;
 
 	}
 
 	bool InDetectRange () {
 
-		float target_distance = Vector3.Distance(this.transform.position,FindPlayer());
-		Debug.Log(this.range);
+		float target_distance = DistanceToPlayer();
+		//Debug.Log(this.range);
 		bool playerDetected = false;
 		if (target_distance < this.detectRange){
 			playerDetected = true;
@@ -46,9 +72,9 @@ public class Enemy : MonoBehaviour, ICombat {
 		return playerDetected; 
 	}
 
-// 	public Vector3 GetPosition(){
-//         return transform.position;
-//     }
+	public Vector3 GetPosition(){
+        return transform.position;
+    }
 
 
 
@@ -59,6 +85,10 @@ public class Enemy : MonoBehaviour, ICombat {
 // 	void DealDamage(){
 // 		Player.GetPlayer().TakeDamage(damage);
 // 	}
+
+    public void TakeDamage(float damage) {
+        Debug.Log("Enemy takes " + damage + " damage.  Not implemented");
+    }
 
 }
 

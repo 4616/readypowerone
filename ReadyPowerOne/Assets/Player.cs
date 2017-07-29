@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, ICombat {
 
+    public LineRenderer phazer;
+
     public static Player player_ = null;
 
     public float moveSpeed = 1f;
     public float rotationSpeed = 90f;
     public float energy = 100f;
     public float health = 100f;
+
+    public float phaserCost = 2f;
 
     public static Player GetPlayer() {
         return player_;
@@ -22,24 +26,42 @@ public class Player : MonoBehaviour, ICombat {
     public void Update() {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
             transform.position += transform.up * Time.deltaTime * moveSpeed;
-            energy -= Time.deltaTime;
+            LoseEnergy(Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
             transform.position -= transform.up * Time.deltaTime * moveSpeed;
-            energy -= Time.deltaTime;
+            LoseEnergy(Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
             transform.Rotate(Vector3.forward, Time.deltaTime * rotationSpeed);
-            energy -= Time.deltaTime;
+            LoseEnergy(Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
             transform.Rotate(Vector3.forward, -1f * Time.deltaTime * rotationSpeed);
-            energy -= Time.deltaTime;
+            LoseEnergy(Time.deltaTime);
+        }
+
+        if (Input.GetKey(KeyCode.Space)) {
+            Phaser();
+        } else {
+            phazer.gameObject.SetActive(false);
         }
 
         if (energy <= 0f) {
             Debug.Log("Out of Energy!");
             Time.timeScale = 0f;
+        }
+    }
+
+    public void LoseEnergy (float amount) {
+        energy -= amount;
+    }
+
+    public void Phaser() {
+        LoseEnergy(phaserCost * Time.deltaTime);
+        phazer.gameObject.SetActive(true);
+        for (int i = 0; i < phazer.positionCount; i++) {
+            phazer.SetPosition(i, new Vector3(Random.Range(-0.2f, 0.2f), i, 0f));
         }
     }
 
@@ -56,7 +78,8 @@ public class Player : MonoBehaviour, ICombat {
     }
 
     void OnCollisionStay2D(Collision2D coll) {
-        if (coll.gameObject.tag == "RechargePoint") {
+        Drill drill = coll.gameObject.GetComponent<Drill>();
+        if (drill != null) {
             energy = Mathf.Min(energy + 1f * Time.deltaTime, 100f);
         }
     }
