@@ -18,7 +18,7 @@ public class Player : MonoBehaviour, ICombat {
 
     public Vector3 GetPosition()
     {
-        return transform.position;
+        return this.transform.position;
     }
 
     public void TakeDamage(float damage)
