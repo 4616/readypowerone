@@ -22,6 +22,5 @@ public class UpgradeButtonBehavior : MonoBehaviour {
 										0);
 		GameObject floatText = Instantiate (textAnimation,upgradeButton.transform);
 		floatText.transform.Translate (randvec);
-		
 	}
 }

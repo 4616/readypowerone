@@ -5,10 +5,10 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, ICombat {
 	public float health = 10f;
 	public float energy = 10f;
-	public float moveSpeed = 0.1f;
+	public float moveSpeed = 1f;
 	public float damage = 1f;
 	public float attackRange = 1f;
-	public float detectRange = 1f;
+	public float detectRange = 10f;
 	public float armor = 0f;
 	public float attackSpeed = 1f;
 	public float attackCoolDown = 1f;
@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour, ICombat {
 		//Debug.Log("in update function");
 		Debug.Log(target_distance);		
 		if(target_distance <= detectRange){
-			Debug.Log("Player detected! Moving towards player now.");
+			//Debug.Log("Player detected! Moving towards player now.");
 			this.transform.position = Vector3.MoveTowards(this.transform.position, FindPlayer(), Time.deltaTime * this.moveSpeed);
 		}
 
@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour, ICombat {
 	}
 
 	void AttackPlayer (){
-		Debug.Log("Player takes " + damage + " damage.");
+		//Debug.Log("Player takes " + damage + " damage.");
 		Player.GetPlayer().TakeDamage(this.damage);
 		attackCoolDown = attackSpeed; 
 	}
@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour, ICombat {
 // 	}
 
     public void TakeDamage(float damage) {
-        Debug.Log("Enemy takes " + damage + " damage.");
+        //Debug.Log("Enemy takes " + damage + " damage.");
         this.health -= damage;
         if(this.health <= 0){
         	Die();
