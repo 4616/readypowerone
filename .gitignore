@@ -1,5 +1,4 @@
-.gitignore
-Ready Power One/Library/*
+ReadyPowerOne/Library/*
 *.sln
 Assembly-CSharp-Editor*
-Ready Power One/Temp/*
+ReadyPowerOne/Temp/*
