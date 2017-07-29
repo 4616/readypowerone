@@ -61,7 +61,7 @@ public class Player : MonoBehaviour, ICombat {
         LoseEnergy(phaserCost * Time.deltaTime);
         phazer.gameObject.SetActive(true);
         for (int i = 1; i < phazer.positionCount; i++) {
-            phazer.SetPosition(i, new Vector3(Random.Range(-0.2f, 0.2f), i, 0f));
+            phazer.SetPosition(i, new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f) + i, 0f));
         }
     }
 
