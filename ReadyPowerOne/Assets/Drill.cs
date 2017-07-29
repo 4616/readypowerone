@@ -28,14 +28,14 @@ public class Drill : MonoBehaviour, ICombat {
 	public float armor = 0f;
 
 	public float rechargeRate = 0.05f;
-  private int _rechargeTimer;
-	private bool _playerInRange;
+  //private int _rechargeTimer;
+	//private bool _playerInRange;
 
 	// Use this for initialization
 	void Start() {
     state = State.Active;
-		_rechargeTimer = 0;
-		_playerInRange = true;
+		//_rechargeTimer = 0;
+		//_playerInRange = true;
 		Debug.Log("drill works");
 	}
 
@@ -59,20 +59,29 @@ public class Drill : MonoBehaviour, ICombat {
 			*/
 		}
 
-	void GetPlayerRange () {
-
+	/*
+	void OnCollisionStay2D(Collision2D coll) {
+  	if (coll.gameObject.GetComponent<Player>() != null) {
+    	state = state.Active;
+    }
+  }
+  */
+	public float GetEnergy () {
+		float energyTransfer = Mathf.Min(this.energy, this.rechargeRate * Time.deltaTime);
+		this.energy -= energyTransfer;
+		return energyTransfer;
 	}
 
 
 
-    //public void CheckDeath(){
-    //	if(health < 0){
-    //		Destroy(gameObject, 0.05f);
-    //	}
-    //}
+  //public void CheckDeath(){
+  //	if(health < 0){
+  //		Destroy(gameObject, 0.05f);
+  //	}
+  //}
 
-    public void TakeDamage(float damage) {
-        Debug.Log("Drill takes " + damage + " damage.  Not implemented");
-    }
+  public void TakeDamage(float damage) {
+      Debug.Log("Drill takes " + damage + " damage.  Not implemented");
+  }
 
 }

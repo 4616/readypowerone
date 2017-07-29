@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour, ICombat {
 	// Use this for initialization
 	void Start () {
 		Debug.Log("Enemy initialized!");
-		
 	}
 	
 	// Update is called once per frame
@@ -28,7 +27,8 @@ public class Enemy : MonoBehaviour, ICombat {
 		// bool playerDetected = InDetectRange();
 		float target_distance = DistanceToPlayer();
 
-		//Debug.Log(playerDetected);		
+		//Debug.Log("in update function");
+		Debug.Log(target_distance);		
 		if(target_distance <= detectRange){
 			//Debug.Log("Player detected! Moving towards player now.");
 			this.transform.position = Vector3.MoveTowards(this.transform.position, FindPlayer(), Time.deltaTime * this.moveSpeed);
@@ -44,13 +44,14 @@ public class Enemy : MonoBehaviour, ICombat {
 	void TimeManagment (){
 
 		if(attackCoolDown > 0){
-			Debug.Log("Cooling down");
+			//Debug.Log("Cooling down");
 			attackCoolDown -= attackSpeed; 
 			attackCoolDown = Mathf.Max(attackCoolDown, 0);
 		}
 	}
 
 	void AttackPlayer (){
+		//Debug.Log("Player takes " + damage + " damage.");
 		Player.GetPlayer().TakeDamage(this.damage);
 		attackCoolDown = attackSpeed; 
 	}
@@ -87,8 +88,16 @@ public class Enemy : MonoBehaviour, ICombat {
 // 	}
 
     public void TakeDamage(float damage) {
-        Debug.Log("Enemy takes " + damage + " damage.  Not implemented");
+        //Debug.Log("Enemy takes " + damage + " damage.");
+        this.health -= damage;
+        if(this.health <= 0){
+        	Die();
+
+        }
     }
 
+    public void Die (){
+    	Object.Destroy(this.gameObject);
+    }
 }
 
