@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   energy: 10
-  moveSpeed: 0.1
+  moveSpeed: 1
   damage: 1
   attackRange: 1
   detectRange: 10
