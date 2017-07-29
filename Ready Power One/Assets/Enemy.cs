@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour, ICombat {
 	
 	// Update is called once per frame
 	void Update () {
-		this.FindPlayer() 
+		this.FindPlayer(); 
 	}
 
 	void FindPlayer () {
