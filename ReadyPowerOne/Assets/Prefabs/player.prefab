@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1345256571784778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.45, z: 0}
+  m_LocalPosition: {x: 1.15, y: 0.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4805632121810684}
@@ -69,7 +69,7 @@ Transform:
   m_GameObject: {fileID: 1578489561520802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4041796545338202}
   m_Father: {fileID: 0}
@@ -92,7 +92,7 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!61 &61245699010056956
@@ -132,7 +132,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 2}
+  m_Offset: {x: 0, y: 4.3532405}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -143,7 +143,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 4.1}
+  m_Size: {x: 0.3, y: 7.4162474}
   m_EdgeRadius: 0
 --- !u!114 &114147011954669148
 MonoBehaviour:
@@ -157,10 +157,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phazer: {fileID: 120124865154078354}
-  moveSpeed: 1
-  rotationSpeed: 90
-  energy: 100
-  health: 1000
+  moveSpeed: 2
+  rotationSpeed: 180
+  energy: 73.49376
+  health: 100
   phaserCost: 2
 --- !u!114 &114933901826246116
 MonoBehaviour:
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a57a459888d7894885d2de495d321f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 100
 --- !u!120 &120124865154078354
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -205,13 +205,13 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0.1, y: 1, z: 0}
-  - {x: -0.1, y: 2, z: 0}
-  - {x: 0.1, y: 3, z: 0}
-  - {x: 0, y: 4, z: 0}
+  - {x: -0.15681152, y: 2, z: 0}
+  - {x: -0.16430555, y: 4, z: 0}
+  - {x: 0.046848804, y: 6, z: 0}
+  - {x: -0.08943127, y: 8, z: 0}
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 0.1
@@ -296,7 +296,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 0fe96434d0581495c8f8eceb21a7da4b, type: 3}
-  m_Color: {r: 0.22372027, g: 0.7352941, b: 0.2054498, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
