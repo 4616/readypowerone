@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour, ICombat {
 	public float attackRange = 1f;
 	public float detectRange = 1f;
 	public float armor = 0f;
+	public float attackSpeed = 1f;
+	public float attackCoolDown = 1f;
 
 
 	// Use this for initialization
@@ -20,26 +22,37 @@ public class Enemy : MonoBehaviour, ICombat {
 	
 	// Update is called once per frame
 	void Update () {
-		bool playerDetected = InDetectRange();
+		TimeManagment();
+
+
+		// bool playerDetected = InDetectRange();
+		float target_distance = DistanceToPlayer();
 
 		//Debug.Log(playerDetected);		
-		if(playerDetected){
-
+		if(target_distance <= detectRange){
 			//Debug.Log("Player detected! Moving towards player now.");
 			this.transform.position = Vector3.MoveTowards(this.transform.position, FindPlayer(), Time.deltaTime * this.moveSpeed);
 		}
 
-		if(DistanceToPlayer() <= attackRange){
-			Player.GetPlayer().TakeDamage(this.damage);
+		if(attackCoolDown <= 0){
+			if(target_distance <= attackRange){
+				AttackPlayer();
+			}
 		}
+	}
 
+	void TimeManagment (){
 
+		if(attackCoolDown > 0){
+			Debug.Log("Cooling down");
+			attackCoolDown -= attackSpeed; 
+			attackCoolDown = Mathf.Max(attackCoolDown, 0);
+		}
+	}
 
-		
-
-
-        //this.FindPlayer();
-
+	void AttackPlayer (){
+		Player.GetPlayer().TakeDamage(this.damage);
+		attackCoolDown = attackSpeed; 
 	}
 
 	float DistanceToPlayer (){
@@ -59,9 +72,9 @@ public class Enemy : MonoBehaviour, ICombat {
 		return playerDetected; 
 	}
 
-// 	public Vector3 GetPosition(){
-//         return transform.position;
-//     }
+	public Vector3 GetPosition(){
+        return transform.position;
+    }
 
 
 
