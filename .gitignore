@@ -1,0 +1,5 @@
+.gitignore
+Ready Power One/Library/*
+*.sln
+Assembly-CSharp-Editor*
+Ready Power One/Temp/*
