@@ -24,7 +24,7 @@ public class Drill : MonoBehaviour, ICombat {
 	public State state;
 	public float health = 10f;
 	public float energy = 10f;
-	public float range = 10f;
+	public float range = 4f;
 	public float armor = 0f;
 
 	public float rechargeRate = 0.05f;
