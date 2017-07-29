@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour, ICombat {
 	public float energy = 10f;
 	public float moveSpeed = 0.1f;
 	public float damage = 1f;
-	public float range = 1f;
+	public float attackRange = 1f;
 	public float detectRange = 1f;
 	public float armor = 0f;
 
@@ -22,11 +22,17 @@ public class Enemy : MonoBehaviour, ICombat {
 	void Update () {
 		bool playerDetected = InDetectRange();
 
-		Debug.Log(playerDetected);		
+		//Debug.Log(playerDetected);		
 		if(playerDetected){
-			Debug.Log("Player detected! Moving towards player now.");
+			//Debug.Log("Player detected! Moving towards player now.");
 			this.transform.position = Vector3.MoveTowards(this.transform.position, FindPlayer(), this.moveSpeed);
 		}
+
+		if(DistanceToPlayer() <= attackRange){
+			Player.GetPlayer().TakeDamage(this.damage);
+		}
+
+
 
 		
 
@@ -35,10 +41,16 @@ public class Enemy : MonoBehaviour, ICombat {
 
 	}
 
+	float DistanceToPlayer (){
+		float target_distance = Vector3.Distance(this.transform.position,FindPlayer());
+		return target_distance;
+
+	}
+
 	bool InDetectRange () {
 
-		float target_distance = Vector3.Distance(this.transform.position,FindPlayer());
-		Debug.Log(this.range);
+		float target_distance = DistanceToPlayer();
+		//Debug.Log(this.range);
 		bool playerDetected = false;
 		if (target_distance < this.detectRange){
 			playerDetected = true;
