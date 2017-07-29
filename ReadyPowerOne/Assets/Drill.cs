@@ -67,14 +67,9 @@ public class Drill : MonoBehaviour, ICombat {
   }
   */
 	public float GetEnergy () {
-		float energyTransfer = this.rechargeRate * Time.deltaTime;
-		if (this.energy > energyTransfer){
-			this.energy -= energyTransfer;
-			return energyTransfer;
-		} else {
-			//state = state.Inactive;
-			return 0;
-		}
+		float energyTransfer = Mathf.Min(this.energy, this.rechargeRate * Time.deltaTime);
+		this.energy -= energyTransfer;
+		return energyTransfer;
 	}
 
 
