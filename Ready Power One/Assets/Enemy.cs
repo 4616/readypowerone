@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour, ICombat {
 	
 	// Update is called once per frame
 	void Update () {
+		this.FindPlayer() 
 	}
 
 	void FindPlayer () {
@@ -25,4 +26,6 @@ public class Enemy : MonoBehaviour, ICombat {
 	void DealDamage(){
 		Player.TakeDamage(Enemy.damage);
 	}
+
+}
 
