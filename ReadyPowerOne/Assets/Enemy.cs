@@ -24,8 +24,9 @@ public class Enemy : MonoBehaviour, ICombat {
 
 		//Debug.Log(playerDetected);		
 		if(playerDetected){
+
 			//Debug.Log("Player detected! Moving towards player now.");
-			this.transform.position = Vector3.MoveTowards(this.transform.position, FindPlayer(), this.moveSpeed);
+			this.transform.position = Vector3.MoveTowards(this.transform.position, FindPlayer(), Time.deltaTime * this.moveSpeed);
 		}
 
 		if(DistanceToPlayer() <= attackRange){

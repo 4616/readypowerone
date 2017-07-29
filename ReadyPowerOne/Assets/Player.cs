@@ -7,7 +7,7 @@ public class Player : MonoBehaviour, ICombat {
     public static Player player_ = null;
 
     public float moveSpeed = 1f;
-    public float rotationSpeed = 45f;
+    public float rotationSpeed = 90f;
     public float energy = 100f;
     public float health = 100f;
 
