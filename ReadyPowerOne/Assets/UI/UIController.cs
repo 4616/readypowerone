@@ -90,6 +90,7 @@ public class UIController : MonoBehaviour {
 	}
 	
 	void Pause(){
+		upgradeMenu ();
 		Paused = true;
 		//pausePanel.SetActive (true);
 
@@ -97,6 +98,7 @@ public class UIController : MonoBehaviour {
 	}
 
 	void unPause(){
+		
 		Paused = false;
 		//pausePanel.SetActive (false);
 
@@ -134,7 +136,9 @@ public class UIController : MonoBehaviour {
 	}
 
 	public void upgradeMenu(){
-		GameObject um = Instantiate (upgradePanelPrefab, this.transform);
+		GameObject um = Instantiate (upgradePanelPrefab.gameObject, this.transform);
+
+		//um.GetComponent<UpgradePanelBehavior>().
 	}
 
 }

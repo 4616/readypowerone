@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour, ICombat {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log("Enemy initialized!");
 	}
 	
 	// Update is called once per frame

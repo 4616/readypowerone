@@ -36,7 +36,6 @@ public class Drill : MonoBehaviour, ICombat {
     state = State.Active;
 		//_rechargeTimer = 0;
 		//_playerInRange = true;
-		Debug.Log("drill works");
 	}
 
 	// Update is called once per frame
