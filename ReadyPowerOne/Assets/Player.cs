@@ -17,6 +17,8 @@ public class Player : MonoBehaviour, ICombat {
     public float health = 100f;
 
     public float phaserCost = 2f;
+	public float moveCost = .1f;
+
 
     public static Player GetPlayer() {
         return player_;
@@ -60,19 +62,19 @@ public class Player : MonoBehaviour, ICombat {
     public void Update() {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
             transform.position += Vector3.up * Time.deltaTime * moveSpeed;
-            LoseEnergy(Time.deltaTime);
+			LoseEnergy(moveCost*Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
             transform.position += Vector3.down * Time.deltaTime * moveSpeed;
-            LoseEnergy(Time.deltaTime);
+			LoseEnergy(moveCost*Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
             transform.position += Vector3.left * Time.deltaTime * moveSpeed;
-            LoseEnergy(Time.deltaTime);
+			LoseEnergy(moveCost*Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
             transform.position += Vector3.right * Time.deltaTime * moveSpeed;
-            LoseEnergy(Time.deltaTime);
+			LoseEnergy(moveCost*Time.deltaTime);
         }
 
         if (Input.GetKeyDown(KeyCode.Q)) {
