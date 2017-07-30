@@ -19,6 +19,7 @@ public class Player : MonoBehaviour, ICombat {
 
     public float phaserCost = 2f;
 	public float moveCost = .1f;
+    public float drillCost = 20f;
 
 
     public static Player GetPlayer() {
@@ -148,11 +149,15 @@ public class Player : MonoBehaviour, ICombat {
     }
 
     void DropDrill() {
-        if(this.bolts >= 20f){
+        if(this.bolts >= drillCost){
             Debug.Log("Dropping drill");
             GameObject newObject = Instantiate (this.drill, UIController.Instance.transform);
             newObject.transform.position = this.transform.position;
-            this.bolts -= 20f;
+            this.bolts -= drillCost;
+            UIController.Instance.updateBolts(this.bolts);
+        }
+        else{
+            Debug.Log("Not enough bolts to drop drill"); //Implement something for the player to see
         }
 
     }
