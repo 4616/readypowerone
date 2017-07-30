@@ -137,4 +137,9 @@ public class Player : MonoBehaviour, ICombat {
             energy = Mathf.Min(energy + 1f * Time.deltaTime, 100f);
         }
     }
+
+    // public void DropDrill{
+    //     Instantiate (this.coal, this.transform);
+
+    // }
 }
