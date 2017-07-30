@@ -96,10 +96,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   health: 10
-  energy: 10
+  energy: 200
   range: 10
   armor: 0
-  rechargeRate: 3
+  rechargeRate: 10
 --- !u!212 &212225167985695738
 SpriteRenderer:
   m_ObjectHideFlags: 1
