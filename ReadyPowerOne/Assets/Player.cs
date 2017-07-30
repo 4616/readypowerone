@@ -7,21 +7,27 @@ public class Player : MonoBehaviour, ICombat {
     public LineRenderer phazer;
 
     public Cannon cannon;
+    public GameObject drill;
 
     public static Player player_ = null;
 
     public float moveSpeed = 1f;
     public float rotationSpeed = 90f;
     public float energy = 100f;
+    public float bolts = 100f;
     public float health = 100f;
 
     public float phaserCost = 2f;
+	public float moveCost = .1f;
+    public float drillCost = 20f;
+
 
     public static Player GetPlayer() {
         return player_;
     }
 
     public void Start() {
+        //DropDrill();
         player_ = this;
     }
 
@@ -58,19 +64,23 @@ public class Player : MonoBehaviour, ICombat {
     public void Update() {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
             transform.position += Vector3.up * Time.deltaTime * moveSpeed;
-            LoseEnergy(Time.deltaTime);
+			LoseEnergy(moveCost*Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
             transform.position += Vector3.down * Time.deltaTime * moveSpeed;
-            LoseEnergy(Time.deltaTime);
+			LoseEnergy(moveCost*Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
             transform.position += Vector3.left * Time.deltaTime * moveSpeed;
-            LoseEnergy(Time.deltaTime);
+			LoseEnergy(moveCost*Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
             transform.position += Vector3.right * Time.deltaTime * moveSpeed;
-            LoseEnergy(Time.deltaTime);
+			LoseEnergy(moveCost*Time.deltaTime);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            DropDrill();
         }
 
         float angle = AngleBetweenPoints(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10f));
@@ -115,11 +125,20 @@ public class Player : MonoBehaviour, ICombat {
     }
 
     public void TakeDamage(float damage) {
-        health -= damage;
-        if (health <= 0f) {
+		health -= damage;
+
+		UIController.Instance.updateHealth(health);
+		UIController.Instance.floatText (damage, this.transform);
+        
+		if (health <= 0f) {
             Debug.Log("Player is dead");
             Time.timeScale = 0f;
         }
+    }
+
+    public void GainEnergy(float amount){
+        energy += amount;
+        UIController.Instance.updateEnergy(energy);
     }
 
     void OnCollisionStay2D(Collision2D coll) {
@@ -127,5 +146,19 @@ public class Player : MonoBehaviour, ICombat {
         if (drill != null) {
             energy = Mathf.Min(energy + 1f * Time.deltaTime, 100f);
         }
+    }
+
+    void DropDrill() {
+        if(this.bolts >= drillCost){
+            Debug.Log("Dropping drill");
+            GameObject newObject = Instantiate (this.drill, UIController.Instance.transform);
+            newObject.transform.position = this.transform.position;
+            this.bolts -= drillCost;
+            UIController.Instance.updateBolts(this.bolts);
+        }
+        else{
+            Debug.Log("Not enough bolts to drop drill"); //Implement something for the player to see
+        }
+
     }
 }

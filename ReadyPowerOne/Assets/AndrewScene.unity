@@ -117,11 +117,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4805632121810684, guid: ba77de5cdc66a47a999f0a6e22ea0d9b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4805632121810684, guid: ba77de5cdc66a47a999f0a6e22ea0d9b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4805632121810684, guid: ba77de5cdc66a47a999f0a6e22ea0d9b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 958935939}
   - component: {fileID: 958935938}
   - component: {fileID: 958935937}
+  - component: {fileID: 958935942}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -254,6 +255,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &958935942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 958935936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4189ed9d2052f429ebc699be826853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!1001 &1585037523
 Prefab:
   m_ObjectHideFlags: 0
@@ -356,6 +369,12 @@ Prefab:
       propertyPath: resourcePanelPrefab
       value: 
       objectReference: {fileID: 114038237483264246, guid: 7b4bbed2a659446d083f3b706bdb19f0,
+        type: 2}
+    - target: {fileID: 114461279917470818, guid: 9812beea10594418682c76b265c95ccb,
+        type: 2}
+      propertyPath: floatingTextPrefab
+      value: 
+      objectReference: {fileID: 1221048958523654, guid: 627d1582c90904d9cbca62ce223d4aa2,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9812beea10594418682c76b265c95ccb, type: 2}

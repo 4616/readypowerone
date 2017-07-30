@@ -55,14 +55,23 @@ public class Drill : MonoBehaviour, ICombat {
 
 
 	public float GetEnergy () {
-		float energyTransfer = Mathf.Min(this.energy, this.rechargeRate * Time.deltaTime);
-		this.energy -= energyTransfer;
-		return energyTransfer;
+		float energyTransfer = 0;
+		if(energy > 0){
+			energyTransfer = Mathf.Min(this.energy, this.rechargeRate * Time.deltaTime);
+			this.energy -= energyTransfer;
+			return energyTransfer;
+		}
+		else{
+			return energyTransfer;
+		}
 	}
 
 
-	void OnCollisionStay2D(Collision2D coll) {
-        Debug.Log(coll.gameObject.GetType());
+    void OnCollisionStay2D(Collision2D coll) {
+        Player e = coll.gameObject.GetComponent<Player>();
+        if (e != null) {
+            e.GainEnergy(this.GetEnergy());
+        }
     }
 
 

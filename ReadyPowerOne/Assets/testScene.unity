@@ -217,6 +217,30 @@ Prefab:
       value: 
       objectReference: {fileID: 1095522940876348, guid: 5e2f259d902b6452b8dfbe9f557a9626,
         type: 2}
+    - target: {fileID: 114461279917470818, guid: 9812beea10594418682c76b265c95ccb,
+        type: 2}
+      propertyPath: enemy1
+      value: 
+      objectReference: {fileID: 1809688050541602, guid: 2dd63090b5d9d4a5eb7607db97e31337,
+        type: 2}
+    - target: {fileID: 114461279917470818, guid: 9812beea10594418682c76b265c95ccb,
+        type: 2}
+      propertyPath: enemy2
+      value: 
+      objectReference: {fileID: 1926311890349992, guid: c6c6760d00e494629ba0d8f2c691c08f,
+        type: 2}
+    - target: {fileID: 114461279917470818, guid: 9812beea10594418682c76b265c95ccb,
+        type: 2}
+      propertyPath: bossEnemyObject
+      value: 
+      objectReference: {fileID: 1339044867011022, guid: ba16582d3a6d64c1899bf586153d6824,
+        type: 2}
+    - target: {fileID: 114461279917470818, guid: 9812beea10594418682c76b265c95ccb,
+        type: 2}
+      propertyPath: coal
+      value: 
+      objectReference: {fileID: 1613862024546718, guid: effcbba0ace834f43ba284c91ddb39b2,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9812beea10594418682c76b265c95ccb, type: 2}
   m_IsPrefabParent: 0
@@ -229,11 +253,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4805632121810684, guid: ba77de5cdc66a47a999f0a6e22ea0d9b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4805632121810684, guid: ba77de5cdc66a47a999f0a6e22ea0d9b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4805632121810684, guid: ba77de5cdc66a47a999f0a6e22ea0d9b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -274,6 +298,7 @@ GameObject:
   - component: {fileID: 1028823531}
   - component: {fileID: 1028823530}
   - component: {fileID: 1028823529}
+  - component: {fileID: 1028823534}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -322,7 +347,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 120
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -345,9 +370,21 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1028823528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 90, y: 100, z: -10}
+  m_LocalPosition: {x: 90, y: 110, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1028823534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1028823528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4189ed9d2052f429ebc699be826853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
