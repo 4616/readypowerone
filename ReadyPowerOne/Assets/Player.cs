@@ -29,6 +29,27 @@ public class Player : MonoBehaviour, ICombat {
     public void Start() {
         //DropDrill();
         player_ = this;
+
+        Upgrade.upgrades.Add(new Upgrade(
+            "Move Speed",
+            "Increase move speed 25%",
+            () => moveSpeed *= 1.25f
+        ));
+        Upgrade.upgrades.Add(new Upgrade(
+            "Move Efficiency",
+            "Deacrease the energy cost of moving by 25%",
+            () => moveCost *= 0.75f
+        ));
+        Upgrade.upgrades.Add(new Upgrade(
+            "Rotation Speed",
+            "Rotate faster",
+            () => rotationSpeed *= 2f
+        ));
+        Upgrade.upgrades.Add(new Upgrade(
+            "Recharge",
+            "Refill your battery right now",
+            () => energy = 100f
+        ));
     }
 
     //public void Update() {
@@ -87,14 +108,13 @@ public class Player : MonoBehaviour, ICombat {
         
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0f, 0f, angle + 90f)), Time.deltaTime * rotationSpeed);
         
-        if (Input.GetMouseButton(1)) {
+        if (Input.GetMouseButton(1) || Input.GetKey(KeyCode.Space)) {
             Phaser();
         } else {
             phazer.gameObject.SetActive(false);
         }
         if (cannon.CanShoot() && (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.LeftAlt) || Input.GetMouseButton(0))) {
-            LoseEnergy(cannon.energyCost);
-            cannon.Shoot();
+            Cannon();
         }
 
         if (energy <= 0f) {
@@ -110,6 +130,11 @@ public class Player : MonoBehaviour, ICombat {
     public void LoseEnergy (float amount) {
         energy -= amount;
 		UIController.Instance.updateEnergy(energy);
+    }
+
+    public void Cannon() {
+        LoseEnergy(cannon.energyCost);
+        cannon.Shoot();
     }
 
     public void Phaser() {
