@@ -234,6 +234,28 @@ public class FunkyRoomFactory: RoomFactory {
 	}
 }
 
+public class DiamondRoomFactory: RoomFactory {
+	public override Room getRoom () {
+
+		Terrain O = Terrain.Open;
+		Terrain W = Terrain.Wall;
+
+		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
+
+		funkyLayout.Add(new List<Terrain> { W, W, W, W, O, W, W, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, W, O, O, O, W, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, O, O, O, O, O, W, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { O, O, O, O, O, O, O, O, O });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, W, O, O, O, O, O, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, W, O, O, O, W, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, W, W, O, W, W, W, W });
+
+		return new SimpleRoom(funkyLayout);
+	}
+}
+
 public class LineRoomFactory: RoomFactory {
 	public override Room getRoom () {
 
@@ -376,7 +398,7 @@ public class RoomCoordinates {
 	}
 
 	public int y2 () {
-		return this.y1 + room.getHeight() + padding;
+		return this.y1 - room.getHeight() - padding;
 	}
 
 	public RoomCoordinates(Room room, int x, int y) {
@@ -385,17 +407,18 @@ public class RoomCoordinates {
 		this.room = room;
 	}
 
-	public Boolean doesCollide(int x, int y) {
-		return this.doesCollide (x, y, x, y);
-	}
+//	public Boolean doesCollide(int x, int y) {
+//		return this.doesCollide (x, y, this.x1, this.y1);
+//	}
 
 	public Boolean doesCollide(int x1, int y1, int x2, int y2) {
 		return (x1 < this.x2() && x2 > this.x1 && y1 > this.y2() && y2 < this.y1);
 	}
 
 	public Boolean doesCollide(RoomCoordinates otherRoomCoordinates) {
-		return (otherRoomCoordinates.x1 < this.x2() && otherRoomCoordinates.x2() > this.x1 && 
-			otherRoomCoordinates.y1 > this.y2() && otherRoomCoordinates.y2() < this.y1);
+		return doesCollide (otherRoomCoordinates.x1, otherRoomCoordinates.y1, otherRoomCoordinates.x2(), otherRoomCoordinates.y2());
+//		return (otherRoomCoordinates.x1 < this.x2() && otherRoomCoordinates.x2() > this.x1 && 
+//			otherRoomCoordinates.y1 > this.y2() && otherRoomCoordinates.y2() < this.y1);
 	}
 
 	//Cache the exits
@@ -530,8 +553,8 @@ public static class TerrainGenerator
 //		print ("potato");
 //	}
 
-	private static int roomPlacementAttempts = 120;
-	private static int roomPositioningRetries = 5;
+	private static int roomPlacementAttempts = 250;
+	private static int roomPositioningRetries = 10;
 	private static int maxRooms = 28;
 	private static int levelBorder = 2;
 
@@ -544,8 +567,9 @@ public static class TerrainGenerator
 				new KeyValuePair<double, RoomFactory>( 0.2, new RectangleRoomFactory(6,6,2)),
 				new KeyValuePair<double, RoomFactory>( 0.2, new RectangleRoomFactory(9,9,2)),
 				new KeyValuePair<double, RoomFactory>( 0.05, new RectangleRoomFactory(12,12,3)),
-				new KeyValuePair<double, RoomFactory>( 0.05, new FunkyRoomFactory()),
-				new KeyValuePair<double, RoomFactory>( 0.2, new LineRoomFactory())
+				new KeyValuePair<double, RoomFactory>( 0.2, new DiamondRoomFactory()),
+				new KeyValuePair<double, RoomFactory>( 0.05, new FunkyRoomFactory()) //,
+				//new KeyValuePair<double, RoomFactory>( 0.2, new LineRoomFactory())
 			};
 		} else
 			throw new NotImplementedException ();
@@ -569,8 +593,8 @@ public static class TerrainGenerator
 
 		RoomFactory startingRoomFactory = new RectangleRoomFactory (6, 6, 1);
 
-		placedRoomCoordinates.Add(new RoomCoordinates(startingRoomFactory.getRoom(), width / 2 - 3, height - (height / 12)));
-		placedRoomCoordinates.Add(new RoomCoordinates(startingRoomFactory.getRoom(), width / 2 - 3, height / 22));
+		placedRoomCoordinates.Add(new RoomCoordinates(startingRoomFactory.getRoom(), width / 2 - 3, height - 10));
+		placedRoomCoordinates.Add(new RoomCoordinates(startingRoomFactory.getRoom(), width / 2 - 3, 2));
 
 		for (int i = 0; i < roomPlacementAttempts; i++) {
 			if (placedRoomCoordinates.Count >= maxRooms)
