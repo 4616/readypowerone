@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour, ICombat {
 	public float armor = 0f;
 	public float attackSpeed = 1f;
 	public float attackCoolDown = 1f;
+	public GameObject bolts;
 
 
 	// Use this for initialization
@@ -104,7 +105,10 @@ public class Enemy : MonoBehaviour, ICombat {
     }
 
     public void Die (){
+    	GameObject newObject = Instantiate (this.bolts, UIController.Instance.transform);
     	Object.Destroy(this.gameObject);
+
+    	
     }
 }
 
