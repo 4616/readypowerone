@@ -122,6 +122,11 @@ public class Player : MonoBehaviour, ICombat {
         }
     }
 
+    public void GainEnergy(float amount){
+        energy += amount;
+        UIController.Instance.updateEnergy(energy);
+    }
+
     void OnCollisionStay2D(Collision2D coll) {
         Drill drill = coll.gameObject.GetComponent<Drill>();
         if (drill != null) {
