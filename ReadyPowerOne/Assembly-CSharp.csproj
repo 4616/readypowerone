@@ -66,11 +66,14 @@
      <Compile Include="Assets\Strafe.cs" />
      <Compile Include="Assets\TerrainGenerator.cs" />
      <Compile Include="Assets\Tower.cs" />
+     <Compile Include="Assets\TowerBullet.cs" />
      <Compile Include="Assets\UI\FloatingText.cs" />
-     <Compile Include="Assets\UI\ResourcesPanelBehavor.cs" />
+     <Compile Include="Assets\UI\NewBehaviourScript.cs" />
+     <Compile Include="Assets\UI\ResourcesPanelBehavior.cs" />
      <Compile Include="Assets\UI\TextFloatBehavior.cs" />
      <Compile Include="Assets\UI\UIController.cs" />
      <Compile Include="Assets\UI\UpgradeButtonBehavior.cs" />
+     <Compile Include="Assets\UI\UpgradePanelBehavior.cs" />
      <Compile Include="Assets\Upgrade.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
