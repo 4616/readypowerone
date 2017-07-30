@@ -12,7 +12,10 @@ public class Bolts : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log("Bolts on the floor");
+		//Debug.Log("Bolts on the floor");
 		
 	}
+
+
+
 }

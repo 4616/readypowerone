@@ -141,10 +141,24 @@ public class Player : MonoBehaviour, ICombat {
         UIController.Instance.updateEnergy(energy);
     }
 
+     public void GainBolts(float amount){
+        bolts += amount;
+        UIController.Instance.updateBolts(bolts);
+    }
+
+
     void OnCollisionStay2D(Collision2D coll) {
         Drill drill = coll.gameObject.GetComponent<Drill>();
         if (drill != null) {
             energy = Mathf.Min(energy + 1f * Time.deltaTime, 100f);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D coll){
+        Bolts boltsobj = coll.gameObject.GetComponent<Bolts>();
+        if (boltsobj != null) {
+            GainBolts(20f);
+            Object.Destroy(coll.gameObject);
         }
     }
 
