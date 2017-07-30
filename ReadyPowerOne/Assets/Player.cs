@@ -23,25 +23,59 @@ public class Player : MonoBehaviour, ICombat {
         player_ = this;
     }
 
+    //public void Update() {
+    //    if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
+    //        transform.position += transform.up * Time.deltaTime * moveSpeed;
+    //        LoseEnergy(Time.deltaTime);
+    //    }
+    //    if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
+    //        transform.position -= transform.up * Time.deltaTime * moveSpeed;
+    //        LoseEnergy(Time.deltaTime);
+    //    }
+    //    if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
+    //        transform.Rotate(Vector3.forward, Time.deltaTime * rotationSpeed);
+    //        LoseEnergy(Time.deltaTime);
+    //    }
+    //    if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
+    //        transform.Rotate(Vector3.forward, -1f * Time.deltaTime * rotationSpeed);
+    //        LoseEnergy(Time.deltaTime);
+    //    }
+
+    //    if (Input.GetKey(KeyCode.Space)) {
+    //        Phaser();
+    //    } else {
+    //        phazer.gameObject.SetActive(false);
+    //    }
+
+    //    if (energy <= 0f) {
+    //        Debug.Log("Out of Energy!");
+    //        Time.timeScale = 0f;
+    //    }
+    //}
+
     public void Update() {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
-            transform.position += transform.up * Time.deltaTime * moveSpeed;
+            transform.position += Vector3.up * Time.deltaTime * moveSpeed;
             LoseEnergy(Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
-            transform.position -= transform.up * Time.deltaTime * moveSpeed;
+            transform.position += Vector3.down * Time.deltaTime * moveSpeed;
             LoseEnergy(Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
-            transform.Rotate(Vector3.forward, Time.deltaTime * rotationSpeed);
+            transform.position += Vector3.left * Time.deltaTime * moveSpeed;
             LoseEnergy(Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-            transform.Rotate(Vector3.forward, -1f * Time.deltaTime * rotationSpeed);
+            transform.position += Vector3.right * Time.deltaTime * moveSpeed;
             LoseEnergy(Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.Space)) {
+        float angle = AngleBetweenPoints(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10f));
+        transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90f));
+        //transform.LookAt((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10f), Vector3.forward);
+
+        if (Input.GetMouseButton(1)) {
             Phaser();
         } else {
             phazer.gameObject.SetActive(false);
@@ -51,6 +85,10 @@ public class Player : MonoBehaviour, ICombat {
             Debug.Log("Out of Energy!");
             Time.timeScale = 0f;
         }
+    }
+
+    float AngleBetweenPoints(Vector2 a, Vector2 b) {
+        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
     }
 
     public void LoseEnergy (float amount) {

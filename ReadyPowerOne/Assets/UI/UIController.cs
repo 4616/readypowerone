@@ -7,6 +7,9 @@ public class UIController : MonoBehaviour {
 
 	bool Paused;
 	public GameObject pausePanel;
+
+	public GameObject wallObject;
+
 	public ResourcesPanelBehavor resourcePanelPrefab;
 	public GameObject floatingText;
 
@@ -27,12 +30,35 @@ public class UIController : MonoBehaviour {
 
 		// Here we save our singleton instance
 		Instance = this;
+
+		//Add terrain
+
+
 	
 	}
+
+	private float blockSize = 2.5f;
 
 	void Start () {
 		//Instantiate (pausePanel, this.transform);
 		resourcePanel = Instantiate (resourcePanelPrefab, this.transform);
+
+		Room room = TerrainGenerator.GenerateLevel (100, 100, 0);
+
+		for (int y = 0; y < room.getHeight(); y++) {
+			for (int x = 0; x < room.getWidth(); x++) {
+				Terrain t = room.getLayout () [y] [x];
+				if (t == Terrain.Wall) {
+					GameObject newWall = Instantiate (this.wallObject, this.transform);
+					newWall.transform.position = new Vector3 (x * blockSize, y * blockSize, 0);
+				}
+			}
+		}
+
+//		GameObject potato = Instantiate (this.wallObject, this.transform);
+//		potato.transform.position = new Vector3 (5, 5, 0);
+
+
 
 		//pausePanel.SetActive(false);
 	}
