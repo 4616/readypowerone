@@ -11,12 +11,12 @@ public class Phazer : MonoBehaviour {
     void Start() {
         Upgrade.upgrades.Add(new Upgrade(
             "Phazer Damage",
-            "Incfrase Damage per second of the Phazer by 1",
+            "Increase Damage per second of the Phazer by 1",
             () => damage += 1f
         ));
         Upgrade.upgrades.Add(new Upgrade(
             "Phazer Range",
-            "Incfrase range of the Phazor by 1 tile",
+            "Increase range of the Phazor by 1 tile (but not actually)",
             () => range += 1f
         ));
         Upgrade.upgrades.Add(new Upgrade(

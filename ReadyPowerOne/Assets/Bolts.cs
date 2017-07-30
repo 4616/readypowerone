@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bolts : MonoBehaviour {
-
+	public float bolts = 10f;
 	// Use this for initialization
 	void Start () {
 
@@ -12,7 +12,10 @@ public class Bolts : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log("Bolts on the floor");
+		//Debug.Log("Bolts on the floor");
 		
 	}
+
+
+
 }
