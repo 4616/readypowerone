@@ -237,6 +237,41 @@ public class FunkyRoomFactory: RoomFactory {
 	}
 }
 
+public class ComplexRoomFactory: RoomFactory {
+	public override Room getRoom () {
+
+		Terrain O = Terrain.Open;
+		Terrain W = Terrain.Wall;
+		Terrain E = Terrain.Enemy1;
+		Terrain I = Terrain.Enemy2;
+		Terrain C = Terrain.Coal;
+		Terrain B = Terrain.BossEnemy;
+
+		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
+
+		funkyLayout.Add(new List<Terrain> { W, W, O, W, W, W, W, W, W, W, W, W, W, O, W, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, O, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, E, O, O, O, I, O, O, O, O, O, O, E, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, O, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, W, O, W, W, W, O, B, O, B, W, W, W, O, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, O, W, W, W, O, O, C, O, W, W, W, O, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, I, W, W, W, W, W, W, W, W, W, W, I, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, O, W, W, W, W, W, W, W, W, W, W, O, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, O, W, W, W, W, W, W, W, W, W, W, O, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, O, W, W, W, W, W, W, W, W, W, W, O, W, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, E, O, W, W, W, W, O, O, O, E, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, W, W, W, W, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, O, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, W, W, W, W, W, W, W, O, W, W, W, W, W, W, W });
+
+		return new SimpleRoomWithExits(funkyLayout, 
+			new List<Vector2> {
+				new Vector2(2, 0), 
+				new Vector2(9, funkyLayout.Count),
+				new Vector2(13, 0)});
+	}
+}
+
 public class DiamondRoomFactory: RoomFactory {
 	public override Room getRoom () {
 
@@ -647,6 +682,7 @@ public static class TerrainGenerator
 		//Add 2 Boss Rooms
 
 		List<RoomFactory> requiredRoomFactories = new List<RoomFactory> ();
+		requiredRoomFactories.Add (new ComplexRoomFactory ());
 		requiredRoomFactories.Add(bossFactory);
 		requiredRoomFactories.Add(bossFactory);
 
@@ -727,10 +763,27 @@ public static class TerrainGenerator
 			List<Vector2> exits1 = placedRoomCoordinates [i].getExits ();
 			List<Vector2> exits2 = placedRoomCoordinates [(i + 1) % placedRoomCoordinates.Count].getExits ();
 
-			exits1.Shuffle ();
-			exits2.Shuffle ();
 
-			hallways.Add (new Hallway(exits1[0], exits2[0]));
+			//Calculate all distances between everything in exits1 and everything in exits2 and use closest exits for linking
+
+			float minDistance = int.MaxValue;
+			Vector2 exit1Candidate = exits1[0];
+			Vector2 exit2Candidate = exits2[0];
+			foreach (Vector2 ex1 in exits1) {
+				foreach (Vector2 ex2 in exits2) {
+					float dist = Vector2.Distance(ex1,ex2);
+					if (dist < minDistance) {
+						minDistance = dist;
+						exit1Candidate = ex1;
+						exit2Candidate = ex2;
+					}
+				}
+			}
+
+//			exits1.Shuffle ();
+//			exits2.Shuffle ();
+
+			hallways.Add (new Hallway(exit1Candidate, exit2Candidate));
 		}
 
 		//Add a few more random hallways

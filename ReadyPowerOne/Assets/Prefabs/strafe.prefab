@@ -108,6 +108,7 @@ MonoBehaviour:
   armor: 0
   attackSpeed: 1
   attackCoolDown: 1
+  bolts: {fileID: 1282703662790732, guid: db05cdc5b0f754b24a74b2621b57f049, type: 2}
 --- !u!212 &212796961032136030
 SpriteRenderer:
   m_ObjectHideFlags: 1
