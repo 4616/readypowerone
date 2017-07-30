@@ -30,6 +30,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1458655715372390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4832044544158596}
+  - component: {fileID: 114635237493851322}
+  m_Layer: 0
+  m_Name: cannon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1578489561520802
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,8 +89,22 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4041796545338202}
+  - {fileID: 4832044544158596}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4832044544158596
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1458655715372390}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.15, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4805632121810684}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50079753728952964
 Rigidbody2D:
@@ -164,7 +194,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 7.4162474}
+  m_Size: {x: 1, y: 7.4162474}
   m_EdgeRadius: 0
 --- !u!114 &114147011954669148
 MonoBehaviour:
@@ -183,6 +213,23 @@ MonoBehaviour:
   energy: 73.49376
   health: 100
   phaserCost: 2
+--- !u!114 &114635237493851322
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1458655715372390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 365bda39fc45b2346a882aea2e5ae392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 114036826220377166, guid: 9a0e7ef5d46270343a6cd1f6dbdca4ea,
+    type: 2}
+  bulletSpeed: 20
+  spawnTime: 1
+  spawnCooldown: 0
+  startOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &114933901826246116
 MonoBehaviour:
   m_ObjectHideFlags: 1
