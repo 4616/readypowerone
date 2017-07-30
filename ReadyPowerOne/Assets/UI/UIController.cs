@@ -7,6 +7,9 @@ public class UIController : MonoBehaviour {
 
 	bool Paused;
 	public GameObject wallObject;
+	public GameObject bossEnemyObject;
+	public GameObject enemy1;
+	public GameObject enemy2;
 
 	public GameObject pausePanel;
 	public ResourcesPanelBehavor resourcePanelPrefab;
@@ -44,10 +47,24 @@ public class UIController : MonoBehaviour {
 		for (int y = 0; y < room.getHeight(); y++) {
 			for (int x = 0; x < room.getWidth(); x++) {
 				Terrain t = room.getLayout () [y] [x];
+				GameObject newObject = null;
 				if (t == Terrain.Wall) {
-					GameObject newWall = Instantiate (this.wallObject, this.transform);
-					newWall.transform.position = new Vector3 (x * blockSize, y * blockSize, 0);
+					newObject = Instantiate (this.wallObject, this.transform);
 				}
+				if (t == Terrain.BossEnemy && this.bossEnemyObject != null) {
+					newObject = Instantiate (this.bossEnemyObject, this.transform);
+				}
+				if (t == Terrain.Enemy1 && this.enemy1 != null) {
+					newObject = Instantiate (this.enemy1, this.transform);
+				}
+				if (t == Terrain.Enemy2 && this.enemy2 != null) {
+					newObject = Instantiate (this.enemy2, this.transform);
+				}
+
+				if (newObject != null) {
+					newObject.transform.position = new Vector3 (x * blockSize, y * blockSize, 0);
+				}
+
 			}
 		}
 

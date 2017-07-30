@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum Terrain {Open,Wall,Coal,Exit,Enemy1,Enemy2};  //Wall, Open, Coal, Exit
+public enum Terrain {Open,Wall,Coal,Exit,Enemy1,Enemy2,BossEnemy};  //Wall, Open, Coal, Exit
 public enum Direction {Left, Top, Right, Bottom};
 
 public static class RoomTools {
@@ -217,16 +217,18 @@ public class FunkyRoomFactory: RoomFactory {
 
 		Terrain O = Terrain.Open;
 		Terrain W = Terrain.Wall;
+		Terrain E = Terrain.Enemy1;
+		Terrain I = Terrain.Enemy2;
 
 		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
 
 		funkyLayout.Add(new List<Terrain> { W, O, W, W, W, W, W, W, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, E, O, O, O, I, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, W, W, W, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, W, W, W, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, W, W, W, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, I, O, O, O, E, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, W, W, W, W, W, W });
 
@@ -239,6 +241,7 @@ public class DiamondRoomFactory: RoomFactory {
 
 		Terrain O = Terrain.Open;
 		Terrain W = Terrain.Wall;
+		Terrain B = Terrain.BossEnemy;
 
 		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
 
@@ -246,7 +249,7 @@ public class DiamondRoomFactory: RoomFactory {
 		funkyLayout.Add(new List<Terrain> { W, W, W, O, O, O, W, W, W });
 		funkyLayout.Add(new List<Terrain> { W, W, O, O, O, O, O, W, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
-		funkyLayout.Add(new List<Terrain> { O, O, O, O, O, O, O, O, O });
+		funkyLayout.Add(new List<Terrain> { O, O, O, O, B, O, O, O, O });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, W, O, O, O, O, O, W, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, O, O, O, W, W, W });
@@ -289,10 +292,45 @@ public class RectangleRoomFactory : RoomFactory
 	public int width;
 	public int height;
 	public int exitCount;
+	private Boolean ifEnemies;
+
+	private double enemy1Probability = 0.015;
+	private double enemy2Probability = 0.015;
 
 	public override Room getRoom ()
 	{
+		System.Random rnd = new System.Random ();
 		SimpleRoom room = RoomTools.generateEmptySimpleRoom (width, height);
+
+		if (this.ifEnemies) {
+			
+
+			List<List<Terrain>> layout = room.Layout;
+
+			//Add one bad guy in every room first
+
+			int firstEnemyX = rnd.Next(1,(width - 1));
+			int firstEnemyY = rnd.Next(1,(height - 1));
+			List<Terrain> randomEnemyList = new List<Terrain> ();
+			randomEnemyList.Add (Terrain.Enemy1);
+			randomEnemyList.Add (Terrain.Enemy2);
+			randomEnemyList.Shuffle ();
+			layout [firstEnemyX] [firstEnemyY] = randomEnemyList[0];
+
+
+			for (int x = 1; x < (width - 1); x++) {
+				for (int y = 1; y < (height - 1); y++) {
+					Double nextDie = rnd.NextDouble ();
+					if (nextDie < enemy1Probability) {
+						layout [y] [x] = Terrain.Enemy1;
+					}
+					else if (nextDie < (enemy1Probability + enemy2Probability)) {
+						layout [y] [x] = Terrain.Enemy2;
+					}
+				}
+			}
+
+		}
 
 		//Add exits iteratively across different walls
 
@@ -340,11 +378,12 @@ public class RectangleRoomFactory : RoomFactory
 		return room;
 	}
 
-	public RectangleRoomFactory (int width, int height, int exitCount)
+	public RectangleRoomFactory (int width, int height, int exitCount, Boolean ifEnemies = true)
 	{
 		this.width = width;
 		this.height = height;
 		this.exitCount = exitCount;
+		this.ifEnemies = ifEnemies;
 		//First create a block of all O, then add outside W; then add exits
 	}
 }
@@ -564,10 +603,10 @@ public static class TerrainGenerator
 			return new List<KeyValuePair<double, RoomFactory>>()
 			{
 				new KeyValuePair<double, RoomFactory>( 0.3, new RectangleRoomFactory(4,4,2)),
-				new KeyValuePair<double, RoomFactory>( 0.2, new RectangleRoomFactory(6,6,2)),
-				new KeyValuePair<double, RoomFactory>( 0.2, new RectangleRoomFactory(9,9,2)),
+				new KeyValuePair<double, RoomFactory>( 0.3, new RectangleRoomFactory(6,6,2)),
+				new KeyValuePair<double, RoomFactory>( 0.3, new RectangleRoomFactory(9,9,2)),
 				new KeyValuePair<double, RoomFactory>( 0.05, new RectangleRoomFactory(12,12,3)),
-				new KeyValuePair<double, RoomFactory>( 0.2, new DiamondRoomFactory()),
+				//new KeyValuePair<double, RoomFactory>( 0.2, new DiamondRoomFactory()),
 				new KeyValuePair<double, RoomFactory>( 0.05, new FunkyRoomFactory()) //,
 				//new KeyValuePair<double, RoomFactory>( 0.2, new LineRoomFactory())
 			};
@@ -591,10 +630,19 @@ public static class TerrainGenerator
 
 		//Add Starting and Ending rooms
 
-		RoomFactory startingRoomFactory = new RectangleRoomFactory (6, 6, 1);
+		RoomFactory startingRoomFactory = new RectangleRoomFactory (6, 6, 1, false);
 
 		placedRoomCoordinates.Add(new RoomCoordinates(startingRoomFactory.getRoom(), width / 2 - 3, height - 10));
 		placedRoomCoordinates.Add(new RoomCoordinates(startingRoomFactory.getRoom(), width / 2 - 3, 2));
+
+		DiamondRoomFactory bossFactory = new DiamondRoomFactory ();
+
+		//Add 2 Boss Rooms
+
+		List<RoomFactory> requiredRoomFactories = new List<RoomFactory> ();
+		requiredRoomFactories.Add(bossFactory);
+		requiredRoomFactories.Add(bossFactory);
+
 
 		for (int i = 0; i < roomPlacementAttempts; i++) {
 			if (placedRoomCoordinates.Count >= maxRooms)
@@ -605,14 +653,19 @@ public static class TerrainGenerator
 			double cumulative = 0.0;
 			RoomFactory selectedRoomFactory = new RectangleRoomFactory(4,4,4);  //Default room in case RoomProbabilities are borked
 
-			foreach (KeyValuePair<double, RoomFactory> entry in roomProbabilities) {
-				cumulative += entry.Key;
-				if (diceRoll < cumulative)
-				{
-					selectedRoomFactory = entry.Value;
-					break;
-				}
-			} 
+			if (requiredRoomFactories.Count > 0) {
+				selectedRoomFactory = requiredRoomFactories [0];
+				requiredRoomFactories.RemoveAt(0);
+			} else {
+				foreach (KeyValuePair<double, RoomFactory> entry in roomProbabilities) {
+					cumulative += entry.Key;
+					if (diceRoll < cumulative)
+					{
+						selectedRoomFactory = entry.Value;
+						break;
+					}
+				} 
+			}
 
 			//Try to place each room N times
 			Room roomToPlace = selectedRoomFactory.getRoom();
