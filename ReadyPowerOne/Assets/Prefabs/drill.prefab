@@ -99,7 +99,7 @@ MonoBehaviour:
   energy: 10
   range: 10
   armor: 0
-  rechargeRate: 0.05
+  rechargeRate: 3
 --- !u!212 &212225167985695738
 SpriteRenderer:
   m_ObjectHideFlags: 1

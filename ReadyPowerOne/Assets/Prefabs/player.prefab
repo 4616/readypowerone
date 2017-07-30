@@ -209,7 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   phazer: {fileID: 120124865154078354}
   cannon: {fileID: 114635237493851322}
-  moveSpeed: 3
+  moveSpeed: 5
   rotationSpeed: 360
   energy: 73.49376
   health: 100

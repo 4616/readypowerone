@@ -14,8 +14,8 @@
    viewBox="0 0 635.21069 416.37823"
    version="1.1"
    id="svg8"
-   sodipodi:docname="readypowerone_art_01.svg"
-   inkscape:version="0.92.1 r15371">
+   sodipodi:docname="art_sheet.svg"
+   inkscape:version="0.92.1 15371">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -33,9 +33,9 @@
      showgrid="false"
      units="px"
      inkscape:pagecheckerboard="false"
-     inkscape:window-width="1307"
+     inkscape:window-width="1301"
      inkscape:window-height="744"
-     inkscape:window-x="59"
+     inkscape:window-x="65"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
      fit-margin-top="50"
@@ -53,7 +53,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -816,5 +816,14 @@
        y="51.058739"
        inkscape:export-xdpi="181.25"
        inkscape:export-ydpi="181.25" />
+    <rect
+       id="rect104"
+       width="120"
+       height="120"
+       x="-76.908623"
+       y="110.04858"
+       style="stroke-width:0.5"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
   </g>
 </svg>
