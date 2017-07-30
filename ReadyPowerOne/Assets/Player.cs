@@ -33,6 +33,12 @@ public class Player : MonoBehaviour, ICombat {
 
 		this.transform.position = new Vector3 (UIController.Instance.mapWidth * UIController.Instance.blockSize / 2, 10, 0);
 
+		Upgrade.upgrades.Add(new Upgrade(
+			"Max Battery",
+			"Increase max battery capacity by 20",
+			() => energyMax += 20f
+		));
+
         Upgrade.upgrades.Add(new Upgrade(
             "Move Speed",
             "Increase move speed 25%",
