@@ -115,8 +115,12 @@ public class Player : MonoBehaviour, ICombat {
     }
 
     public void TakeDamage(float damage) {
-        health -= damage;
-        if (health <= 0f) {
+		health -= damage;
+
+		UIController.Instance.updateHealth(health);
+		UIController.Instance.floatText (damage, this.transform);
+        
+		if (health <= 0f) {
             Debug.Log("Player is dead");
             Time.timeScale = 0f;
         }
