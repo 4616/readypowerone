@@ -147,16 +147,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114147011954669148, guid: ba77de5cdc66a47a999f0a6e22ea0d9b,
-        type: 2}
-      propertyPath: moveSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114147011954669148, guid: ba77de5cdc66a47a999f0a6e22ea0d9b,
-        type: 2}
-      propertyPath: rotationSpeed
-      value: 180
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba77de5cdc66a47a999f0a6e22ea0d9b, type: 2}
   m_IsPrefabParent: 0
