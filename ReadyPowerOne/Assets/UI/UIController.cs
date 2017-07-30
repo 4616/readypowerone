@@ -13,6 +13,10 @@ public class UIController : MonoBehaviour {
 	public GameObject coal;
 	public GameObject destWall;
 
+	public int mapWidth = 50;
+	public int mapHeight = 120;
+	public float blockSize = 2.5f;
+
 	public UpgradePanelBehavior upgradePanelPrefab;
 	public ResourcesPanelBehavior resourcePanelPrefab;
 	public GameObject floatingTextPrefab;
@@ -22,7 +26,7 @@ public class UIController : MonoBehaviour {
 
 	private float lastDraw = 0f;
 	private float DrawAmount = 0f;
-	private float blockSize = 2.5f;
+
 		
 	public static UIController Instance { get; private set; }
 
@@ -44,7 +48,7 @@ public class UIController : MonoBehaviour {
 		//Instantiate (pausePanel, this.transform);
 		resourcePanel = Instantiate (resourcePanelPrefab, this.transform);
 
-		Room room = TerrainGenerator.GenerateLevel (50, 120, 0);
+		Room room = TerrainGenerator.GenerateLevel (mapWidth, mapHeight, 0);
 
 		for (int y = 0; y < room.getHeight(); y++) {
 			for (int x = 0; x < room.getWidth(); x++) {
