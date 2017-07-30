@@ -84,7 +84,7 @@ public class Player : MonoBehaviour, ICombat {
         }
 
         float angle = AngleBetweenPoints(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10f));
-        //transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90f));
+        
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0f, 0f, angle + 90f)), Time.deltaTime * rotationSpeed);
         
         if (Input.GetMouseButton(1)) {
