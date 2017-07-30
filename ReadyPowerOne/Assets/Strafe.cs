@@ -8,6 +8,8 @@ public class Strafe : Enemy {
 	float hide_range_y;
 	Vector3 rangeOffset;
 
+    public GameObject laser;
+
     public float rotationSpeed = 180f;
 
 
@@ -38,7 +40,17 @@ public class Strafe : Enemy {
         return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
     }
 
+    protected override void AttackPlayer() {
+        Player.GetPlayer().TakeDamage(this.damage);
+        attackCoolDown = attackSpeed;
+        laser.SetActive(true);
+        StartCoroutine(TurnOffLaser(0.2f));
+    }
 
+    IEnumerator TurnOffLaser(float time) {
+        yield return new WaitForSeconds(time);
+        laser.SetActive(false);
+    }
 
     float PositiveNegative(){
 		float cutpoint = Random.Range(0f,1f);
