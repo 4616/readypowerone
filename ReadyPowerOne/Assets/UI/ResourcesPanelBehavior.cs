@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResourcesPanelBehavor : MonoBehaviour {
+public class ResourcesPanelBehavior : MonoBehaviour {
 
 	public Text voltsText;
 	public Text boltsText;

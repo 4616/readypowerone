@@ -56,8 +56,10 @@ public class Enemy : MonoBehaviour, ICombat {
 
 	void AttackPlayer (){
 		//Debug.Log("Player takes " + damage + " damage.");
-		Player.GetPlayer().TakeDamage(this.damage);
-		attackCoolDown = attackSpeed; 
+		if(Time.deltaTime>.01){
+			Player.GetPlayer().TakeDamage(this.damage);
+			attackCoolDown = attackSpeed; 
+		}
 	}
 
 	float DistanceToPlayer (){

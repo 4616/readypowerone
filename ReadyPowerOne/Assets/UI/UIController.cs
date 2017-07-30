@@ -12,12 +12,12 @@ public class UIController : MonoBehaviour {
 	public GameObject enemy2;
 	public GameObject coal;
 
-	public GameObject pausePanel;
-	public ResourcesPanelBehavor resourcePanelPrefab;
+	public UpgradePanelBehavior upgradePanelPrefab;
+	public ResourcesPanelBehavior resourcePanelPrefab;
 	public GameObject floatingTextPrefab;
 
-
-	private ResourcesPanelBehavor resourcePanel;
+	private UpgradePanelBehavior upgradePanel;
+	private ResourcesPanelBehavior resourcePanel;
 
 	private float lastDraw = 0f;
 	private float DrawAmount = 0f;
@@ -131,6 +131,10 @@ public class UIController : MonoBehaviour {
 			DrawAmount = 0f;
 		} 
 
+	}
+
+	public void upgradeMenu(){
+		GameObject um = Instantiate (upgradePanelPrefab, this.transform);
 	}
 
 }
