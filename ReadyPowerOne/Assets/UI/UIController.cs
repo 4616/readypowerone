@@ -62,7 +62,7 @@ public class UIController : MonoBehaviour {
 					newObject = Instantiate (this.enemy2, this.transform);
 				}
 				if (t == Terrain.Coal && this.coal != null) {
-					newObject = Instantiate (this.coal, this.transform);
+					newObject = Instantiate (this.coal, this.transform); //comment out to remove drills
 				}
 
 				if (newObject != null) {

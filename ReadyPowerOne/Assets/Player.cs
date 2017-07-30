@@ -7,6 +7,7 @@ public class Player : MonoBehaviour, ICombat {
     public LineRenderer phazer;
 
     public Cannon cannon;
+    public GameObject drill;
 
     public static Player player_ = null;
 
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour, ICombat {
     }
 
     public void Start() {
+        //DropDrill();
         player_ = this;
     }
 
@@ -71,6 +73,10 @@ public class Player : MonoBehaviour, ICombat {
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
             transform.position += Vector3.right * Time.deltaTime * moveSpeed;
             LoseEnergy(Time.deltaTime);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            DropDrill();
         }
 
         float angle = AngleBetweenPoints(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10f));
@@ -138,8 +144,10 @@ public class Player : MonoBehaviour, ICombat {
         }
     }
 
-    // public void DropDrill{
-    //     Instantiate (this.coal, this.transform);
+    void DropDrill() {
+        Debug.Log("Dropping drill");
+        GameObject newObject = Instantiate (this.drill, UIController.Instance.transform);
+        newObject.transform.position = this.transform.position;
 
-    // }
+    }
 }
