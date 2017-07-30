@@ -82,25 +82,24 @@ public class UIController : MonoBehaviour {
 
 	void Update() {
 		if (!Paused && Input.GetKeyDown(KeyCode.P) ) {
-			Pause();
+			openUpgradeMenu();
 		}
 		else if (Paused && Input.GetKeyDown(KeyCode.P) ) {
-			unPause();
+			closeUpgradeMenu();
 		}
 	}
 	
-	void Pause(){
-		upgradeMenu ();
+	void openUpgradeMenu(){
+		upgradePanel = Instantiate (upgradePanelPrefab, this.transform);
 		Paused = true;
-		//pausePanel.SetActive (true);
 
 		Time.timeScale = 0f;
 	}
 
-	void unPause(){
-		
+	public void closeUpgradeMenu(){
+		Debug.Log("close");
+		Destroy (upgradePanel.gameObject);
 		Paused = false;
-		//pausePanel.SetActive (false);
 
 		Time.timeScale = 1f;
 	}
@@ -134,11 +133,6 @@ public class UIController : MonoBehaviour {
 		} 
 
 	}
-
-	public void upgradeMenu(){
-		GameObject um = Instantiate (upgradePanelPrefab.gameObject, this.transform);
-
-		//um.GetComponent<UpgradePanelBehavior>().
-	}
+		
 
 }
