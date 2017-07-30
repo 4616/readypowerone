@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour {
 	public GameObject enemy1;
 	public GameObject enemy2;
 	public GameObject coal;
+	public GameObject destWall;
 
 	public UpgradePanelBehavior upgradePanelPrefab;
 	public ResourcesPanelBehavior resourcePanelPrefab;
@@ -60,6 +61,9 @@ public class UIController : MonoBehaviour {
 				}
 				if (t == Terrain.Enemy2 && this.enemy2 != null) {
 					newObject = Instantiate (this.enemy2, this.transform);
+				}
+				if (t == Terrain.DestWall && this.enemy2 != null) {
+					newObject = Instantiate (this.destWall, this.transform);
 				}
 				// if (t == Terrain.Coal && this.coal != null) {
 				// 	newObject = Instantiate (this.coal, this.transform); //comment out to remove drills
