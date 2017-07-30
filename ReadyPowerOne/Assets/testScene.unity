@@ -217,6 +217,24 @@ Prefab:
       value: 
       objectReference: {fileID: 1095522940876348, guid: 5e2f259d902b6452b8dfbe9f557a9626,
         type: 2}
+    - target: {fileID: 114461279917470818, guid: 9812beea10594418682c76b265c95ccb,
+        type: 2}
+      propertyPath: enemy1
+      value: 
+      objectReference: {fileID: 1809688050541602, guid: 2dd63090b5d9d4a5eb7607db97e31337,
+        type: 2}
+    - target: {fileID: 114461279917470818, guid: 9812beea10594418682c76b265c95ccb,
+        type: 2}
+      propertyPath: enemy2
+      value: 
+      objectReference: {fileID: 1926311890349992, guid: c6c6760d00e494629ba0d8f2c691c08f,
+        type: 2}
+    - target: {fileID: 114461279917470818, guid: 9812beea10594418682c76b265c95ccb,
+        type: 2}
+      propertyPath: bossEnemyObject
+      value: 
+      objectReference: {fileID: 1339044867011022, guid: ba16582d3a6d64c1899bf586153d6824,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9812beea10594418682c76b265c95ccb, type: 2}
   m_IsPrefabParent: 0
@@ -345,7 +363,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1028823528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 90, y: 100, z: -10}
+  m_LocalPosition: {x: 90, y: 110, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
