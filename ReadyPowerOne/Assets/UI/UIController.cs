@@ -6,17 +6,19 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour {
 
 	bool Paused;
-	public GameObject pausePanel;
-
 	public GameObject wallObject;
 
+	public GameObject pausePanel;
 	public ResourcesPanelBehavor resourcePanelPrefab;
-	public GameObject floatingText;
+	public GameObject floatingTextPrefab;
+
 
 	private ResourcesPanelBehavor resourcePanel;
 
-	private float lastDraw;
-
+	private float lastDraw = 0f;
+	private float DrawAmount = 0f;
+	private float blockSize = 2.5f;
+		
 	public static UIController Instance { get; private set; }
 
 	void Awake() {
@@ -30,20 +32,14 @@ public class UIController : MonoBehaviour {
 
 		// Here we save our singleton instance
 		Instance = this;
-
-		//Add terrain
-
-
 	
 	}
-
-	private float blockSize = 2.5f;
 
 	void Start () {
 		//Instantiate (pausePanel, this.transform);
 		resourcePanel = Instantiate (resourcePanelPrefab, this.transform);
 
-		Room room = TerrainGenerator.GenerateLevel (50, 50, 0);
+		Room room = TerrainGenerator.GenerateLevel (30, 120, 0);
 
 		for (int y = 0; y < room.getHeight(); y++) {
 			for (int x = 0; x < room.getWidth(); x++) {
@@ -91,15 +87,20 @@ public class UIController : MonoBehaviour {
 	}
 
 	public void floatText(float floatnum,Transform location){
-		
-		GameObject ft = Instantiate (floatingText, this.transform);
+		DrawAmount += floatnum;
 
-		Vector3 drawlocation = Camera.main.WorldToScreenPoint (location.position);
-		Vector3 randvec = new Vector3 (Random.Range (-20, 20), 
-			                 Random.Range (-20, 20), 
-			                 0);
-		
-		ft.transform.position = drawlocation + randvec;
+		if  (Time.frameCount - lastDraw >= 12f) {
+			GameObject ft = Instantiate (floatingTextPrefab, this.transform);
+
+			Vector3 drawlocation = Camera.main.WorldToScreenPoint (location.position);
+			Vector3 randvec = new Vector3 (Random.Range (-20, 20), 
+				                  Random.Range (-20, 20), 
+				                  0);
+			ft.GetComponent<TextFloatBehavior>().floatText.text = DrawAmount.ToString();
+			ft.transform.position = drawlocation + randvec;
+			lastDraw = Time.frameCount;
+			DrawAmount = 0f;
+		} 
 
 	}
 
