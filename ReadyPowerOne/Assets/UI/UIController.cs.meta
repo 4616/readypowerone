@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 507e0b6ba3ef244949386d4450c78ba5
+timeCreated: 1501370469
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - pausePanel: {fileID: 1457499017188324, guid: 69882d20ced394cf8a794264ed863561,
+      type: 2}
+  - resourcePanel: {fileID: 1409282053424242, guid: 7b4bbed2a659446d083f3b706bdb19f0,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
