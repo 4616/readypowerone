@@ -385,10 +385,10 @@ public class RectangleRoomFactory : RoomFactory
 	public int exitCount;
 	private Boolean ifEnemies;
 
-	private double enemy1Probability = 0.015;
-	private double enemy2Probability = 0.015;
+	private double enemy1Probability = 0.02;
+	private double enemy2Probability = 0.02;
 
-	private double roomDestWallProbability = 0.4;
+	private double roomDestWallProbability = 0.3;
 	private double destWallProbability = 0.25;
 
 	public override Room getRoom ()
