@@ -6,6 +6,8 @@ public class Player : MonoBehaviour, ICombat {
 
     public LineRenderer phazer;
 
+    public Cannon cannon;
+
     public static Player player_ = null;
 
     public float moveSpeed = 1f;
@@ -72,13 +74,17 @@ public class Player : MonoBehaviour, ICombat {
         }
 
         float angle = AngleBetweenPoints(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10f));
-        transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90f));
-        //transform.LookAt((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10f), Vector3.forward);
-
+        //transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90f));
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0f, 0f, angle + 90f)), Time.deltaTime * rotationSpeed);
+        
         if (Input.GetMouseButton(1)) {
             Phaser();
         } else {
             phazer.gameObject.SetActive(false);
+        }
+        if (cannon.CanShoot() && (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.LeftAlt) || Input.GetMouseButton(0))) {
+            LoseEnergy(cannon.energyCost);
+            cannon.Shoot();
         }
 
         if (energy <= 0f) {
