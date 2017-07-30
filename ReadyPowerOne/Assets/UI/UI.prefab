@@ -62,6 +62,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 777f265604eeb4a4685c4b580a6d3760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pausePanel: {fileID: 1457499017188324, guid: 69882d20ced394cf8a794264ed863561, type: 2}
+  resourcePanel: {fileID: 1477072156198850, guid: 2965aa40f98824f368043543f1cc13df,
+    type: 2}
 --- !u!114 &114518805380045662
 MonoBehaviour:
   m_ObjectHideFlags: 1
