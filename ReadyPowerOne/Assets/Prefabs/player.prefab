@@ -219,6 +219,7 @@ MonoBehaviour:
   phaserCost: 2
   moveCost: 0.5
   drillCost: 20
+  explosion: {fileID: 1313053159660636, guid: a6dc6d03892a145e2baba9f0157d27b8, type: 2}
 --- !u!114 &114635237493851322
 MonoBehaviour:
   m_ObjectHideFlags: 1

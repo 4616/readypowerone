@@ -21,7 +21,7 @@ public class Player : MonoBehaviour, ICombat {
     public float phaserCost = 2f;
 	public float moveCost = .1f;
     public float drillCost = 10f;
-
+    public GameObject explosion;
 
     public static Player GetPlayer() {
         return player_;
@@ -51,6 +51,8 @@ public class Player : MonoBehaviour, ICombat {
             "Refill your battery right now",
             () => energy = 100f
         ));
+
+        
     }
 
     //public void Update() {
@@ -155,7 +157,9 @@ public class Player : MonoBehaviour, ICombat {
 
 		UIController.Instance.updateHealth(health);
 		UIController.Instance.floatText (damage, this.transform);
-        
+        GameObject ex = Instantiate (explosion, this.transform.position, this.transform.rotation);
+        Object.Destroy(ex, 0.5f);
+
 		if (health <= 0f) {
             Debug.Log("Player is dead");
             Time.timeScale = 0f;
