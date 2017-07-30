@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour {
 
 	bool Paused;
+	public GameObject wallObject;
+
 	public GameObject pausePanel;
 	public ResourcesPanelBehavor resourcePanelPrefab;
 	public GameObject floatingTextPrefab;
@@ -15,6 +17,7 @@ public class UIController : MonoBehaviour {
 
 	private float lastDraw = 0f;
 	private float DrawAmount = 0f;
+	private float blockSize = 2.5f;
 		
 	public static UIController Instance { get; private set; }
 
@@ -35,6 +38,23 @@ public class UIController : MonoBehaviour {
 	void Start () {
 		//Instantiate (pausePanel, this.transform);
 		resourcePanel = Instantiate (resourcePanelPrefab, this.transform);
+
+		Room room = TerrainGenerator.GenerateLevel (30, 120, 0);
+
+		for (int y = 0; y < room.getHeight(); y++) {
+			for (int x = 0; x < room.getWidth(); x++) {
+				Terrain t = room.getLayout () [y] [x];
+				if (t == Terrain.Wall) {
+					GameObject newWall = Instantiate (this.wallObject, this.transform);
+					newWall.transform.position = new Vector3 (x * blockSize, y * blockSize, 0);
+				}
+			}
+		}
+
+//		GameObject potato = Instantiate (this.wallObject, this.transform);
+//		potato.transform.position = new Vector3 (5, 5, 0);
+
+
 
 		//pausePanel.SetActive(false);
 	}

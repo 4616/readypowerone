@@ -41,22 +41,7 @@ public class Drill : MonoBehaviour, ICombat {
 
 	// Update is called once per frame
 	void Update () {
-		/*
-		if (_playerInRange) {
-			state = State.Active;
-		} else {
-			state = State.Inactive;
-		}
 
-		switch (state) {
-			case State.Active:
-				//change sprite active
-				break;
-			default:
-				//change sprite inactive
-				break;
-			}
-			*/
 		}
 
 	/*
@@ -66,11 +51,19 @@ public class Drill : MonoBehaviour, ICombat {
     }
   }
   */
+
+
+
 	public float GetEnergy () {
 		float energyTransfer = Mathf.Min(this.energy, this.rechargeRate * Time.deltaTime);
 		this.energy -= energyTransfer;
 		return energyTransfer;
 	}
+
+
+	void OnCollisionStay2D(Collision2D coll) {
+        Debug.Log(coll.gameObject.GetType());
+    }
 
 
 

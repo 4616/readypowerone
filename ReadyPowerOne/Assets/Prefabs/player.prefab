@@ -208,8 +208,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phazer: {fileID: 120124865154078354}
-  moveSpeed: 2
-  rotationSpeed: 180
+  cannon: {fileID: 114635237493851322}
+  moveSpeed: 3
+  rotationSpeed: 360
   energy: 73.49376
   health: 100
   phaserCost: 2
@@ -227,8 +228,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 114036826220377166, guid: 9a0e7ef5d46270343a6cd1f6dbdca4ea,
     type: 2}
   bulletSpeed: 20
-  spawnTime: 1
+  spawnTime: 0.5
   spawnCooldown: 0
+  energyCost: 1
   startOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &114933901826246116
 MonoBehaviour:

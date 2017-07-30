@@ -41,6 +41,8 @@ public static class RoomTools {
 		return new SimpleRoom(layout);
 	}
 
+
+
 	public static SimpleRoom generateEmptySimpleRoom(int width, int height) {
 
 		List<List<Terrain>> layout = new List<List<Terrain>> ();
@@ -74,26 +76,51 @@ public static class RoomTools {
 		room.Layout = currentLayout;
 	}
 
+//	public static List<Vector2> exitFinder(SimpleRoom room) {
+//		List<List<Terrain>> currentLayout = room.Layout;
+//		List<Vector2> exits = new List<Vector2>();
+//
+//		for (int y = 0; y < currentLayout.Count; y++) {
+//			if (y == 0 || y == currentLayout.Count) {
+//				for (int x = 0; x < currentLayout [y].Count; x++) {
+//					if (currentLayout [y] [x] == Terrain.Open) {
+//						exits.Add (new Vector2 (x, y));
+//					}
+//				}
+//			} else {
+//				if (currentLayout [y] [0] == Terrain.Open) {
+//					exits.Add (new Vector2 (0, y));
+//				}
+//				if (currentLayout [y] [currentLayout[y].Count - 1] == Terrain.Open) {
+//					exits.Add (new Vector2 (currentLayout[y].Count - 1, y));
+//				}
+//			}
+//		}
+//		return exits;
+//	}
+
 	public static List<Vector2> exitFinder(SimpleRoom room) {
-		List<List<Terrain>> currentLayout = room.Layout;
+//		List<List<Terrain>> currentLayout = room.Layout;
 		List<Vector2> exits = new List<Vector2>();
 
-		for (int y = 0; y < currentLayout.Count; y++) {
-			if (y == 0 || y == currentLayout.Count) {
-				for (int x = 0; x < currentLayout [y].Count; x++) {
-					if (currentLayout [y] [x] == Terrain.Open) {
-						exits.Add (new Vector2 (x, y));
-					}
-				}
-			} else {
-				if (currentLayout [y] [0] == Terrain.Open) {
-					exits.Add (new Vector2 (0, y));
-				}
-				if (currentLayout [y] [currentLayout[y].Count - 1] == Terrain.Open) {
-					exits.Add (new Vector2 (currentLayout[y].Count - 1, y));
-				}
-			}
-		}
+//		for (int y = 0; y < currentLayout.Count; y++) {
+//			if (y == 0 || y == currentLayout.Count) {
+//				for (int x = 0; x < currentLayout [y].Count; x++) {
+//					if (currentLayout [y] [x] == Terrain.Open) {
+//						exits.Add (new Vector2 (x, y));
+//					}
+//				}
+//			} else {
+//				if (currentLayout [y] [0] == Terrain.Open) {
+//					exits.Add (new Vector2 (0, y));
+//				}
+//				if (currentLayout [y] [currentLayout[y].Count - 1] == Terrain.Open) {
+//					exits.Add (new Vector2 (currentLayout[y].Count - 1, y));
+//				}
+//			}
+//		}
+		exits.Add(new Vector2(room.getWidth() / 2, room.getHeight() / 2));
+
 		return exits;
 	}
 
@@ -112,7 +139,7 @@ public static class RoomTools {
 		List<List<Terrain>> parentLayout = parentRoom.getLayout ();
 
 		foreach (TerrainCoordinates tc in hallway.terrainCoordinateIterator()) {
-			
+
 			if (parentLayout [tc.Y] [tc.X] == Terrain.Wall) {
 				parentLayout [tc.Y] [tc.X] = tc.Terrain;
 			}
@@ -165,9 +192,23 @@ public class SimpleRoom : Room
 		return Layout.Count;
 	}
 
-	public List<Vector2> getExits ()
+	virtual public List<Vector2> getExits ()
 	{
 		return RoomTools.exitFinder (this);
+	}
+}
+
+public class SimpleRoomWithExits: SimpleRoom {
+
+	private List<Vector2> exits;
+
+	public SimpleRoomWithExits(List<List<Terrain>> layout, List<Vector2> exits): base(layout) {
+		this.exits = exits;
+	}
+
+	override public List<Vector2> getExits ()
+	{
+		return exits;
 	}
 }
 
@@ -179,17 +220,40 @@ public class FunkyRoomFactory: RoomFactory {
 
 		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
 
-		funkyLayout.Add(new List<Terrain> { W, W, W, W, W, W, W, W, W });
+		funkyLayout.Add(new List<Terrain> { W, O, W, W, W, W, W, W, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, O, W, W, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, O, W, O, O, O, W });
-		funkyLayout.Add(new List<Terrain> { O, O, O, O, W, W, O, O, O });
-		funkyLayout.Add(new List<Terrain> { W, W, O, O, O, W, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, W, O, O, W, W, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, W, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, W, W, W, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, W, W, W, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, W, W, W, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, W, W, W, W, W, W });
 
-		return new SimpleRoom(funkyLayout);
+		return new SimpleRoomWithExits(funkyLayout, new List<Vector2> {new Vector2(2, 1)});
+	}
+}
+
+public class LineRoomFactory: RoomFactory {
+	public override Room getRoom () {
+
+		Terrain O = Terrain.Open;
+		Terrain W = Terrain.Wall;
+
+		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
+
+		funkyLayout.Add(new List<Terrain> { W, W, W });
+		funkyLayout.Add(new List<Terrain> { W, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, W });
+
+		return new SimpleRoomWithExits(funkyLayout, new List<Vector2> {new Vector2(2, 1)});
 	}
 }
 
@@ -210,9 +274,9 @@ public class RectangleRoomFactory : RoomFactory
 
 		//Add exits iteratively across different walls
 
-		List<Direction> doorOrder = new List<Direction> { Direction.Bottom, Direction.Left, Direction.Right, Direction.Top };
+//		List<Direction> doorOrder = new List<Direction> { Direction.Bottom, Direction.Left, Direction.Right, Direction.Top };
 
-		doorOrder.Shuffle ();
+//		doorOrder.Shuffle ();
 
 //
 //
@@ -222,34 +286,34 @@ public class RectangleRoomFactory : RoomFactory
 
 		//TODO: Don't create a door on an already existing door slot
 
-		List<List<Terrain>> layout = room.Layout;
+//		List<List<Terrain>> layout = room.Layout;
 
-		System.Random rnd = new System.Random ();
+//		System.Random rnd = new System.Random ();
+//
+//		int idx;
 
-		int idx;
-
-		for (int i = 0; i < exitCount; i++) {
-
-			Direction doorLocation = doorOrder [i % doorOrder.Count];
-			switch (doorLocation) {
-			case Direction.Top:
-				idx = rnd.Next (1, layout [0].Count - 1);
-				layout [0] [idx] = Terrain.Open;
-				break;
-			case Direction.Bottom:
-				idx = rnd.Next (1, layout [layout.Count - 1].Count - 1);
-				layout [layout.Count - 1] [idx] = Terrain.Open;
-				break;
-			case Direction.Left:
-				idx = rnd.Next (1, layout.Count - 1);
-				layout [idx] [0] = Terrain.Open;
-				break;
-			case Direction.Right:
-				idx = rnd.Next (1, layout.Count - 1);
-				layout [idx] [layout.Count - 1] = Terrain.Open;
-				break;
-			}
-		}
+//		for (int i = 0; i < exitCount; i++) {
+//
+//			Direction doorLocation = doorOrder [i % doorOrder.Count];
+//			switch (doorLocation) {
+//			case Direction.Top:
+//				idx = rnd.Next (1, layout [0].Count - 1);
+//				layout [0] [idx] = Terrain.Open;
+//				break;
+//			case Direction.Bottom:
+//				idx = rnd.Next (1, layout [layout.Count - 1].Count - 1);
+//				layout [layout.Count - 1] [idx] = Terrain.Open;
+//				break;
+//			case Direction.Left:
+//				idx = rnd.Next (1, layout.Count - 1);
+//				layout [idx] [0] = Terrain.Open;
+//				break;
+//			case Direction.Right:
+//				idx = rnd.Next (1, layout.Count - 1);
+//				layout [idx] [layout.Count - 1] = Terrain.Open;
+//				break;
+//			}
+//		}
 
 		return room;
 	}
@@ -404,6 +468,7 @@ public class Hallway {
 		//Then move between 0 and 5 spaces in direction of y1 - y2 (max at y2)
 		//repeat until we're at x2,y2
 
+
 		int xSign = Math.Sign (X2 - X1);
 		int ySign = Math.Sign (Y2 - Y1);
 
@@ -413,21 +478,24 @@ public class Hallway {
 
 		Boolean direction = true;  //true == x; false == y;
 
-		while (Math.Abs(X2 - currentX) > 0 && Math.Abs(Y2 - currentY) > 0) {
+		while (Math.Abs(X2 - currentX) > 0 || Math.Abs(Y2 - currentY) > 0) {
 			if (direction) {
-				int deltaX = xSign * Math.Min (rng.Next (5), Math.Abs (X2 - currentX));
-				for (int i = 0; i <= Math.Abs(X2 - currentX); i++) {
+				int deltaX = Math.Min (rng.Next (5), Math.Abs (X2 - currentX));
+
+				for (int i = 0; i < deltaX; i++) {
 					currentX += xSign;
 					yield return new TerrainCoordinates (currentX, currentY, Terrain.Open);
-					direction = !direction;
 				}
+				direction = !direction;
+//				}
 			} else {
-				int deltaY = ySign * Math.Min(rng.Next (5), Math.Abs(Y2 - currentY));
-				for (int i = 0; i <= Math.Abs(Y2 - currentY); i++) {
+				int deltaY = Math.Min(rng.Next (5), Math.Abs(Y2 - currentY));
+				for (int i = 0; i < deltaY; i++) {
 					currentY += ySign;
 					yield return new TerrainCoordinates (currentX, currentY, Terrain.Open);
-					direction = !direction;
 				}
+				direction = !direction;
+//				}
 			}
 		}
 
@@ -463,18 +531,21 @@ public static class TerrainGenerator
 //	}
 
 	private static int roomPlacementAttempts = 120;
-//	private static int roomPositioningRetries = 5;
-	private static int maxRooms = 20;
+	private static int roomPositioningRetries = 5;
+	private static int maxRooms = 28;
 	private static int levelBorder = 2;
 
 	//For now needs to add up to 1
-	private static Dictionary<double, RoomFactory> getRoomProbabilities(int level) {
+	private static List<KeyValuePair<double, RoomFactory>> getRoomProbabilities(int level) {
 		if (level == 0) {
-			return new Dictionary<double, RoomFactory>()
+			return new List<KeyValuePair<double, RoomFactory>>()
 			{
-				{ 0.3, new RectangleRoomFactory(6,6,2)},
-				{ 0.5, new RectangleRoomFactory(8,8,2)},
-				{ 0.2, new FunkyRoomFactory()}
+				new KeyValuePair<double, RoomFactory>( 0.3, new RectangleRoomFactory(4,4,2)),
+				new KeyValuePair<double, RoomFactory>( 0.2, new RectangleRoomFactory(6,6,2)),
+				new KeyValuePair<double, RoomFactory>( 0.2, new RectangleRoomFactory(9,9,2)),
+				new KeyValuePair<double, RoomFactory>( 0.05, new RectangleRoomFactory(12,12,3)),
+				new KeyValuePair<double, RoomFactory>( 0.05, new FunkyRoomFactory()),
+				new KeyValuePair<double, RoomFactory>( 0.2, new LineRoomFactory())
 			};
 		} else
 			throw new NotImplementedException ();
@@ -487,14 +558,24 @@ public static class TerrainGenerator
 		//Cheat and use room generator and then keep layout
 		SimpleRoom baseRoom = RoomTools.generateWallRoom (width, height);
 
-		Dictionary<double, RoomFactory> roomProbabilities = getRoomProbabilities (level);
+		List<KeyValuePair<double, RoomFactory>> roomProbabilities = getRoomProbabilities (level);
 
 		System.Random r = new System.Random();
 
 		//TODO: Merge room and roomCoordinates
 		List<RoomCoordinates> placedRoomCoordinates = new List<RoomCoordinates> ();
 
+		//Add Starting and Ending rooms
+
+		RoomFactory startingRoomFactory = new RectangleRoomFactory (6, 6, 1);
+
+		placedRoomCoordinates.Add(new RoomCoordinates(startingRoomFactory.getRoom(), width / 2 - 3, height - (height / 12)));
+		placedRoomCoordinates.Add(new RoomCoordinates(startingRoomFactory.getRoom(), width / 2 - 3, height / 22));
+
 		for (int i = 0; i < roomPlacementAttempts; i++) {
+			if (placedRoomCoordinates.Count >= maxRooms)
+				break;
+
 			double diceRoll = r.NextDouble();
 
 			double cumulative = 0.0;
@@ -515,7 +596,7 @@ public static class TerrainGenerator
 			int xMax = width - roomToPlace.getWidth () - levelBorder;
 			int yMax = height - roomToPlace.getHeight () - levelBorder;
 
-			for (int j = 0; j < roomPlacementAttempts; j++) {
+			for (int j = 0; j < roomPositioningRetries; j++) {
 				int roomX = r.Next (levelBorder, xMax);
 				int roomY = r.Next (levelBorder, yMax);
 
@@ -531,12 +612,9 @@ public static class TerrainGenerator
 
 				if (!roomOverlap) {
 					placedRoomCoordinates.Add (newRoomCoordinates);
-				}
-				if (placedRoomCoordinates.Count >= maxRooms)
 					break;
+				}
 			}
-			if (placedRoomCoordinates.Count >= maxRooms)
-				break;
 
 		}
 
@@ -555,10 +633,15 @@ public static class TerrainGenerator
 
 		List<Hallway> hallways = new List<Hallway> ();
 
+		placedRoomCoordinates.Sort((first, second) => {
+			return (-1 * first.y1).CompareTo(-1 * second.y1);
+		}
+			);
+
 		//First add a sequential list of hallways from room to room so as to guarantee connections
 		for (int i = 0; i < (placedRoomCoordinates.Count - 1); i++) {
 			List<Vector2> exits1 = placedRoomCoordinates [i].getExits ();
-			List<Vector2> exits2 = placedRoomCoordinates [i + 1].getExits ();
+			List<Vector2> exits2 = placedRoomCoordinates [(i + 1) % placedRoomCoordinates.Count].getExits ();
 
 			exits1.Shuffle ();
 			exits2.Shuffle ();
@@ -568,46 +651,28 @@ public static class TerrainGenerator
 
 		//Add a few more random hallways
 
-		placedRoomCoordinates.Shuffle ();
-
-		for (int i = 0; i < (1 + (placedRoomCoordinates.Count - 1) / 3); i++) {  //(1 + (placedRoomCoordinates.Count - 1) / 3)
-			
-			List<Vector2> exits1 = placedRoomCoordinates [i % placedRoomCoordinates.Count].getExits ();
-			List<Vector2> exits2 = placedRoomCoordinates [(i + 1) % placedRoomCoordinates.Count].getExits ();
-
-//			print ("exits");
-//			exits1.Shuffle ();
-//			exits2.Shuffle ();
-//			print (exits1[0].x);
-//			print (exits1[0].y);
-//			print (exits2[0].x);
-//			print (exits2[0].y);
-
-			hallways.Add (new Hallway(exits1[0], exits2[0]));
-		}
+//		placedRoomCoordinates.Shuffle ();
+//
+//		for (int i = 0; i < (1 + (placedRoomCoordinates.Count - 1) / 3); i++) {  //(1 + (placedRoomCoordinates.Count - 1) / 3)
+//			
+//			List<Vector2> exits1 = placedRoomCoordinates [i % placedRoomCoordinates.Count].getExits ();
+//			List<Vector2> exits2 = placedRoomCoordinates [(i + 1) % placedRoomCoordinates.Count].getExits ();
+//
+////			print ("exits");
+////			exits1.Shuffle ();
+////			exits2.Shuffle ();
+////			print (exits1[0].x);
+////			print (exits1[0].y);
+////			print (exits2[0].x);
+////			print (exits2[0].y);
+//
+//			hallways.Add (new Hallway(exits1[0], exits2[0]));
+//		}
 
 		foreach (RoomCoordinates rc in placedRoomCoordinates) {
 			baseRoom = RoomTools.mergeRoom (baseRoom, rc);
 		}
-
-//		print ("hallways");
-//		print (hallways.Count);
-//		print (hallways[0]);
-//		print (hallways[0].X1);
-//		print (hallways[0].Y1);
-//		print (hallways[0].X2);
-//		print (hallways[0].Y2);
-//		print ("internal");
-//		foreach (TerrainCoordinates tc in hallways[0].terrainCoordinateIterator()) {
-//			print ("tc: " + tc.X.ToString() + ", " + tc.Y.ToString ());
-//		}
-//		print ("hallways");
-//		print (hallways.Count);
-//		print (hallways[1]);
-//		print (hallways[2].X1);
-//		print (hallways[3].Y1);
-//		print (hallways[4].X2);
-//		print (hallways[5].Y2);
+			
 		foreach (Hallway hw in hallways) {
 			baseRoom = RoomTools.mergeHallway (baseRoom, hw);
 		}
