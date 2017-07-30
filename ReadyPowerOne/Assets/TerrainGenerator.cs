@@ -260,7 +260,6 @@ public class CrapRoomFactory: RoomFactory {
 		funkyLayout.Add(new List<Terrain> { W, O, O, W, O, O, O, W, O, W, O, W, O, W, O, W, O, W, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, I, I, W, O, I, I, W, W, O, I, W, W, W, I, W, W, O, I, I, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, W, I, O, O, W, O, W, O, W, O, W, O, W, E, O, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, W, O, O, O, W, O, W, O, W, O, W, O, W, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, W, W, W, O, W, O, W, O, W, O, W, O, W, O, O, E, E, W });
 		funkyLayout.Add(new List<Terrain> { W, E, E, O, O, E, O, O, O, O, O, O, O, O, E, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, E, O, O, I, O, O, O, O, O, O, O, O, O, O, O, W });
@@ -270,7 +269,8 @@ public class CrapRoomFactory: RoomFactory {
 		funkyLayout.Reverse ();
 
 		return new SimpleRoomWithExits(funkyLayout, new List<Vector2> {
-			new Vector2(4, 0), new Vector2(12,0), new Vector2(4, funkyLayout.Count), new Vector2(12, funkyLayout.Count)
+			new Vector2(4, 0), new Vector2(12,0), new Vector2(4, funkyLayout.Count), 
+			new Vector2(12, funkyLayout.Count), new Vector2(funkyLayout[0].Count-1, 6)
 		});
 	}
 }
@@ -844,8 +844,8 @@ public static class TerrainGenerator
 						}
 					}
 				}
-				if (altMinDistance <= 1.5 * minDistance) {
-					hallways.Add (new Hallway(exit1Candidate, exit3Candidate));
+				if (altMinDistance <= 1.5 * minDistance && Vector2.Distance(altExit1Candidate,exit3Candidate) > 0.5 * altMinDistance) {
+					hallways.Add (new Hallway(altExit1Candidate, exit3Candidate));
 				}
 			}
 
