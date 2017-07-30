@@ -43,7 +43,7 @@ public class UIController : MonoBehaviour {
 		//Instantiate (pausePanel, this.transform);
 		resourcePanel = Instantiate (resourcePanelPrefab, this.transform);
 
-		Room room = TerrainGenerator.GenerateLevel (50, 50, 0);
+		Room room = TerrainGenerator.GenerateLevel (30, 120, 0);
 
 		for (int y = 0; y < room.getHeight(); y++) {
 			for (int x = 0; x < room.getWidth(); x++) {
