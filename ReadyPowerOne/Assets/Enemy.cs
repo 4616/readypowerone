@@ -94,9 +94,12 @@ public class Enemy : MonoBehaviour, ICombat {
     public void TakeDamage(float damage) {
         //Debug.Log("Enemy takes " + damage + " damage.");
         this.health -= damage;
+
+		//spawn damage text
+		UIController.Instance.floatText (damage, this.transform);
+
         if(this.health <= 0){
         	Die();
-
         }
     }
 
