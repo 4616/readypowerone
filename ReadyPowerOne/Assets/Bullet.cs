@@ -6,10 +6,9 @@ public class Bullet : MonoBehaviour {
 
     public float damage = 5f;
 
-    public void Die() {
+    public virtual void Die() {
         gameObject.SetActive(false);
         Cannon.pool.Enqueue(this);
-        //Debug.LogError("Bullet dead, pool has " + Cannon.pool.Count);
     }
 
     void OnCollisionEnter2D(Collision2D coll) {
