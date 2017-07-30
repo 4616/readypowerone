@@ -235,6 +235,12 @@ Prefab:
       value: 
       objectReference: {fileID: 1339044867011022, guid: ba16582d3a6d64c1899bf586153d6824,
         type: 2}
+    - target: {fileID: 114461279917470818, guid: 9812beea10594418682c76b265c95ccb,
+        type: 2}
+      propertyPath: coal
+      value: 
+      objectReference: {fileID: 1613862024546718, guid: effcbba0ace834f43ba284c91ddb39b2,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9812beea10594418682c76b265c95ccb, type: 2}
   m_IsPrefabParent: 0

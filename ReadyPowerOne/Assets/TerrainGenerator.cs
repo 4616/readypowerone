@@ -219,15 +219,16 @@ public class FunkyRoomFactory: RoomFactory {
 		Terrain W = Terrain.Wall;
 		Terrain E = Terrain.Enemy1;
 		Terrain I = Terrain.Enemy2;
+		Terrain C = Terrain.Coal;
 
 		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
 
 		funkyLayout.Add(new List<Terrain> { W, O, W, W, W, W, W, W, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, E, O, O, O, I, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, W, W, W, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, W, W, W, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, W, W, W, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, W, O, W, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, C, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, W, O, W, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, I, O, O, O, E, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, W, W, W, W, W, W });
@@ -242,15 +243,16 @@ public class DiamondRoomFactory: RoomFactory {
 		Terrain O = Terrain.Open;
 		Terrain W = Terrain.Wall;
 		Terrain B = Terrain.BossEnemy;
+		Terrain C = Terrain.Coal;
 
 		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
 
 		funkyLayout.Add(new List<Terrain> { W, W, W, W, O, W, W, W, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, O, O, O, W, W, W });
 		funkyLayout.Add(new List<Terrain> { W, W, O, O, O, O, O, W, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
-		funkyLayout.Add(new List<Terrain> { O, O, O, O, B, O, O, O, O });
-		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, C, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { O, O, O, C, B, C, O, O, O });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, C, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, W, O, O, O, O, O, W, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, O, O, O, W, W, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, W, O, W, W, W, W });
@@ -264,13 +266,15 @@ public class LineRoomFactory: RoomFactory {
 
 		Terrain O = Terrain.Open;
 		Terrain W = Terrain.Wall;
+		Terrain E = Terrain.Enemy1;
+		Terrain C = Terrain.Coal;
 
 		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
 
 		funkyLayout.Add(new List<Terrain> { W, W, W });
-		funkyLayout.Add(new List<Terrain> { W, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, W });
+		funkyLayout.Add(new List<Terrain> { W, C, W });
+		funkyLayout.Add(new List<Terrain> { W, E, W });
+		funkyLayout.Add(new List<Terrain> { W, E, W });
 		funkyLayout.Add(new List<Terrain> { W, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, W });
@@ -301,11 +305,9 @@ public class RectangleRoomFactory : RoomFactory
 	{
 		System.Random rnd = new System.Random ();
 		SimpleRoom room = RoomTools.generateEmptySimpleRoom (width, height);
+		List<List<Terrain>> layout = room.Layout;
 
 		if (this.ifEnemies) {
-			
-
-			List<List<Terrain>> layout = room.Layout;
 
 			//Add one bad guy in every room first
 
@@ -331,6 +333,11 @@ public class RectangleRoomFactory : RoomFactory
 			}
 
 		}
+
+		//Add Coal in every room last
+		int coalX = rnd.Next(1,(width - 1));
+		int coalY = rnd.Next(1,(height - 1));
+		layout [coalX] [coalY] = Terrain.Coal;
 
 		//Add exits iteratively across different walls
 
