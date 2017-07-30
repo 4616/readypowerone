@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 120124865154078354}
   - component: {fileID: 61599646225195872}
   - component: {fileID: 114933901826246116}
+  - component: {fileID: 50082060533770524}
   m_Layer: 0
   m_Name: phazer
   m_TagString: Untagged
@@ -82,6 +83,26 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1578489561520802}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!50 &50082060533770524
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1345256571784778}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
@@ -173,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a57a459888d7894885d2de495d321f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
+  damage: 10
 --- !u!120 &120124865154078354
 LineRenderer:
   m_ObjectHideFlags: 1
