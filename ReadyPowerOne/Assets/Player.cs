@@ -14,6 +14,7 @@ public class Player : MonoBehaviour, ICombat {
     public float moveSpeed = 1f;
     public float rotationSpeed = 90f;
     public float energy = 100f;
+    public float bolts = 100f;
     public float health = 100f;
 
     public float phaserCost = 2f;
@@ -147,9 +148,12 @@ public class Player : MonoBehaviour, ICombat {
     }
 
     void DropDrill() {
-        Debug.Log("Dropping drill");
-        GameObject newObject = Instantiate (this.drill, UIController.Instance.transform);
-        newObject.transform.position = this.transform.position;
+        if(this.bolts >= 20f){
+            Debug.Log("Dropping drill");
+            GameObject newObject = Instantiate (this.drill, UIController.Instance.transform);
+            newObject.transform.position = this.transform.position;
+            this.bolts -= 20f;
+        }
 
     }
 }
