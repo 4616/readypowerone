@@ -109,6 +109,7 @@ MonoBehaviour:
   attackSpeed: 1
   attackCoolDown: 1
   bolts: {fileID: 1282703662790732, guid: db05cdc5b0f754b24a74b2621b57f049, type: 2}
+  explosionenemy: {fileID: 1686933039066152}
 --- !u!212 &212099828507762968
 SpriteRenderer:
   m_ObjectHideFlags: 1
