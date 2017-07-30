@@ -2,20 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bolts : MonoBehaviour {
-	public float bolts = 10f;
+public class NewBehaviourScript : MonoBehaviour {
+
 	// Use this for initialization
 	void Start () {
-
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//Debug.Log("Bolts on the floor");
 		
 	}
-
-
-
 }

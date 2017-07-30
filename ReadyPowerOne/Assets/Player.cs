@@ -14,12 +14,13 @@ public class Player : MonoBehaviour, ICombat {
     public float moveSpeed = 1f;
     public float rotationSpeed = 90f;
     public float energy = 100f;
+    public float energyMax = 100f;
     public float bolts = 100f;
     public float health = 100f;
 
     public float phaserCost = 2f;
 	public float moveCost = .1f;
-    public float drillCost = 20f;
+    public float drillCost = 10f;
 
 
     public static Player GetPlayer() {
@@ -162,14 +163,26 @@ public class Player : MonoBehaviour, ICombat {
     }
 
     public void GainEnergy(float amount){
+        Debug.Log(amount);
         energy += amount;
         UIController.Instance.updateEnergy(energy);
+        //Debug.Log(energy);
+
+
     }
 
-    void OnCollisionStay2D(Collision2D coll) {
-        Drill drill = coll.gameObject.GetComponent<Drill>();
-        if (drill != null) {
-            energy = Mathf.Min(energy + 1f * Time.deltaTime, 100f);
+     public void GainBolts(float amount){
+        bolts += amount;
+        UIController.Instance.updateBolts(bolts);
+    }
+
+
+
+    void OnTriggerEnter2D(Collider2D coll){
+        Bolts boltsobj = coll.gameObject.GetComponent<Bolts>();
+        if (boltsobj != null) {
+            GainBolts(boltsobj.bolts);
+            Object.Destroy(coll.gameObject);
         }
     }
 
@@ -180,6 +193,7 @@ public class Player : MonoBehaviour, ICombat {
             newObject.transform.position = this.transform.position;
             this.bolts -= drillCost;
             UIController.Instance.updateBolts(this.bolts);
+            GainEnergy(-drillCost);
         }
         else{
             Debug.Log("Not enough bolts to drop drill"); //Implement something for the player to see

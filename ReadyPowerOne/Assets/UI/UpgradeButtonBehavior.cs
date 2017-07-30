@@ -5,22 +5,28 @@ using UnityEngine.UI;
 
 public class UpgradeButtonBehavior : MonoBehaviour {
 
-	public GameObject textAnimation;
-	public Button upgradeButton;
+	public Text buttonTitle;
+	public Text buttonDesc;
+
+	public Upgrade upgrade;
+
 
 	// Use this for initialization
 	void Start () {
-		Button btn = upgradeButton.GetComponent<Button> ();
+		Button btn = this.gameObject.GetComponent<Button> ();
 		btn.onClick.AddListener (TaskOnClick);
 	}
 
 
 	void TaskOnClick(){
 		Debug.Log ("Click");
-		Vector3 randvec = new Vector3 (Random.Range (-10, 10), 
-										Random.Range (-10, 10), 
-										0);
-		GameObject floatText = Instantiate (textAnimation,upgradeButton.transform);
-		floatText.transform.Translate (randvec);
+	}
+
+	public void makeButton(Upgrade u){
+		upgrade = u;
+
+		buttonTitle.text = u.title;
+		buttonDesc.text = u.description;
+
 	}
 }

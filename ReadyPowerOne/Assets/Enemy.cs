@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour, ICombat {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log("Enemy initialized!");
 	}
 
     // Update is called once per frame
@@ -57,8 +56,10 @@ public class Enemy : MonoBehaviour, ICombat {
 
 	protected virtual void AttackPlayer (){
 		//Debug.Log("Player takes " + damage + " damage.");
-		Player.GetPlayer().TakeDamage(this.damage);
-		attackCoolDown = attackSpeed; 
+		if(Time.deltaTime>.01){
+			Player.GetPlayer().TakeDamage(this.damage);
+			attackCoolDown = attackSpeed; 
+		}
 	}
 
 	float DistanceToPlayer (){
@@ -105,7 +106,7 @@ public class Enemy : MonoBehaviour, ICombat {
     }
 
     public void Die (){
-    	Debug.Log("Dead!");
+    	//Debug.Log("Enemy dead!");
     	GameObject newObject = Instantiate (this.bolts, UIController.Instance.transform);
         newObject.transform.position = this.transform.position;
     	Object.Destroy(this.gameObject);

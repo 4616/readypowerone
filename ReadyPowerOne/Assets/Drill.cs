@@ -36,7 +36,6 @@ public class Drill : MonoBehaviour, ICombat {
     state = State.Active;
 		//_rechargeTimer = 0;
 		//_playerInRange = true;
-		Debug.Log("drill works");
 	}
 
 	// Update is called once per frame
@@ -59,6 +58,8 @@ public class Drill : MonoBehaviour, ICombat {
 		if(energy > 0){
 			energyTransfer = Mathf.Min(this.energy, this.rechargeRate * Time.deltaTime);
 			this.energy -= energyTransfer;
+			//Debug.Log(energy);
+			
 			return energyTransfer;
 		}
 		else{
@@ -70,7 +71,14 @@ public class Drill : MonoBehaviour, ICombat {
     void OnCollisionStay2D(Collision2D coll) {
         Player e = coll.gameObject.GetComponent<Player>();
         if (e != null) {
-            e.GainEnergy(this.GetEnergy());
+        	if(e.energyMax >= e.energy){
+        		float energyTransfer = this.GetEnergy();
+        		//Debug.Log(energyTransfer);
+        		if(energyTransfer > 0){
+        			//Debug.Log("Zero not zero");
+            		e.GainEnergy(this.GetEnergy());
+            	}
+            }
         }
     }
 
