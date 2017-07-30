@@ -10,6 +10,7 @@ public class Cannon : MonoBehaviour {
     public float bulletSpeed = 20f;
     public float spawnTime = 5f;
     public float spawnCooldown = 0f;
+    public float energyCost = 1f;
     public Vector3 startOffset;
 
     // Use this for initialization
@@ -21,13 +22,18 @@ public class Cannon : MonoBehaviour {
 	void Update () {
         spawnCooldown -= Time.deltaTime;
 
-        if (spawnCooldown <= 0f && (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.LeftAlt) || Input.GetMouseButton(0))) {
-            Shoot();
-            spawnCooldown = spawnTime;
-        }
+        //if (spawnCooldown <= 0f && (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.LeftAlt) || Input.GetMouseButton(0))) {
+        //    Shoot();
+        //    spawnCooldown = spawnTime;
+        //}
+    }
+
+    public bool CanShoot() {
+        return spawnCooldown <= 0f;
     }
 
     public void Shoot() {
+        spawnCooldown = spawnTime;
         Bullet b;
         if (Cannon.pool.Count > 0) {
             //Debug.LogError("Recycle " + pool.Count);
