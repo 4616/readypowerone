@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour {
     public void Die() {
         gameObject.SetActive(false);
         Cannon.pool.Enqueue(this);
-        Debug.LogError("Bullet dead, pool has " + Cannon.pool.Count);
+        //Debug.LogError("Bullet dead, pool has " + Cannon.pool.Count);
     }
 
     void OnCollisionEnter2D(Collision2D coll) {

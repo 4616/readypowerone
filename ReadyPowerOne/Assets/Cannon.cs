@@ -30,11 +30,11 @@ public class Cannon : MonoBehaviour {
     public void Shoot() {
         Bullet b;
         if (Cannon.pool.Count > 0) {
-            Debug.LogError("Recycle " + pool.Count);
+            //Debug.LogError("Recycle " + pool.Count);
             b = Cannon.pool.Dequeue();
             b.gameObject.SetActive(true);
         } else {
-            Debug.LogError("Creating a new bullet, this should not happen so often " + pool.Count);
+            //Debug.LogError("Creating a new bullet, this should not happen so often " + pool.Count);
             b = Instantiate<Bullet>(bulletPrefab);
         }
         b.transform.position = transform.position + startOffset;
