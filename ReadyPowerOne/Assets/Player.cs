@@ -7,16 +7,19 @@ public class Player : MonoBehaviour, ICombat {
     public LineRenderer phazer;
 
     public Cannon cannon;
+    public GameObject drill;
 
     public static Player player_ = null;
 
     public float moveSpeed = 1f;
     public float rotationSpeed = 90f;
     public float energy = 100f;
+    public float bolts = 100f;
     public float health = 100f;
 
     public float phaserCost = 2f;
 	public float moveCost = .1f;
+    public float drillCost = 20f;
 
 
     public static Player GetPlayer() {
@@ -24,6 +27,7 @@ public class Player : MonoBehaviour, ICombat {
     }
 
     public void Start() {
+        //DropDrill();
         player_ = this;
     }
 
@@ -75,8 +79,12 @@ public class Player : MonoBehaviour, ICombat {
 			LoseEnergy(moveCost*Time.deltaTime);
         }
 
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            DropDrill();
+        }
+
         float angle = AngleBetweenPoints(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10f));
-        //transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90f));
+        
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0f, 0f, angle + 90f)), Time.deltaTime * rotationSpeed);
         
         if (Input.GetMouseButton(1)) {
@@ -140,8 +148,17 @@ public class Player : MonoBehaviour, ICombat {
         }
     }
 
-    // public void DropDrill{
-    //     Instantiate (this.coal, this.transform);
+    void DropDrill() {
+        if(this.bolts >= drillCost){
+            Debug.Log("Dropping drill");
+            GameObject newObject = Instantiate (this.drill, UIController.Instance.transform);
+            newObject.transform.position = this.transform.position;
+            this.bolts -= drillCost;
+            UIController.Instance.updateBolts(this.bolts);
+        }
+        else{
+            Debug.Log("Not enough bolts to drop drill"); //Implement something for the player to see
+        }
 
-    // }
+    }
 }

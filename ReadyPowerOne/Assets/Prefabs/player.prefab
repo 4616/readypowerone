@@ -209,11 +209,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   phazer: {fileID: 120124865154078354}
   cannon: {fileID: 114635237493851322}
+  drill: {fileID: 1613862024546718, guid: effcbba0ace834f43ba284c91ddb39b2, type: 2}
   moveSpeed: 5
   rotationSpeed: 360
   energy: 73.49376
+  bolts: 100
   health: 100
   phaserCost: 2
+  moveCost: 0.1
+  drillCost: 5
 --- !u!114 &114635237493851322
 MonoBehaviour:
   m_ObjectHideFlags: 1
