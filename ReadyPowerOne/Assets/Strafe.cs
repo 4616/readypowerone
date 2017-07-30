@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Strafe : Enemy {
+
+	void Start () {
+		Debug.Log("Enemy initialized!");
+	}
 	override public void MoveEnemy (){
 		//float angle = Vector3.Angle(this.transform.position, FindPlayer());
 		//Debug.Log("The angle is " + angle);
