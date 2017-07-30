@@ -12,12 +12,12 @@ public class UIController : MonoBehaviour {
 	public GameObject enemy2;
 	public GameObject coal;
 
-	public GameObject pausePanel;
-	public ResourcesPanelBehavor resourcePanelPrefab;
+	public UpgradePanelBehavior upgradePanelPrefab;
+	public ResourcesPanelBehavior resourcePanelPrefab;
 	public GameObject floatingTextPrefab;
 
-
-	private ResourcesPanelBehavor resourcePanel;
+	private UpgradePanelBehavior upgradePanel;
+	private ResourcesPanelBehavior resourcePanel;
 
 	private float lastDraw = 0f;
 	private float DrawAmount = 0f;
@@ -43,7 +43,7 @@ public class UIController : MonoBehaviour {
 		//Instantiate (pausePanel, this.transform);
 		resourcePanel = Instantiate (resourcePanelPrefab, this.transform);
 
-		Room room = TerrainGenerator.GenerateLevel (30, 120, 0);
+		Room room = TerrainGenerator.GenerateLevel (50, 120, 0);
 
 		for (int y = 0; y < room.getHeight(); y++) {
 			for (int x = 0; x < room.getWidth(); x++) {
@@ -90,6 +90,7 @@ public class UIController : MonoBehaviour {
 	}
 	
 	void Pause(){
+		upgradeMenu ();
 		Paused = true;
 		//pausePanel.SetActive (true);
 
@@ -97,6 +98,7 @@ public class UIController : MonoBehaviour {
 	}
 
 	void unPause(){
+		
 		Paused = false;
 		//pausePanel.SetActive (false);
 
@@ -131,6 +133,12 @@ public class UIController : MonoBehaviour {
 			DrawAmount = 0f;
 		} 
 
+	}
+
+	public void upgradeMenu(){
+		GameObject um = Instantiate (upgradePanelPrefab.gameObject, this.transform);
+
+		//um.GetComponent<UpgradePanelBehavior>().
 	}
 
 }

@@ -223,7 +223,7 @@ public class FunkyRoomFactory: RoomFactory {
 
 		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
 
-		funkyLayout.Add(new List<Terrain> { W, O, W, W, W, W, W, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, W, W, W, W, W, W, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, E, O, O, O, I, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, W, O, W, O, O, W });
@@ -233,7 +233,45 @@ public class FunkyRoomFactory: RoomFactory {
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, W, W, W, W, W, W });
 
-		return new SimpleRoomWithExits(funkyLayout, new List<Vector2> {new Vector2(2, 1)});
+		return new SimpleRoomWithExits(funkyLayout, new List<Vector2> {
+			new Vector2(1, 1), new Vector2(7,1), new Vector2(7, 1), new Vector2(7, 7)
+		});
+	}
+}
+
+
+public class CrapRoomFactory: RoomFactory {
+	public override Room getRoom () {
+
+		Terrain O = Terrain.Open;
+		Terrain W = Terrain.Wall;
+		Terrain E = Terrain.Enemy1;
+		Terrain I = Terrain.Enemy2;
+		Terrain C = Terrain.Coal;
+		Terrain B = Terrain.BossEnemy;
+
+		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
+
+		funkyLayout.Add(new List<Terrain> { W, W, W, O, W, W, W, W, W, W, W, W, W, W, O, W, W, W, W, W, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, I, O, O, O, O, O, O, O, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, E, B, O, O, I, O, O, O, B, O, O, E, O, O, B, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, O, O, C, O, O, O, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, W, W, W, O, W, W, O, O, O, W, O, O, W, W, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, W, O, O, O, W, O, W, O, W, O, W, O, W, O, W, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, I, I, W, O, I, I, W, W, O, I, W, W, W, I, W, W, O, I, I, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, W, I, O, O, W, O, W, O, W, O, W, O, W, E, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, W, W, W, O, W, O, W, O, W, O, W, O, W, O, O, E, E, W });
+		funkyLayout.Add(new List<Terrain> { W, E, E, O, O, E, O, O, O, O, O, O, O, O, E, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, E, O, O, I, O, O, O, O, O, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, W, W, W, W, W, W, W, W, O, W, W, W, W, W, W, W, W, W, W, W });
+
+		funkyLayout.Reverse ();
+
+		return new SimpleRoomWithExits(funkyLayout, new List<Vector2> {
+			new Vector2(4, 0), new Vector2(12,0), new Vector2(4, funkyLayout.Count), 
+			new Vector2(12, funkyLayout.Count), new Vector2(funkyLayout[0].Count-1, 6)
+		});
 	}
 }
 
@@ -292,7 +330,12 @@ public class DiamondRoomFactory: RoomFactory {
 		funkyLayout.Add(new List<Terrain> { W, W, W, O, O, O, W, W, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, W, O, W, W, W, W });
 
-		return new SimpleRoom(funkyLayout);
+		return new SimpleRoomWithExits(funkyLayout, 
+			new List<Vector2> {
+				new Vector2(4, 0), 
+				new Vector2(4, funkyLayout.Count),
+				new Vector2(0, 4),
+				new Vector2(8, 4)});
 	}
 }
 
@@ -634,9 +677,9 @@ public static class TerrainGenerator
 //		print ("potato");
 //	}
 
-	private static int roomPlacementAttempts = 250;
-	private static int roomPositioningRetries = 10;
-	private static int maxRooms = 28;
+	private static int roomPlacementAttempts = 280;
+	private static int roomPositioningRetries = 13;
+	private static int maxRooms = 30;
 	private static int levelBorder = 2;
 
 	//For now needs to add up to 1
@@ -644,10 +687,11 @@ public static class TerrainGenerator
 		if (level == 0) {
 			return new List<KeyValuePair<double, RoomFactory>>()
 			{
-				new KeyValuePair<double, RoomFactory>( 0.3, new RectangleRoomFactory(4,4,2)),
+				new KeyValuePair<double, RoomFactory>( 0.25, new RectangleRoomFactory(4,4,2)),
 				new KeyValuePair<double, RoomFactory>( 0.3, new RectangleRoomFactory(6,6,2)),
 				new KeyValuePair<double, RoomFactory>( 0.3, new RectangleRoomFactory(9,9,2)),
 				new KeyValuePair<double, RoomFactory>( 0.05, new RectangleRoomFactory(12,12,3)),
+				new KeyValuePair<double, RoomFactory>( 0.05, new CrapRoomFactory()),
 				//new KeyValuePair<double, RoomFactory>( 0.2, new DiamondRoomFactory()),
 				new KeyValuePair<double, RoomFactory>( 0.05, new FunkyRoomFactory()) //,
 				//new KeyValuePair<double, RoomFactory>( 0.2, new LineRoomFactory())
@@ -683,6 +727,7 @@ public static class TerrainGenerator
 
 		List<RoomFactory> requiredRoomFactories = new List<RoomFactory> ();
 		requiredRoomFactories.Add (new ComplexRoomFactory ());
+//		requiredRoomFactories.Add (new CrapRoomFactory ());
 		requiredRoomFactories.Add(bossFactory);
 		requiredRoomFactories.Add(bossFactory);
 
@@ -761,7 +806,7 @@ public static class TerrainGenerator
 		//First add a sequential list of hallways from room to room so as to guarantee connections
 		for (int i = 0; i < (placedRoomCoordinates.Count - 1); i++) {
 			List<Vector2> exits1 = placedRoomCoordinates [i].getExits ();
-			List<Vector2> exits2 = placedRoomCoordinates [(i + 1) % placedRoomCoordinates.Count].getExits ();
+			List<Vector2> exits2 = placedRoomCoordinates [i + 1].getExits ();
 
 
 			//Calculate all distances between everything in exits1 and everything in exits2 and use closest exits for linking
@@ -780,11 +825,38 @@ public static class TerrainGenerator
 				}
 			}
 
+			hallways.Add (new Hallway(exit1Candidate, exit2Candidate));
+
+			//Add some skip hallways if they make sense
+			if (i < (placedRoomCoordinates.Count - 2)) {
+				List<Vector2> exits3 = placedRoomCoordinates [i + 2].getExits ();
+
+				float altMinDistance = int.MaxValue;
+				Vector2 altExit1Candidate = exits1[0];
+				Vector2 exit3Candidate = exits3[0];
+				foreach (Vector2 ex1 in exits1) {
+					foreach (Vector2 ex3 in exits3) {
+						float dist = Vector2.Distance(ex1,ex3);
+						if (dist < altMinDistance) {
+							altMinDistance = dist;
+							exit1Candidate = ex1;
+							exit3Candidate = ex3;
+						}
+					}
+				}
+				if (altMinDistance <= 1.5 * minDistance && Vector2.Distance(altExit1Candidate,exit3Candidate) > 0.5 * altMinDistance) {
+					hallways.Add (new Hallway(altExit1Candidate, exit3Candidate));
+				}
+			}
+
+				
+
 //			exits1.Shuffle ();
 //			exits2.Shuffle ();
 
-			hallways.Add (new Hallway(exit1Candidate, exit2Candidate));
+
 		}
+
 
 		//Add a few more random hallways
 
