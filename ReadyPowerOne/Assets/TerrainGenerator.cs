@@ -292,27 +292,44 @@ public class RectangleRoomFactory : RoomFactory
 	public int width;
 	public int height;
 	public int exitCount;
+	private Boolean ifEnemies;
 
-	private double enemy1Probability = 0.05;
-	private double enemy2Probability = 0.05;
+	private double enemy1Probability = 0.015;
+	private double enemy2Probability = 0.015;
 
 	public override Room getRoom ()
 	{
 		System.Random rnd = new System.Random ();
 		SimpleRoom room = RoomTools.generateEmptySimpleRoom (width, height);
 
-		List<List<Terrain>> layout = room.Layout;
+		if (this.ifEnemies) {
+			
 
-		for (int x = 1; x < (width - 1); x++) {
-			for (int y = 1; y < (height - 1); y++) {
-				Double nextDie = rnd.NextDouble ();
-				if (nextDie < enemy1Probability) {
-					layout [y] [x] = Terrain.Enemy1;
-				}
-				else if (nextDie < (enemy1Probability + enemy2Probability)) {
-					layout [y] [x] = Terrain.Enemy2;
+			List<List<Terrain>> layout = room.Layout;
+
+			//Add one bad guy in every room first
+
+			int firstEnemyX = rnd.Next(1,(width - 1));
+			int firstEnemyY = rnd.Next(1,(height - 1));
+			List<Terrain> randomEnemyList = new List<Terrain> ();
+			randomEnemyList.Add (Terrain.Enemy1);
+			randomEnemyList.Add (Terrain.Enemy2);
+			randomEnemyList.Shuffle ();
+			layout [firstEnemyX] [firstEnemyY] = randomEnemyList[0];
+
+
+			for (int x = 1; x < (width - 1); x++) {
+				for (int y = 1; y < (height - 1); y++) {
+					Double nextDie = rnd.NextDouble ();
+					if (nextDie < enemy1Probability) {
+						layout [y] [x] = Terrain.Enemy1;
+					}
+					else if (nextDie < (enemy1Probability + enemy2Probability)) {
+						layout [y] [x] = Terrain.Enemy2;
+					}
 				}
 			}
+
 		}
 
 		//Add exits iteratively across different walls
@@ -361,11 +378,12 @@ public class RectangleRoomFactory : RoomFactory
 		return room;
 	}
 
-	public RectangleRoomFactory (int width, int height, int exitCount)
+	public RectangleRoomFactory (int width, int height, int exitCount, Boolean ifEnemies = true)
 	{
 		this.width = width;
 		this.height = height;
 		this.exitCount = exitCount;
+		this.ifEnemies = ifEnemies;
 		//First create a block of all O, then add outside W; then add exits
 	}
 }
@@ -612,7 +630,7 @@ public static class TerrainGenerator
 
 		//Add Starting and Ending rooms
 
-		RoomFactory startingRoomFactory = new RectangleRoomFactory (6, 6, 1);
+		RoomFactory startingRoomFactory = new RectangleRoomFactory (6, 6, 1, false);
 
 		placedRoomCoordinates.Add(new RoomCoordinates(startingRoomFactory.getRoom(), width / 2 - 3, height - 10));
 		placedRoomCoordinates.Add(new RoomCoordinates(startingRoomFactory.getRoom(), width / 2 - 3, 2));
