@@ -21,15 +21,22 @@ public class Cannon : MonoBehaviour {
 	void Update () {
         spawnCooldown -= Time.deltaTime;
 
-        if (spawnCooldown <= 0f && (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.LeftAlt))) {
+        if (spawnCooldown <= 0f && (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.LeftAlt) || Input.GetMouseButton(0))) {
             Shoot();
             spawnCooldown = spawnTime;
         }
     }
 
     public void Shoot() {
-        Bullet b = Cannon.pool.Dequeue();
-        if (b == null) b = Instantiate<Bullet>(bulletPrefab);
+        Bullet b;
+        if (Cannon.pool.Count > 0) {
+            //Debug.LogError("Recycle " + pool.Count);
+            b = Cannon.pool.Dequeue();
+            b.gameObject.SetActive(true);
+        } else {
+            //Debug.LogError("Creating a new bullet, this should not happen so often " + pool.Count);
+            b = Instantiate<Bullet>(bulletPrefab);
+        }
         b.transform.position = transform.position + startOffset;
         b.GetComponent<Rigidbody2D>().velocity = transform.up * bulletSpeed;
     }

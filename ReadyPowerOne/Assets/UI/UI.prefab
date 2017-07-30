@@ -63,7 +63,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 1457499017188324, guid: 69882d20ced394cf8a794264ed863561, type: 2}
-  resourcePanelPrefab: {fileID: 0}
+  wallObject: {fileID: 1095522940876348, guid: 5e2f259d902b6452b8dfbe9f557a9626, type: 2}
+  resourcePanelPrefab: {fileID: 114038237483264246, guid: 7b4bbed2a659446d083f3b706bdb19f0,
+    type: 2}
+  floatingText: {fileID: 1221048958523654, guid: 627d1582c90904d9cbca62ce223d4aa2,
+    type: 2}
 --- !u!114 &114518805380045662
 MonoBehaviour:
   m_ObjectHideFlags: 1

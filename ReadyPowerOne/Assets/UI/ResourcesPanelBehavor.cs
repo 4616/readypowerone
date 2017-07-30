@@ -18,9 +18,7 @@ public class ResourcesPanelBehavor : MonoBehaviour {
 	}
 
 	public void updateVolts(float t){
-		Debug.Log ("update to " + t);
 		voltsText.text = t.ToString();
-		Debug.Log ("updated " + voltsText.text);
 	}
 
 }

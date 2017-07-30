@@ -11,8 +11,11 @@ public class UIController : MonoBehaviour {
 	public GameObject wallObject;
 
 	public ResourcesPanelBehavor resourcePanelPrefab;
+	public GameObject floatingText;
 
 	private ResourcesPanelBehavor resourcePanel;
+
+	private float lastDraw;
 
 	public static UIController Instance { get; private set; }
 
@@ -87,5 +90,17 @@ public class UIController : MonoBehaviour {
 		resourcePanel.updateVolts (energy);
 	}
 
+	public void floatText(float floatnum,Transform location){
+		
+		GameObject ft = Instantiate (floatingText, this.transform);
+
+		Vector3 drawlocation = Camera.main.WorldToScreenPoint (location.position);
+		Vector3 randvec = new Vector3 (Random.Range (-20, 20), 
+			                 Random.Range (-20, 20), 
+			                 0);
+		
+		ft.transform.position = drawlocation + randvec;
+
+	}
 
 }
