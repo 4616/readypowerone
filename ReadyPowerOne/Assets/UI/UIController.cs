@@ -107,6 +107,14 @@ public class UIController : MonoBehaviour {
 		resourcePanel.updateVolts (energy);
 	}
 
+	public void updateBolts(float bolts){
+		resourcePanel.updateBolts (bolts);
+	}
+
+	public void updateHealth(float health){
+		resourcePanel.updateHealth (health);
+	}
+
 	public void floatText(float floatnum,Transform location){
 		DrawAmount += floatnum;
 
