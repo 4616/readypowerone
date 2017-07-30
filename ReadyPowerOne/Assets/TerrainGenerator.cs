@@ -587,6 +587,8 @@ public static class TerrainGenerator
 
 		List<Hallway> hallways = new List<Hallway> ();
 
+		placedRoomCoordinates.Sort((first, second) => first.x1.CompareTo(second.x1));
+
 		//First add a sequential list of hallways from room to room so as to guarantee connections
 		for (int i = 0; i < (placedRoomCoordinates.Count - 1); i++) {
 			List<Vector2> exits1 = placedRoomCoordinates [i].getExits ();
