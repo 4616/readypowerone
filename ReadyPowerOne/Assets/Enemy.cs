@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour, ICombat {
 	public float energy = 10f;
 	public float moveSpeed = 1f;
 	public float damage = 1f;
-	public float attackRange = 1f;
+	public float attackRange = 5f;
 	public float detectRange = 10f;
 	public float armor = 0f;
 	public float attackSpeed = 1f;
