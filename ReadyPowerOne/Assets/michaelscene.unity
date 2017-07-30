@@ -283,6 +283,12 @@ Prefab:
       value: 
       objectReference: {fileID: 1613862024546718, guid: effcbba0ace834f43ba284c91ddb39b2,
         type: 2}
+    - target: {fileID: 114461279917470818, guid: 9812beea10594418682c76b265c95ccb,
+        type: 2}
+      propertyPath: destWall
+      value: 
+      objectReference: {fileID: 1095522940876348, guid: 17bbd672baa3b4fafbace8e13e628d71,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9812beea10594418682c76b265c95ccb, type: 2}
   m_IsPrefabParent: 0

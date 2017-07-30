@@ -31,6 +31,8 @@ public class Player : MonoBehaviour, ICombat {
         //DropDrill();
         player_ = this;
 
+		this.transform.position = new Vector3 (UIController.Instance.mapWidth * UIController.Instance.blockSize / 2, 10, 0);
+
         Upgrade.upgrades.Add(new Upgrade(
             "Move Speed",
             "Increase move speed 25%",
