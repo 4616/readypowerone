@@ -434,36 +434,36 @@ public class Hallway {
 	}
 }
 
-public class TerrainGenerator : MonoBehaviour
+public static class TerrainGenerator
 {
 
-	void Start() {
-		Room room = GenerateLevel (100, 100, 0);
-		List<List<Terrain>> layout = room.getLayout ();
-
-//		Debug.Log (layout.ToString ());
+//	void Start() {
+//		Room room = GenerateLevel (100, 100, 0);
+//		List<List<Terrain>> layout = room.getLayout ();
 //
-//		Debug.Log ("potato");
+////		Debug.Log (layout.ToString ());
+////
+////		Debug.Log ("potato");
+//
+//		foreach (List<Terrain> row in layout) {
+//			List<String> strRow = new List<String> ();
+//			foreach (Terrain tr in row) {
+//				if (tr == Terrain.Open)
+//					strRow.Add ("O");
+//				else if (tr == Terrain.Wall)
+//					strRow.Add ("W");
+//				else
+//					strRow.Add (tr.ToString ());
+//			}
+//			String[] strArray = strRow.ToArray ();
+//			print (String.Join (",", strArray));
+//		}
+//
+//		print ("potato");
+//	}
 
-		foreach (List<Terrain> row in layout) {
-			List<String> strRow = new List<String> ();
-			foreach (Terrain tr in row) {
-				if (tr == Terrain.Open)
-					strRow.Add ("O");
-				else if (tr == Terrain.Wall)
-					strRow.Add ("W");
-				else
-					strRow.Add (tr.ToString ());
-			}
-			String[] strArray = strRow.ToArray ();
-			print (String.Join (",", strArray));
-		}
-
-		print ("potato");
-	}
-
-	private static int roomPlacementAttempts = 50;
-	private static int roomPositioningRetries = 4;
+	private static int roomPlacementAttempts = 120;
+//	private static int roomPositioningRetries = 5;
 	private static int maxRooms = 20;
 	private static int levelBorder = 2;
 
@@ -480,9 +480,9 @@ public class TerrainGenerator : MonoBehaviour
 			throw new NotImplementedException ();
 	}
 
-	public Room GenerateLevel(int width, int height, int level) {
+	public static Room GenerateLevel(int width, int height, int level) {
 
-		print ("beginning");
+//		print ("beginning");
 
 		//Cheat and use room generator and then keep layout
 		SimpleRoom baseRoom = RoomTools.generateWallRoom (width, height);
