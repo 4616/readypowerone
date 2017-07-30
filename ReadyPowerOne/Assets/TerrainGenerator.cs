@@ -687,11 +687,11 @@ public static class TerrainGenerator
 		if (level == 0) {
 			return new List<KeyValuePair<double, RoomFactory>>()
 			{
-				new KeyValuePair<double, RoomFactory>( 0.23, new RectangleRoomFactory(4,4,2)),
+				new KeyValuePair<double, RoomFactory>( 0.25, new RectangleRoomFactory(4,4,2)),
 				new KeyValuePair<double, RoomFactory>( 0.3, new RectangleRoomFactory(6,6,2)),
 				new KeyValuePair<double, RoomFactory>( 0.3, new RectangleRoomFactory(9,9,2)),
 				new KeyValuePair<double, RoomFactory>( 0.05, new RectangleRoomFactory(12,12,3)),
-				new KeyValuePair<double, RoomFactory>( 0.07, new CrapRoomFactory()),
+				new KeyValuePair<double, RoomFactory>( 0.05, new CrapRoomFactory()),
 				//new KeyValuePair<double, RoomFactory>( 0.2, new DiamondRoomFactory()),
 				new KeyValuePair<double, RoomFactory>( 0.05, new FunkyRoomFactory()) //,
 				//new KeyValuePair<double, RoomFactory>( 0.2, new LineRoomFactory())
