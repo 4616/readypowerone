@@ -55,6 +55,7 @@ public class Player : MonoBehaviour, ICombat {
 
     public void LoseEnergy (float amount) {
         energy -= amount;
+		UIController.Instance.updateEnergy(energy);
     }
 
     public void Phaser() {
