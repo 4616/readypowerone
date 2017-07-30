@@ -17,11 +17,10 @@ public class Enemy : MonoBehaviour, ICombat {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log("Enemy initialized!");
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    protected virtual void Update () {
 		TimeManagment();
 
 
@@ -46,19 +45,21 @@ public class Enemy : MonoBehaviour, ICombat {
 		this.transform.position = Vector3.MoveTowards(this.transform.position, FindPlayer(), Time.deltaTime * this.moveSpeed);
 	}
 
-	void TimeManagment (){
-
-		if(attackCoolDown > 0){
+	protected void TimeManagment (){
+        //Debug.LogError("TimeManagment");
+        if (attackCoolDown > 0){
 			//Debug.Log("Cooling down");
-			attackCoolDown -= attackSpeed; 
+			attackCoolDown -= Time.deltaTime; 
 			attackCoolDown = Mathf.Max(attackCoolDown, 0);
 		}
 	}
 
-	void AttackPlayer (){
+	protected virtual void AttackPlayer (){
 		//Debug.Log("Player takes " + damage + " damage.");
-		Player.GetPlayer().TakeDamage(this.damage);
-		attackCoolDown = attackSpeed; 
+		if(Time.deltaTime>.01){
+			Player.GetPlayer().TakeDamage(this.damage);
+			attackCoolDown = attackSpeed; 
+		}
 	}
 
 	float DistanceToPlayer (){

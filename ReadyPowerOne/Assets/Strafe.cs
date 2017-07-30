@@ -9,7 +9,6 @@ public class Strafe : Enemy {
 	Vector3 rangeOffset;
 
 	void Start () {
-		Debug.Log("Enemy initialized!");
 		hide_range_x = hide_range * PositiveNegative();
 		hide_range_y = hide_range * PositiveNegative();
 		Vector3 rangeOffset = new Vector3(hide_range_x,hide_range_y, 0f);

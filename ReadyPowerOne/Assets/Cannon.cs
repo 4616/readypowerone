@@ -31,6 +31,11 @@ public class Cannon : MonoBehaviour {
             "Deacrease the energy cost of each bullet by one third",
             () => energyCost *= 0.67f
         ));
+        Upgrade.upgrades.Add(new Upgrade(
+            "Cannon Bullet Speed",
+            "Bullets go faster",
+            () => bulletSpeed += 10f
+        ));
     }
 	
 	// Update is called once per frame
