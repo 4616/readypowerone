@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class ResourcesPanelBehavor : MonoBehaviour {
 
 	public Text voltsText;
+	public Text boltsText;
+	public Text healthText;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +21,14 @@ public class ResourcesPanelBehavor : MonoBehaviour {
 
 	public void updateVolts(float t){
 		voltsText.text = t.ToString();
+	}
+
+	public void updateBolts(float t){
+		boltsText.text = t.ToString();
+	}
+
+	public void updateHealth(float t){
+		healthText.text = t.ToString();
 	}
 
 }

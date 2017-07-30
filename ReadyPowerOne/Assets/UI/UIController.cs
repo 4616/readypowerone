@@ -62,7 +62,7 @@ public class UIController : MonoBehaviour {
 					newObject = Instantiate (this.enemy2, this.transform);
 				}
 				if (t == Terrain.Coal && this.coal != null) {
-					newObject = Instantiate (this.coal, this.transform);
+					newObject = Instantiate (this.coal, this.transform); //comment out to remove drills
 				}
 
 				if (newObject != null) {
@@ -105,6 +105,14 @@ public class UIController : MonoBehaviour {
 
 	public void updateEnergy(float energy){
 		resourcePanel.updateVolts (energy);
+	}
+
+	public void updateBolts(float bolts){
+		resourcePanel.updateBolts (bolts);
+	}
+
+	public void updateHealth(float health){
+		resourcePanel.updateHealth (health);
 	}
 
 	public void floatText(float floatnum,Transform location){
