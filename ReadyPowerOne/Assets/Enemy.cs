@@ -106,7 +106,7 @@ public class Enemy : MonoBehaviour, ICombat {
     }
 
     public void Die (){
-    	Debug.Log("Dead!");
+    	//Debug.Log("Enemy dead!");
     	GameObject newObject = Instantiate (this.bolts, UIController.Instance.transform);
         newObject.transform.position = this.transform.position;
     	Object.Destroy(this.gameObject);

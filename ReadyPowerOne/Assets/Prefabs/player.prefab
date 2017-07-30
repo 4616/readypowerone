@@ -213,11 +213,12 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 360
   energy: 73.49376
+  energyMax: 100
   bolts: 100
-  health: 100
+  health: 1000
   phaserCost: 2
-  moveCost: 0.1
-  drillCost: 5
+  moveCost: 0.5
+  drillCost: 20
 --- !u!114 &114635237493851322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,6 +233,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 114036826220377166, guid: 9a0e7ef5d46270343a6cd1f6dbdca4ea,
     type: 2}
   bulletSpeed: 20
+  bulletDamage: 5
   spawnTime: 0.5
   spawnCooldown: 0
   energyCost: 1
@@ -248,6 +250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  range: 4
+  energyCost: 4
 --- !u!120 &120124865154078354
 LineRenderer:
   m_ObjectHideFlags: 1

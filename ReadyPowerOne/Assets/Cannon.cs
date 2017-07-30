@@ -8,6 +8,7 @@ public class Cannon : MonoBehaviour {
     public Bullet bulletPrefab;
 
     public float bulletSpeed = 20f;
+    public float bulletDamage = 5f;
     public float spawnTime = 5f;
     public float spawnCooldown = 0f;
     public float energyCost = 1f;
@@ -15,8 +16,22 @@ public class Cannon : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
+        Upgrade.upgrades.Add(new Upgrade(
+            "Cannon Damage",
+            "Increase Damage of each by 3",
+            () => bulletDamage += 3f
+        ));
+        Upgrade.upgrades.Add(new Upgrade(
+            "Cannon Fire Rate",
+            "Fire bullets 50% more often",
+            () => spawnTime *= 0.67f
+        ));
+        Upgrade.upgrades.Add(new Upgrade(
+            "Cannon Efficiency",
+            "Deacrease the energy cost of each bullet by one third",
+            () => energyCost *= 0.67f
+        ));
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -43,6 +58,7 @@ public class Cannon : MonoBehaviour {
             //Debug.LogError("Creating a new bullet, this should not happen so often " + pool.Count);
             b = Instantiate<Bullet>(bulletPrefab);
         }
+        b.damage = bulletDamage;
         b.transform.position = transform.position + startOffset;
         b.GetComponent<Rigidbody2D>().velocity = transform.up * bulletSpeed;
     }

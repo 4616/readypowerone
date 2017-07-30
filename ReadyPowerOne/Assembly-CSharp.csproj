@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Bolts.cs" />
      <Compile Include="Assets\Bullet.cs" />
      <Compile Include="Assets\Cannon.cs" />
      <Compile Include="Assets\Drill.cs" />
@@ -58,6 +59,7 @@
      <Compile Include="Assets\EnemySpawner.cs" />
      <Compile Include="Assets\FollowCamera.cs" />
      <Compile Include="Assets\ICombat.cs" />
+     <Compile Include="Assets\MouseLookCamera.cs" />
      <Compile Include="Assets\Phazer.cs" />
      <Compile Include="Assets\Player.cs" />
      <Compile Include="Assets\Robocop.cs" />
@@ -69,6 +71,7 @@
      <Compile Include="Assets\UI\TextFloatBehavior.cs" />
      <Compile Include="Assets\UI\UIController.cs" />
      <Compile Include="Assets\UI\UpgradeButtonBehavior.cs" />
+     <Compile Include="Assets\Upgrade.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -14,12 +14,13 @@ public class Player : MonoBehaviour, ICombat {
     public float moveSpeed = 1f;
     public float rotationSpeed = 90f;
     public float energy = 100f;
+    public float energyMax = 100f;
     public float bolts = 100f;
     public float health = 100f;
 
     public float phaserCost = 2f;
 	public float moveCost = .1f;
-    public float drillCost = 20f;
+    public float drillCost = 10f;
 
 
     public static Player GetPlayer() {
@@ -29,6 +30,27 @@ public class Player : MonoBehaviour, ICombat {
     public void Start() {
         //DropDrill();
         player_ = this;
+
+        Upgrade.upgrades.Add(new Upgrade(
+            "Move Speed",
+            "Increase move speed 25%",
+            () => moveSpeed *= 1.25f
+        ));
+        Upgrade.upgrades.Add(new Upgrade(
+            "Move Efficiency",
+            "Deacrease the energy cost of moving by 25%",
+            () => moveCost *= 0.75f
+        ));
+        Upgrade.upgrades.Add(new Upgrade(
+            "Rotation Speed",
+            "Rotate faster",
+            () => rotationSpeed *= 2f
+        ));
+        Upgrade.upgrades.Add(new Upgrade(
+            "Recharge",
+            "Refill your battery right now",
+            () => energy = 100f
+        ));
     }
 
     //public void Update() {
@@ -87,14 +109,13 @@ public class Player : MonoBehaviour, ICombat {
         
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0f, 0f, angle + 90f)), Time.deltaTime * rotationSpeed);
         
-        if (Input.GetMouseButton(1)) {
+        if (Input.GetMouseButton(1) || Input.GetKey(KeyCode.Space)) {
             Phaser();
         } else {
             phazer.gameObject.SetActive(false);
         }
         if (cannon.CanShoot() && (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.LeftAlt) || Input.GetMouseButton(0))) {
-            LoseEnergy(cannon.energyCost);
-            cannon.Shoot();
+            Cannon();
         }
 
         if (energy <= 0f) {
@@ -110,6 +131,11 @@ public class Player : MonoBehaviour, ICombat {
     public void LoseEnergy (float amount) {
         energy -= amount;
 		UIController.Instance.updateEnergy(energy);
+    }
+
+    public void Cannon() {
+        LoseEnergy(cannon.energyCost);
+        cannon.Shoot();
     }
 
     public void Phaser() {
@@ -137,14 +163,26 @@ public class Player : MonoBehaviour, ICombat {
     }
 
     public void GainEnergy(float amount){
+        Debug.Log(amount);
         energy += amount;
         UIController.Instance.updateEnergy(energy);
+        //Debug.Log(energy);
+
+
     }
 
-    void OnCollisionStay2D(Collision2D coll) {
-        Drill drill = coll.gameObject.GetComponent<Drill>();
-        if (drill != null) {
-            energy = Mathf.Min(energy + 1f * Time.deltaTime, 100f);
+     public void GainBolts(float amount){
+        bolts += amount;
+        UIController.Instance.updateBolts(bolts);
+    }
+
+
+
+    void OnTriggerEnter2D(Collider2D coll){
+        Bolts boltsobj = coll.gameObject.GetComponent<Bolts>();
+        if (boltsobj != null) {
+            GainBolts(boltsobj.bolts);
+            Object.Destroy(coll.gameObject);
         }
     }
 
@@ -155,6 +193,7 @@ public class Player : MonoBehaviour, ICombat {
             newObject.transform.position = this.transform.position;
             this.bolts -= drillCost;
             UIController.Instance.updateBolts(this.bolts);
+            GainEnergy(-drillCost);
         }
         else{
             Debug.Log("Not enough bolts to drop drill"); //Implement something for the player to see

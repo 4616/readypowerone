@@ -43,7 +43,7 @@ public class UIController : MonoBehaviour {
 		//Instantiate (pausePanel, this.transform);
 		resourcePanel = Instantiate (resourcePanelPrefab, this.transform);
 
-		Room room = TerrainGenerator.GenerateLevel (30, 120, 0);
+		Room room = TerrainGenerator.GenerateLevel (50, 120, 0);
 
 		for (int y = 0; y < room.getHeight(); y++) {
 			for (int x = 0; x < room.getWidth(); x++) {
@@ -61,9 +61,9 @@ public class UIController : MonoBehaviour {
 				if (t == Terrain.Enemy2 && this.enemy2 != null) {
 					newObject = Instantiate (this.enemy2, this.transform);
 				}
-				if (t == Terrain.Coal && this.coal != null) {
-					newObject = Instantiate (this.coal, this.transform); //comment out to remove drills
-				}
+				// if (t == Terrain.Coal && this.coal != null) {
+				// 	newObject = Instantiate (this.coal, this.transform); //comment out to remove drills
+				// }
 
 				if (newObject != null) {
 					newObject.transform.position = new Vector3 (x * blockSize, y * blockSize, 0);

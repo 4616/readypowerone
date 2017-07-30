@@ -223,7 +223,7 @@ public class FunkyRoomFactory: RoomFactory {
 
 		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
 
-		funkyLayout.Add(new List<Terrain> { W, O, W, W, W, W, W, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, W, W, W, W, W, W, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, E, O, O, O, I, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, W, O, W, O, O, W });
@@ -233,7 +233,9 @@ public class FunkyRoomFactory: RoomFactory {
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, W, W, W, W, W, W });
 
-		return new SimpleRoomWithExits(funkyLayout, new List<Vector2> {new Vector2(2, 1)});
+		return new SimpleRoomWithExits(funkyLayout, new List<Vector2> {
+			new Vector2(1, 1), new Vector2(7,1), new Vector2(7, 1), new Vector2(7, 7)
+		});
 	}
 }
 
@@ -292,7 +294,12 @@ public class DiamondRoomFactory: RoomFactory {
 		funkyLayout.Add(new List<Terrain> { W, W, W, O, O, O, W, W, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, W, O, W, W, W, W });
 
-		return new SimpleRoom(funkyLayout);
+		return new SimpleRoomWithExits(funkyLayout, 
+			new List<Vector2> {
+				new Vector2(4, 0), 
+				new Vector2(4, funkyLayout.Count),
+				new Vector2(0, 4),
+				new Vector2(8, 4)});
 	}
 }
 
@@ -761,7 +768,7 @@ public static class TerrainGenerator
 		//First add a sequential list of hallways from room to room so as to guarantee connections
 		for (int i = 0; i < (placedRoomCoordinates.Count - 1); i++) {
 			List<Vector2> exits1 = placedRoomCoordinates [i].getExits ();
-			List<Vector2> exits2 = placedRoomCoordinates [(i + 1) % placedRoomCoordinates.Count].getExits ();
+			List<Vector2> exits2 = placedRoomCoordinates [i + 1].getExits ();
 
 
 			//Calculate all distances between everything in exits1 and everything in exits2 and use closest exits for linking
@@ -780,11 +787,38 @@ public static class TerrainGenerator
 				}
 			}
 
+			hallways.Add (new Hallway(exit1Candidate, exit2Candidate));
+
+			//Add some skip hallways if they make sense
+			if (i < (placedRoomCoordinates.Count - 2)) {
+				List<Vector2> exits3 = placedRoomCoordinates [i + 2].getExits ();
+
+				float altMinDistance = int.MaxValue;
+				Vector2 altExit1Candidate = exits1[0];
+				Vector2 exit3Candidate = exits3[0];
+				foreach (Vector2 ex1 in exits1) {
+					foreach (Vector2 ex3 in exits3) {
+						float dist = Vector2.Distance(ex1,ex3);
+						if (dist < altMinDistance) {
+							altMinDistance = dist;
+							exit1Candidate = ex1;
+							exit3Candidate = ex3;
+						}
+					}
+				}
+				if (altMinDistance <= 1.5 * minDistance) {
+					hallways.Add (new Hallway(exit1Candidate, exit3Candidate));
+				}
+			}
+
+				
+
 //			exits1.Shuffle ();
 //			exits2.Shuffle ();
 
-			hallways.Add (new Hallway(exit1Candidate, exit2Candidate));
+
 		}
+
 
 		//Add a few more random hallways
 
