@@ -276,8 +276,8 @@ public class CrapRoomFactory: RoomFactory {
 		funkyLayout.Reverse ();
 
 		return new SimpleRoomWithExits(funkyLayout, new List<Vector2> {
-			new Vector2(4, 0), new Vector2(12,0), new Vector2(4, funkyLayout.Count), 
-			new Vector2(12, funkyLayout.Count), new Vector2(funkyLayout[0].Count-1, 6)
+			new Vector2(4, 1), new Vector2(12,1), new Vector2(4, funkyLayout.Count -2), 
+			new Vector2(12, funkyLayout.Count -2), new Vector2(funkyLayout[0].Count-2, 6)
 		});
 	}
 }
