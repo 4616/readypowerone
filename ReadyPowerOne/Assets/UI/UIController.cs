@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour {
 	public GameObject bossEnemyObject;
 	public GameObject enemy1;
 	public GameObject enemy2;
+	public GameObject spawner;
 	public GameObject coal;
 	public GameObject destWall;
 	public GameObject floor;
@@ -68,6 +69,9 @@ public class UIController : MonoBehaviour {
 				}
 				if (t == Terrain.Enemy2 && this.enemy2 != null) {
 					newObject = Instantiate (this.enemy2, this.transform);
+				}
+				if (t == Terrain.Spawner && this.spawner != null) {
+					newObject = Instantiate (this.spawner, this.transform);
 				}
 				if (t == Terrain.DestWall && this.destWall != null) {
 					newObject = Instantiate (this.destWall, this.transform);
