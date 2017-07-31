@@ -29,8 +29,8 @@ public class Tower : Enemy {
         attackCoolDown = attackSpeed;
 
         Bullet b;
-        if (Cannon.pool.Count > 0) {
-            b = Cannon.pool.Dequeue();
+        if (Tower.pool.Count > 0) {
+            b = Tower.pool.Dequeue();
             b.gameObject.SetActive(true);
         } else {
             b = Instantiate<Bullet>(bulletPrefab);
