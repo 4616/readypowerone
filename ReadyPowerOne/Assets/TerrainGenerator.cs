@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum Terrain {Open,Wall,Coal,Exit,Enemy1,Enemy2,BossEnemy,DestWall};  //Wall, Open, Coal, Exit
+public enum Terrain {Open,Wall,Coal,Exit,Enemy1,Enemy2,Spawner,BossEnemy,DestWall};  //Wall, Open, Coal, Exit
 public enum Direction {Left, Top, Right, Bottom};
 
 public static class RoomTools {
@@ -14,7 +14,7 @@ public static class RoomTools {
 	public static void Shuffle<T>(this IList<T> list)  
 	{  
 		int n = list.Count;  
-		while (n > 1) {  
+		while (n > 1) {   
 			n--;  
 			int k = rng.Next(n + 1);  
 			T value = list[k];  
@@ -386,7 +386,7 @@ public class RectangleRoomFactory : RoomFactory
 	private Boolean ifEnemies;
 
 	private double enemy1Probability = 0.02;
-	private double enemy2Probability = 0.0;
+	private double enemy2Probability = 0.02;
 
 	private double roomDestWallProbability = 0.3;
 	private double destWallProbability = 0.25;
@@ -406,6 +406,7 @@ public class RectangleRoomFactory : RoomFactory
 			List<Terrain> randomEnemyList = new List<Terrain> ();
 			randomEnemyList.Add (Terrain.Enemy1);
 			randomEnemyList.Add (Terrain.Enemy2);
+			randomEnemyList.Add (Terrain.Spawner);
 			randomEnemyList.Shuffle ();
 			layout [firstEnemyX] [firstEnemyY] = randomEnemyList[0];
 

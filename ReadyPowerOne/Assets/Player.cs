@@ -18,7 +18,6 @@ public class Player : MonoBehaviour, ICombat {
     public float bolts = 100f;
     public float health = 100f;
 
-    public float phaserCost = 2f;
 	public float moveCost = .1f;
     public float drillCost = 10f;
     public GameObject explosionplayer;
@@ -93,6 +92,45 @@ public class Player : MonoBehaviour, ICombat {
     //    }
     //}
 
+//	public void Update() {
+//		if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
+//			transform.position += transform.up * Time.deltaTime * moveSpeed;
+//			LoseEnergy(moveCost*Time.deltaTime);
+//		}
+//		if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
+//			transform.position += transform.up * -0.5f * Time.deltaTime * moveSpeed;
+//			LoseEnergy(moveCost*Time.deltaTime);
+//		}
+//		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
+//			//transform.position +=     //Vector3.left * Time.deltaTime * moveSpeed; 
+//			transform.Rotate(0, 0, 3);
+//			LoseEnergy(moveCost*Time.deltaTime);
+//		}
+//		if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
+//			transform.Rotate(0, 0, -3);
+//			//transform.position +=     //Vector3.right * Time.deltaTime * moveSpeed;
+//			LoseEnergy(moveCost*Time.deltaTime);
+//		}
+//
+//		if (Input.GetKeyDown(KeyCode.Q)) {
+//			DropDrill();
+//		}
+//
+//		if (Input.GetMouseButton(1) || Input.GetKey(KeyCode.Space)) {
+//			Phaser();
+//		} else {
+//			phazer.gameObject.SetActive(false);
+//		}
+//		if (cannon.CanShoot() && (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.LeftAlt) || Input.GetMouseButton(0))) {
+//			Cannon();
+//		}
+//
+//		if (energy <= 0f) {
+//			Debug.Log("Out of Energy!");
+//			Time.timeScale = 0f;
+//		}
+//	}
+
     public void Update() {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
             transform.position += Vector3.up * Time.deltaTime * moveSpeed;
@@ -120,7 +158,7 @@ public class Player : MonoBehaviour, ICombat {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0f, 0f, angle + 90f)), Time.deltaTime * rotationSpeed);
         
         if (Input.GetMouseButton(1) || Input.GetKey(KeyCode.Space)) {
-            LoseEnergy(phaserCost * Time.deltaTime);
+            LoseEnergy(phazer.energyCost * Time.deltaTime);
             phazer.Fire();
         } else {
             phazer.gameObject.SetActive(false);
@@ -139,7 +177,7 @@ public class Player : MonoBehaviour, ICombat {
 
     private void LowEnergy(){
         if(energy <= 30){
-            if(energy > 25){
+            if(energy > 30){
                 UIController.Instance.floatTextForText("Low on Energy!", this.transform);
             }
             if(energy < 25){
