@@ -18,7 +18,6 @@ public class Player : MonoBehaviour, ICombat {
     public float bolts = 100f;
     public float health = 100f;
 
-    public float phaserCost = 2f;
 	public float moveCost = .1f;
     public float drillCost = 10f;
     public GameObject explosionplayer;
@@ -120,7 +119,7 @@ public class Player : MonoBehaviour, ICombat {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0f, 0f, angle + 90f)), Time.deltaTime * rotationSpeed);
         
         if (Input.GetMouseButton(1) || Input.GetKey(KeyCode.Space)) {
-            LoseEnergy(phaserCost * Time.deltaTime);
+            LoseEnergy(phazer.energyCost * Time.deltaTime);
             phazer.Fire();
         } else {
             phazer.gameObject.SetActive(false);

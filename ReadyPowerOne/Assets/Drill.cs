@@ -68,7 +68,7 @@ public class Drill : MonoBehaviour, ICombat {
 	}
 
 
-    void OnCollisionStay2D(Collision2D coll) {
+    void OnTriggerStay2D(Collider2D coll) {
         Player e = coll.gameObject.GetComponent<Player>();
         if (e != null) {
         	if(e.energyMax >= e.energy){
