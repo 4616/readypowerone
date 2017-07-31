@@ -9,33 +9,33 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1926311890349992}
+  m_RootGameObject: {fileID: 1862051351314324}
   m_IsPrefabParent: 1
---- !u!1 &1926311890349992
+--- !u!1 &1862051351314324
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4462646101521818}
-  - component: {fileID: 212075094613569576}
-  - component: {fileID: 114198694049240360}
-  - component: {fileID: 61229829818382842}
-  - component: {fileID: 50030788395585120}
+  - component: {fileID: 4747532397898434}
+  - component: {fileID: 212439357214469308}
+  - component: {fileID: 61031578535859702}
+  - component: {fileID: 50409444965438942}
+  - component: {fileID: 114963874435354416}
   m_Layer: 0
-  m_Name: robocop
+  m_Name: rat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4462646101521818
+--- !u!4 &4747532397898434
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1926311890349992}
+  m_GameObject: {fileID: 1862051351314324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -43,32 +43,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50030788395585120
+--- !u!50 &50409444965438942
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1926311890349992}
+  m_GameObject: {fileID: 1862051351314324}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 10
-  m_AngularDrag: 10
+  m_LinearDrag: 5
+  m_AngularDrag: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61229829818382842
+--- !u!61 &61031578535859702
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1926311890349992}
+  m_GameObject: {fileID: 1862051351314324}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -79,7 +79,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.5, y: 2.5}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -88,37 +88,39 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114198694049240360
+--- !u!114 &114963874435354416
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1926311890349992}
+  m_GameObject: {fileID: 1862051351314324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b976c2a05de74d9c8f383d9cca329d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 56c4fffa1412be349879b15f76a5745d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
   energy: 10
-  moveSpeed: 1
+  moveSpeed: 2
   damage: 1
-  attackRange: 1
+  attackRange: 5
   detectRange: 10
   armor: 0
   attackSpeed: 1
   attackCoolDown: 1
   bolts: {fileID: 1282703662790732, guid: db05cdc5b0f754b24a74b2621b57f049, type: 2}
-  healthdrop: {fileID: 1487907783280644, guid: 91b5cae17af0e43369e608be8572ec06, type: 2}
   explosionenemy: {fileID: 1275435267980758, guid: f5b075fd7b77d40fb828c7d1ed1338ea,
     type: 2}
+  rotationTime: 0.75
+  rotationTimeRandom: 0.25
+  rotationTimer: 0
   rotationSpeed: 90
---- !u!212 &212075094613569576
+--- !u!212 &212439357214469308
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1926311890349992}
+  m_GameObject: {fileID: 1862051351314324}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -145,8 +147,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 155b7f876f2b4487982a6176e7fb6419, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e76870d134bab4d83af151291677c4ea, type: 3}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

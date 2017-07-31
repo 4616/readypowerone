@@ -139,6 +139,7 @@ MonoBehaviour:
   attackSpeed: 1
   attackCoolDown: 1
   bolts: {fileID: 1282703662790732, guid: db05cdc5b0f754b24a74b2621b57f049, type: 2}
+  healthdrop: {fileID: 1487907783280644, guid: 91b5cae17af0e43369e608be8572ec06, type: 2}
   explosionenemy: {fileID: 1275435267980758, guid: f5b075fd7b77d40fb828c7d1ed1338ea,
     type: 2}
   bulletPrefab: {fileID: 114669475618537574, guid: 7ddcb68dd0ba21441bba9b3f881856e4,
