@@ -245,12 +245,29 @@ public class Player : MonoBehaviour, ICombat {
         UIController.Instance.updateBolts(bolts);
     }
 
+     public void GainHealth(float amount){
+        health += amount;
+        UIController.Instance.updateHealth(health);
+    }
+
+
 
 
     void OnTriggerEnter2D(Collider2D coll){
         Bolts boltsobj = coll.gameObject.GetComponent<Bolts>();
         if (boltsobj != null) {
             GainBolts(boltsobj.bolts);
+            Object.Destroy(coll.gameObject);
+        }
+
+        Health healthobj = coll.gameObject.GetComponent<Health>();
+        if (healthobj != null) {
+            GainHealth(healthobj.health);
+            Object.Destroy(coll.gameObject);
+        }
+        UpgradeToken upgradeToken = coll.gameObject.GetComponent<UpgradeToken>();
+        if (upgradeToken != null) {
+            UIController.Instance.openUpgradeMenu();
             Object.Destroy(coll.gameObject);
         }
     }

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour {
-	public float health = 10f;
+public class UpgradeToken : MonoBehaviour {
+
 	// Use this for initialization
 	void Start () {
 		

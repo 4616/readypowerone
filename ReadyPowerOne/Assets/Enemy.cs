@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour, ICombat {
 	public GameObject bolts;
 	public GameObject healthdrop;
 	public GameObject explosionenemy;
+	public GameObject upgradedrop;
 
 
 	// Use this for initialization
@@ -112,11 +113,45 @@ public class Enemy : MonoBehaviour, ICombat {
 
     public void Die (){
         //Debug.Log("Enemy dead!");
+        float rand;
+        Vector3 randvec; 
         if (bolts != null) {
-            GameObject newObject = Instantiate(this.bolts, UIController.Instance.transform);
-            newObject.transform.position = this.transform.position;
+        	rand = Random.Range(0f,1f);
+        	Debug.Log(rand);
+        	if(0.5f >= rand){
+            	GameObject newObject = Instantiate(this.bolts, UIController.Instance.transform);
+
+            	randvec = new Vector3(Random.Range (-0.5, 0.5), 
+				          		Random.Range (-0.5, 0.5), 
+				                  0);
+            	newObject.transform.position = this.transform.position + randvec;
+            }
         }
-    	Object.Destroy(this.gameObject);
+        if (healthdrop != null) {
+        	rand = Random.Range(0f,1f);
+        	if(.1f > rand){
+            	GameObject newObject = Instantiate(this.healthdrop, UIController.Instance.transform);
+            	randvec = new Vector3(Random.Range (-0.5, 0.5), 
+				          		Random.Range (-0.5, 0.5), 
+				                  0);
+            	newObject.transform.position = this.transform.position + randvec;
+        	}
+        }
+
+        if (upgradedrop != null) {
+        	rand = Random.Range(0f,1f);
+        	if(0.05f > rand){
+            	GameObject newObject = Instantiate(this.upgradedrop, UIController.Instance.transform);
+            	randvec = new Vector3(Random.Range (-0.5, 0.5), 
+				          		Random.Range (-0.5, 0.5), 
+				                  0);
+            	newObject.transform.position = this.transform.position + randvec;
+        	}
+
+        }
+
+    	Object.Destroy(this.gameObject); //Distroy enemy
     }
 }
 
+			

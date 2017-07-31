@@ -108,7 +108,7 @@ public class UIController : MonoBehaviour {
 		}
 	}
 	
-	void openUpgradeMenu(){
+	public void openUpgradeMenu(){
 		upgradePanel = Instantiate (upgradePanelPrefab, this.transform);
 		Paused = true;
 
