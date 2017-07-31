@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour, ICombat {
 	public float attackSpeed = 1f;
 	public float attackCoolDown = 1f;
 	public GameObject bolts;
+	public GameObject healthdrop;
 	public GameObject explosionenemy;
 
 
