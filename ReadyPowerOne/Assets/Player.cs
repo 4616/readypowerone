@@ -139,7 +139,7 @@ public class Player : MonoBehaviour, ICombat {
 
     private void LowEnergy(){
         if(energy <= 30){
-            if(energy > 25){
+            if(energy > 30){
                 UIController.Instance.floatTextForText("Low on Energy!", this.transform);
             }
             if(energy < 25){
