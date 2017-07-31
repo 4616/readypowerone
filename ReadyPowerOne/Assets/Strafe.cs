@@ -30,8 +30,8 @@ public class Strafe : Enemy {
 
         float angle = AngleBetweenPoints(transform.position, Player.GetPlayer().transform.position);
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0f, 0f, angle + 90f)), Time.deltaTime * rotationSpeed);
-
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0f, 0f, angle + 90f)), Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90f));
 
         this.transform.position = Vector3.MoveTowards(this.transform.position, FindPlayer() + rangeOffset, Time.deltaTime * this.moveSpeed);
 	}

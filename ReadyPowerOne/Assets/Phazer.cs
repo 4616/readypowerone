@@ -5,8 +5,13 @@ using UnityEngine;
 public class Phazer : MonoBehaviour {
 
     public float damage = 1f;
-    public float range = 4f;
+    public int range = 4;
     public float energyCost = 4f;
+    public float width = 1f;
+
+    public LineRenderer line;
+    public BoxCollider2D collider;
+    
 
     void Start() {
         Upgrade.upgrades.Add(new Upgrade(
@@ -17,7 +22,7 @@ public class Phazer : MonoBehaviour {
         Upgrade.upgrades.Add(new Upgrade(
             "Phazer Range",
             "Increase range of the Phazor by 1 tile (but not actually)",
-            () => range += 1f
+            () => range += 1
         ));
         Upgrade.upgrades.Add(new Upgrade(
             "Phazer Efficiency",
@@ -34,6 +39,16 @@ public class Phazer : MonoBehaviour {
             if (r != null) {
                 r.AddForce(transform.up * 50f);
             }
+        }
+    }
+
+    public void Fire() {
+        collider.size = new Vector2(width, (range * 2f) - 0.5f);
+        collider.offset = new Vector2(0f, range + 0.5f);
+        gameObject.SetActive(true);
+        line.positionCount = range;
+        for (int i = 1; i < line.positionCount; i++) {
+            line.SetPosition(i, new Vector3(Random.Range(-width/2f, width/2f), Random.Range(-0.4f, 0.4f) + 2f * i, 0f));
         }
     }
 }
