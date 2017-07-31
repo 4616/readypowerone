@@ -214,8 +214,8 @@ MonoBehaviour:
   rotationSpeed: 360
   energy: 100
   energyMax: 100
-  bolts: 100
-  health: 1000
+  bolts: 40
+  health: 100
   phaserCost: 2
   moveCost: 0.5
   drillCost: 20
