@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour {
 	public GameObject coal;
 	public GameObject destWall;
 	public GameObject floor;
+	public GameObject exit;
 
 	public int mapWidth = 50;
 	public int mapHeight = 120;
@@ -76,6 +77,11 @@ public class UIController : MonoBehaviour {
 				if (t == Terrain.DestWall && this.destWall != null) {
 					newObject = Instantiate (this.destWall, this.transform);
 				}
+				if (t == Terrain.Exit && this.exit != null) {
+					newObject = Instantiate (this.exit, this.transform);
+				}
+
+
 				if (t != Terrain.Wall && this.floor != null) {
 					GameObject floors = Instantiate (this.floor, this.transform);
 					floors.transform.position = new Vector3 (x * blockSize, y * blockSize, 1);
