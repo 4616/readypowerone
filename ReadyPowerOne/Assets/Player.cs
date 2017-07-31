@@ -15,9 +15,10 @@ public class Player : MonoBehaviour, ICombat {
     public float rotationSpeed = 90f;
     public float energy = 100f;
     public float energyMax = 100f;
+
     public float bolts = 100f;
     public float health = 100f;
-
+    public float healthMax = 100f;
 	public float moveCost = .1f;
     public float drillCost = 10f;
     public GameObject explosionplayer;
@@ -236,7 +237,8 @@ public class Player : MonoBehaviour, ICombat {
     }
 
     public void GainEnergy(float amount){
-        Debug.Log(amount);
+        //Debug.Log(amount);
+        energy = AtOrBelowMax(energy, amount, energyMax);
         energy += amount;
         UIController.Instance.updateEnergy(energy);
         //Debug.Log(energy);
@@ -250,12 +252,20 @@ public class Player : MonoBehaviour, ICombat {
     }
 
      public void GainHealth(float amount){
-        health += amount;
+        health = AtOrBelowMax(health, amount, healthMax);
         UIController.Instance.updateHealth(health);
     }
 
 
-
+    public float AtOrBelowMax(float pretotal, float amount, float maxval){
+        float newval = pretotal + amount;
+        if(newval <= maxval){
+            return newval;
+        }
+        else{
+            return maxval;
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D coll){
         Bolts boltsobj = coll.gameObject.GetComponent<Bolts>();
