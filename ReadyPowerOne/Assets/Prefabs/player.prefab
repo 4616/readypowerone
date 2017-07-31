@@ -221,6 +221,8 @@ MonoBehaviour:
   drillCost: 20
   explosionplayer: {fileID: 1684479814132344, guid: a3c263003721443d791d75c567a4485f,
     type: 2}
+  lowenergywarning: {fileID: 1905994536720332, guid: 1416f731357404522909bf4c91603d25,
+    type: 2}
 --- !u!114 &114635237493851322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,6 +256,7 @@ MonoBehaviour:
   damage: 10
   range: 4
   energyCost: 9
+  width: 1
   line: {fileID: 120124865154078354}
   collider: {fileID: 61599646225195872}
 --- !u!120 &120124865154078354
