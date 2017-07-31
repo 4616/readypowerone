@@ -22,7 +22,7 @@ public class Player : MonoBehaviour, ICombat {
 	public float moveCost = .1f;
     public float drillCost = 10f;
     public GameObject explosionplayer;
-
+    public GameObject lowenergywarning;
     public static Player GetPlayer() {
         return player_;
     }
@@ -132,6 +132,18 @@ public class Player : MonoBehaviour, ICombat {
         if (energy <= 0f) {
             Debug.Log("Out of Energy!");
             Time.timeScale = 0f;
+        }
+
+        LowEnergy();
+    }
+
+    private void LowEnergy(){
+        if(energy <= 30){
+            float cutpoint = Random.Range(0f,1f);
+            if(cutpoint < ((energy-20)/200)){
+                GameObject ex = Instantiate (lowenergywarning, this.transform.position, this.transform.rotation);
+                Object.Destroy(ex, 5f);
+            }
         }
     }
 
