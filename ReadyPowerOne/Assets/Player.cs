@@ -180,8 +180,12 @@ public class Player : MonoBehaviour, ICombat {
             if(energy > 30){
                 UIController.Instance.floatTextForText("Low on Energy!", this.transform);
             }
-            if(energy < 25){
+            if(energy < 25 && energy > 20){
                 UIController.Instance.floatTextForText("Drop a Drill!", this.transform);
+            }
+
+            if(energy < 25 && energy > 20){
+                UIController.Instance.floatTextForText("Running out of power!", this.transform);
             }
             float cutpoint = Random.Range(0f,1f);
             if(cutpoint < ((energy-20)/200)){
@@ -273,7 +277,7 @@ public class Player : MonoBehaviour, ICombat {
     }
 
     void DropDrill() {
-        if(this.bolts >= drillCost){
+        if(this.bolts >= drillCost && this.energy >= drillCost){
             Debug.Log("Dropping drill");
             GameObject newObject = Instantiate (this.drill, UIController.Instance.transform);
             newObject.transform.position = this.transform.position;

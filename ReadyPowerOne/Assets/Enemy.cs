@@ -114,11 +114,11 @@ public class Enemy : MonoBehaviour, ICombat {
     public void Die (){
         //Debug.Log("Enemy dead!");
         float rand;
-        float jitter = 2f;
+        float jitter = 1f;
         Vector3 randvec; 
         if (bolts != null) {
         	rand = Random.Range(0f,1f);
-        	Debug.Log(rand);
+        	//Debug.Log(rand);
         	if(0.5f >= rand){
             	GameObject newObject = Instantiate(this.bolts, UIController.Instance.transform);
 
