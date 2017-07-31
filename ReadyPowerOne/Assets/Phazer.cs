@@ -21,8 +21,13 @@ public class Phazer : MonoBehaviour {
         ));
         Upgrade.upgrades.Add(new Upgrade(
             "Phazer Range",
-            "Increase range of the Phazor by 1 tile (but not actually)",
+            "Increase range of the Phazor by 1 section",
             () => range += 1
+        ));
+        Upgrade.upgrades.Add(new Upgrade(
+            "Phazer Width",
+            "It's short, but it's thick",
+            () => width += 2
         ));
         Upgrade.upgrades.Add(new Upgrade(
             "Phazer Efficiency",
@@ -46,9 +51,10 @@ public class Phazer : MonoBehaviour {
         collider.size = new Vector2(width, (range * 2f) - 0.5f);
         collider.offset = new Vector2(0f, range + 0.5f);
         gameObject.SetActive(true);
-        line.positionCount = range;
+        line.positionCount = range + 1;
         for (int i = 1; i < line.positionCount; i++) {
-            line.SetPosition(i, new Vector3(Random.Range(-width/2f, width/2f), Random.Range(-0.4f, 0.4f) + 2f * i, 0f));
+            float adjustedWidth = Mathf.Max(((float)i / (float)range) * width / 2f, 0.4f);
+            line.SetPosition(i, new Vector3(Random.Range(-adjustedWidth, adjustedWidth), Random.Range(-0.4f, 0.4f) + 2f * i, 0f));
         }
     }
 }
