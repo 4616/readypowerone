@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, ICombat {
 
-    public LineRenderer phazer;
+    public Phazer phazer;
 
     public Cannon cannon;
     public GameObject drill;
@@ -57,7 +57,7 @@ public class Player : MonoBehaviour, ICombat {
         Upgrade.upgrades.Add(new Upgrade(
             "Recharge",
             "Refill your battery right now",
-            () => energy = 100f
+            () => GainEnergy(100f - energy)
         ));
 
         
@@ -120,7 +120,8 @@ public class Player : MonoBehaviour, ICombat {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0f, 0f, angle + 90f)), Time.deltaTime * rotationSpeed);
         
         if (Input.GetMouseButton(1) || Input.GetKey(KeyCode.Space)) {
-            Phaser();
+            LoseEnergy(phaserCost * Time.deltaTime);
+            phazer.Fire();
         } else {
             phazer.gameObject.SetActive(false);
         }
@@ -160,13 +161,13 @@ public class Player : MonoBehaviour, ICombat {
         cannon.Shoot();
     }
 
-    public void Phaser() {
-        LoseEnergy(phaserCost * Time.deltaTime);
-        phazer.gameObject.SetActive(true);
-        for (int i = 1; i < phazer.positionCount; i++) {
-            phazer.SetPosition(i, new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f) + 2f * i, 0f));
-        }
-    }
+    //public void Phaser() {
+    //    LoseEnergy(phaserCost * Time.deltaTime);
+    //    phazer.gameObject.SetActive(true);
+    //    for (int i = 1; i < phazer.positionCount; i++) {
+    //        phazer.SetPosition(i, new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f) + 2f * i, 0f));
+    //    }
+    //}
 
     public Vector3 GetPosition() {
         return transform.position;

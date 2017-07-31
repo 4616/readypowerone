@@ -30,7 +30,7 @@ public class Tower : Enemy {
 
         Bullet b;
         if (Cannon.pool.Count > 0) {
-            b = Cannon.pool.Dequeue();
+            b = Tower.pool.Dequeue();
             b.gameObject.SetActive(true);
         } else {
             b = Instantiate<Bullet>(bulletPrefab);
