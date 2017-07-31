@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, ICombat {
 
-    public LineRenderer phazer;
+    public Phazer phazer;
 
     public Cannon cannon;
     public GameObject drill;
@@ -21,8 +21,8 @@ public class Player : MonoBehaviour, ICombat {
     public float phaserCost = 2f;
 	public float moveCost = .1f;
     public float drillCost = 10f;
-    public GameObject explosion;
-
+    public GameObject explosionplayer;
+    public GameObject lowenergywarning;
     public static Player GetPlayer() {
         return player_;
     }
@@ -32,6 +32,12 @@ public class Player : MonoBehaviour, ICombat {
         player_ = this;
 
 		this.transform.position = new Vector3 (UIController.Instance.mapWidth * UIController.Instance.blockSize / 2, 10, 0);
+
+		Upgrade.upgrades.Add(new Upgrade(
+			"Max Battery",
+			"Increase max battery capacity by 20",
+			() => energyMax += 20f
+		));
 
         Upgrade.upgrades.Add(new Upgrade(
             "Move Speed",
@@ -51,7 +57,7 @@ public class Player : MonoBehaviour, ICombat {
         Upgrade.upgrades.Add(new Upgrade(
             "Recharge",
             "Refill your battery right now",
-            () => energy = 100f
+            () => GainEnergy(100f - energy)
         ));
 
         
@@ -114,7 +120,8 @@ public class Player : MonoBehaviour, ICombat {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0f, 0f, angle + 90f)), Time.deltaTime * rotationSpeed);
         
         if (Input.GetMouseButton(1) || Input.GetKey(KeyCode.Space)) {
-            Phaser();
+            LoseEnergy(phaserCost * Time.deltaTime);
+            phazer.Fire();
         } else {
             phazer.gameObject.SetActive(false);
         }
@@ -125,6 +132,18 @@ public class Player : MonoBehaviour, ICombat {
         if (energy <= 0f) {
             Debug.Log("Out of Energy!");
             Time.timeScale = 0f;
+        }
+
+        LowEnergy();
+    }
+
+    private void LowEnergy(){
+        if(energy <= 30){
+            float cutpoint = Random.Range(0f,1f);
+            if(cutpoint < ((energy-20)/200)){
+                GameObject ex = Instantiate (lowenergywarning, this.transform.position, this.transform.rotation);
+                Object.Destroy(ex, 5f);
+            }
         }
     }
 
@@ -142,13 +161,13 @@ public class Player : MonoBehaviour, ICombat {
         cannon.Shoot();
     }
 
-    public void Phaser() {
-        LoseEnergy(phaserCost * Time.deltaTime);
-        phazer.gameObject.SetActive(true);
-        for (int i = 1; i < phazer.positionCount; i++) {
-            phazer.SetPosition(i, new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f) + 2f * i, 0f));
-        }
-    }
+    //public void Phaser() {
+    //    LoseEnergy(phaserCost * Time.deltaTime);
+    //    phazer.gameObject.SetActive(true);
+    //    for (int i = 1; i < phazer.positionCount; i++) {
+    //        phazer.SetPosition(i, new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f) + 2f * i, 0f));
+    //    }
+    //}
 
     public Vector3 GetPosition() {
         return transform.position;
@@ -159,7 +178,7 @@ public class Player : MonoBehaviour, ICombat {
 
 		UIController.Instance.updateHealth(health);
 		UIController.Instance.floatText (damage, this.transform);
-        GameObject ex = Instantiate (explosion, this.transform.position, this.transform.rotation);
+        GameObject ex = Instantiate (explosionplayer, this.transform.position, this.transform.rotation);
         Object.Destroy(ex, 0.5f);
 
 		if (health <= 0f) {

@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour, ICombat {
 	public float attackSpeed = 1f;
 	public float attackCoolDown = 1f;
 	public GameObject bolts;
+	public GameObject explosionenemy;
 
 
 	// Use this for initialization
@@ -99,6 +100,9 @@ public class Enemy : MonoBehaviour, ICombat {
 
 		//spawn damage text
 		UIController.Instance.floatText (damage, this.transform);
+
+        GameObject ex = Instantiate (explosionenemy, this.transform.position, this.transform.rotation);
+        Object.Destroy(ex, 0.5f);
 
         if(this.health <= 0){
         	Die();
