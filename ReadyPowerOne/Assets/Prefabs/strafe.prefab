@@ -132,7 +132,7 @@ MonoBehaviour:
   health: 10
   energy: 10
   moveSpeed: 1
-  damage: 1
+  damage: 2
   attackRange: 7
   detectRange: 10
   armor: 0

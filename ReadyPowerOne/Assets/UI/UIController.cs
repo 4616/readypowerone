@@ -35,6 +35,7 @@ public class UIController : MonoBehaviour {
     private GameObject losePanel;
 
 	private float lastDraw = 0f;
+	private float lastDrawLowEnergy = 0f;
 	private float DrawAmount = 0f;
 
 		
@@ -132,6 +133,7 @@ public class UIController : MonoBehaviour {
         } else {
             winPanel.SetActive(true);
         }
+        Time.timeScale = 0f;
     }
 
     public void Lose() {
@@ -140,6 +142,7 @@ public class UIController : MonoBehaviour {
         } else {
             losePanel.SetActive(true);
         }
+        Time.timeScale = 0f;
     }
 
     public void openUpgradeMenu(){
@@ -190,16 +193,14 @@ public class UIController : MonoBehaviour {
 	public void floatTextForText(string s,Transform location){
 
 
-		if  (Time.frameCount - lastDraw >= 100f) {
+		if  (Time.frameCount - lastDrawLowEnergy  >= 40f) {
 			GameObject ft = Instantiate (floatingTextPrefab, this.transform);
 
 			Vector3 drawlocation = Camera.main.WorldToScreenPoint (location.position);
-			Vector3 randvec = new Vector3 (Random.Range (-20, 20), 
-				                  Random.Range (-20, 20), 
-				                  0);
+			Vector3 displacevec = new Vector3 (0, 5, 0);
 			ft.GetComponent<TextFloatBehavior>().floatText.text = s;
-			ft.transform.position = drawlocation + randvec;
-			lastDraw = Time.frameCount;
+			ft.transform.position = drawlocation + displacevec;
+			lastDrawLowEnergy = Time.frameCount;
 			DrawAmount = 0f;
 		} 
 

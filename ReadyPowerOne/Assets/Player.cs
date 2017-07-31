@@ -28,10 +28,8 @@ public class Player : MonoBehaviour, ICombat {
     }
 
     public void Start() {
-        UIController.Instance.updateBolts(bolts);
-        UIController.Instance.updateEnergy(energy);
-        UIController.Instance.updateHealth(health);
         //DropDrill();
+
         player_ = this;
 
 		this.transform.position = new Vector3 (UIController.Instance.mapWidth * UIController.Instance.blockSize / 2, 10, 0);
@@ -173,23 +171,30 @@ public class Player : MonoBehaviour, ICombat {
 
         if (energy <= 0f) {
             Debug.Log("Out of Energy!");
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
+            UIController.Instance.Lose();
+        }
+
+        if (health <= 0f) {
+            Debug.Log("Out of health!");
+            //Time.timeScale = 0f;
+            UIController.Instance.Lose();
         }
 
         LowEnergy();
     }
 
     private void LowEnergy(){
-        if(energy <= 30){
+        if(energy <= 35){
             if(energy > 30){
                 UIController.Instance.floatTextForText("Low on Energy!", this.transform);
             }
-            if(energy < 25 && energy > 20){
+            if(energy < 30 && energy > 20){
                 UIController.Instance.floatTextForText("Drop a Drill!", this.transform);
             }
 
-            if(energy < 25 && energy > 20){
-                UIController.Instance.floatTextForText("Running out of power!", this.transform);
+            if(energy < 20){
+                UIController.Instance.floatTextForText("Retreat to Drill!", this.transform);
             }
             float cutpoint = Random.Range(0f,1f);
             if(cutpoint < ((energy-20)/200)){

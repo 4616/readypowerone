@@ -11,6 +11,9 @@ public class ResourcesPanelBehavior : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		updateVolts(100);
+		updateBolts(40);
+		updateHealth(100);
 		
 	}
 	
