@@ -253,6 +253,36 @@ Prefab:
       value: 
       objectReference: {fileID: 1855446616495024, guid: 3f9fabe3749f94dc5afa207a4c118dcb,
         type: 2}
+    - target: {fileID: 114461279917470818, guid: 9812beea10594418682c76b265c95ccb,
+        type: 2}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 1421866185836794, guid: 007f22395848fd048ae85470274f590c,
+        type: 2}
+    - target: {fileID: 114461279917470818, guid: 9812beea10594418682c76b265c95ccb,
+        type: 2}
+      propertyPath: exit
+      value: 
+      objectReference: {fileID: 1391912512054054, guid: 05218acfb9583452b90b07a1b3ff1b95,
+        type: 2}
+    - target: {fileID: 114461279917470818, guid: 9812beea10594418682c76b265c95ccb,
+        type: 2}
+      propertyPath: startPanelPrefab
+      value: 
+      objectReference: {fileID: 1839361808637312, guid: ff620475e75a8474c869f823eecd4f2e,
+        type: 2}
+    - target: {fileID: 114461279917470818, guid: 9812beea10594418682c76b265c95ccb,
+        type: 2}
+      propertyPath: winPanelPrefab
+      value: 
+      objectReference: {fileID: 1446180823662066, guid: c683432b06ec94eb296a4049274c8db2,
+        type: 2}
+    - target: {fileID: 114461279917470818, guid: 9812beea10594418682c76b265c95ccb,
+        type: 2}
+      propertyPath: losePanelPrefab
+      value: 
+      objectReference: {fileID: 1994466471033720, guid: 5c193f939d6a041d097b1a7ca02a16be,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9812beea10594418682c76b265c95ccb, type: 2}
   m_IsPrefabParent: 0

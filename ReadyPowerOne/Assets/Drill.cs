@@ -40,8 +40,8 @@ public class Drill : MonoBehaviour, ICombat {
 
 	// Update is called once per frame
 	void Update () {
-
-		}
+        transform.Rotate(new Vector3(0f,0f, 90f * Time.deltaTime * (energy/100f)));
+	}
 
 	/*
 	void OnCollisionStay2D(Collision2D coll) {

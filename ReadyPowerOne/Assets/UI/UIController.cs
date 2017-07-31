@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour {
 	public GameObject coal;
 	public GameObject destWall;
 	public GameObject floor;
+	public GameObject exit;
 
 	public int mapWidth = 50;
 	public int mapHeight = 120;
@@ -22,10 +23,16 @@ public class UIController : MonoBehaviour {
 
 	public UpgradePanelBehavior upgradePanelPrefab;
 	public ResourcesPanelBehavior resourcePanelPrefab;
+    public GameObject startPanelPrefab;
+    public GameObject winPanelPrefab;
+    public GameObject losePanelPrefab;
 	public GameObject floatingTextPrefab;
 
 	private UpgradePanelBehavior upgradePanel;
 	private ResourcesPanelBehavior resourcePanel;
+    private GameObject startPanel;
+    private GameObject winPanel;
+    private GameObject losePanel;
 
 	private float lastDraw = 0f;
 	private float DrawAmount = 0f;
@@ -50,8 +57,9 @@ public class UIController : MonoBehaviour {
 	void Start () {
 		//Instantiate (pausePanel, this.transform);
 		resourcePanel = Instantiate (resourcePanelPrefab, this.transform);
+        startPanel = Instantiate(startPanelPrefab, this.transform);
 
-		Room room = TerrainGenerator.GenerateLevel (mapWidth, mapHeight, 0);
+        Room room = TerrainGenerator.GenerateLevel (mapWidth, mapHeight, 0);
 
 
 		for (int y = 0; y < room.getHeight(); y++) {
@@ -76,6 +84,11 @@ public class UIController : MonoBehaviour {
 				if (t == Terrain.DestWall && this.destWall != null) {
 					newObject = Instantiate (this.destWall, this.transform);
 				}
+				if (t == Terrain.Exit && this.exit != null) {
+					newObject = Instantiate (this.exit, this.transform);
+				}
+
+
 				if (t != Terrain.Wall && this.floor != null) {
 					GameObject floors = Instantiate (this.floor, this.transform);
 					floors.transform.position = new Vector3 (x * blockSize, y * blockSize, 1);
@@ -106,9 +119,30 @@ public class UIController : MonoBehaviour {
 		else if (Paused && Input.GetKeyDown(KeyCode.P) ) {
 			closeUpgradeMenu();
 		}
+
+        if(Input.GetKey(KeyCode.Space)) {
+            startPanel.SetActive(false);
+        }
 	}
-	
-	public void openUpgradeMenu(){
+
+
+    public void Win() {
+        if (winPanel == null) {
+            winPanel = Instantiate(winPanelPrefab, this.transform);
+        } else {
+            winPanel.SetActive(true);
+        }
+    }
+
+    public void Lose() {
+        if (losePanel == null) {
+            losePanel = Instantiate(losePanelPrefab, this.transform);
+        } else {
+            losePanel.SetActive(true);
+        }
+    }
+
+    public void openUpgradeMenu(){
 		upgradePanel = Instantiate (upgradePanelPrefab, this.transform);
 		Paused = true;
 
