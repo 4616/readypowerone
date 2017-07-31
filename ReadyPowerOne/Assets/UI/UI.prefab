@@ -81,6 +81,10 @@ MonoBehaviour:
     type: 2}
   startPanelPrefab: {fileID: 1839361808637312, guid: ff620475e75a8474c869f823eecd4f2e,
     type: 2}
+  winPanelPrefab: {fileID: 1446180823662066, guid: c683432b06ec94eb296a4049274c8db2,
+    type: 2}
+  losePanelPrefab: {fileID: 1994466471033720, guid: 5c193f939d6a041d097b1a7ca02a16be,
+    type: 2}
   floatingTextPrefab: {fileID: 1221048958523654, guid: 627d1582c90904d9cbca62ce223d4aa2,
     type: 2}
 --- !u!114 &114518805380045662

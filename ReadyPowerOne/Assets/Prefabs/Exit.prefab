@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212752023718606572}
   - component: {fileID: 50368453676633378}
   - component: {fileID: 58736497519473698}
+  - component: {fileID: 114519132095282968}
   m_Layer: 0
   m_Name: Exit
   m_TagString: Untagged
@@ -49,7 +50,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1391912512054054}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -71,12 +72,23 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
+--- !u!114 &114519132095282968
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1391912512054054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9a78e7fba8024447b220638d08dbddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212752023718606572
 SpriteRenderer:
   m_ObjectHideFlags: 1

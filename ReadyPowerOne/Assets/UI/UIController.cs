@@ -24,11 +24,15 @@ public class UIController : MonoBehaviour {
 	public UpgradePanelBehavior upgradePanelPrefab;
 	public ResourcesPanelBehavior resourcePanelPrefab;
     public GameObject startPanelPrefab;
+    public GameObject winPanelPrefab;
+    public GameObject losePanelPrefab;
 	public GameObject floatingTextPrefab;
 
 	private UpgradePanelBehavior upgradePanel;
 	private ResourcesPanelBehavior resourcePanel;
     private GameObject startPanel;
+    private GameObject winPanel;
+    private GameObject losePanel;
 
 	private float lastDraw = 0f;
 	private float DrawAmount = 0f;
@@ -120,8 +124,24 @@ public class UIController : MonoBehaviour {
             startPanel.SetActive(false);
         }
 	}
-	
-	void openUpgradeMenu(){
+
+    public void Win() {
+        if (winPanel == null) {
+            winPanel = Instantiate(winPanelPrefab, this.transform);
+        } else {
+            winPanel.SetActive(true);
+        }
+    }
+
+    public void Lose() {
+        if (losePanel == null) {
+            losePanel = Instantiate(losePanelPrefab, this.transform);
+        } else {
+            losePanel.SetActive(true);
+        }
+    }
+
+    void openUpgradeMenu(){
 		upgradePanel = Instantiate (upgradePanelPrefab, this.transform);
 		Paused = true;
 
