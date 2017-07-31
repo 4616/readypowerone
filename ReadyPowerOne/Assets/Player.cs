@@ -139,6 +139,12 @@ public class Player : MonoBehaviour, ICombat {
 
     private void LowEnergy(){
         if(energy <= 30){
+            if(energy > 25){
+                UIController.Instance.floatTextForText("Low on Energy!", this.transform);
+            }
+            if(energy < 25){
+                UIController.Instance.floatTextForText("Drop a Drill!", this.transform);
+            }
             float cutpoint = Random.Range(0f,1f);
             if(cutpoint < ((energy-20)/200)){
                 GameObject ex = Instantiate (lowenergywarning, this.transform.position, this.transform.rotation);
