@@ -111,6 +111,8 @@ MonoBehaviour:
   bolts: {fileID: 1282703662790732, guid: db05cdc5b0f754b24a74b2621b57f049, type: 2}
   healthdrop: {fileID: 1487907783280644, guid: 91b5cae17af0e43369e608be8572ec06, type: 2}
   explosionenemy: {fileID: 1686933039066152}
+  upgradedrop: {fileID: 1877273859217140, guid: c1b3228567eac4163b0c926918f9f919,
+    type: 2}
 --- !u!212 &212099828507762968
 SpriteRenderer:
   m_ObjectHideFlags: 1

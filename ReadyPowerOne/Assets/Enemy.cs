@@ -114,6 +114,7 @@ public class Enemy : MonoBehaviour, ICombat {
     public void Die (){
         //Debug.Log("Enemy dead!");
         float rand;
+        float jitter = 2f;
         Vector3 randvec; 
         if (bolts != null) {
         	rand = Random.Range(0f,1f);
@@ -121,9 +122,9 @@ public class Enemy : MonoBehaviour, ICombat {
         	if(0.5f >= rand){
             	GameObject newObject = Instantiate(this.bolts, UIController.Instance.transform);
 
-            	randvec = new Vector3(Random.Range (-0.5, 0.5), 
-				          		Random.Range (-0.5, 0.5), 
-				                  0);
+            	randvec = new Vector3(Random.Range (-jitter, jitter), 
+				          		Random.Range (-jitter, jitter), 
+				                  0f);
             	newObject.transform.position = this.transform.position + randvec;
             }
         }
@@ -131,9 +132,9 @@ public class Enemy : MonoBehaviour, ICombat {
         	rand = Random.Range(0f,1f);
         	if(.1f > rand){
             	GameObject newObject = Instantiate(this.healthdrop, UIController.Instance.transform);
-            	randvec = new Vector3(Random.Range (-0.5, 0.5), 
-				          		Random.Range (-0.5, 0.5), 
-				                  0);
+            	randvec = new Vector3(Random.Range (-jitter, jitter), 
+				          		Random.Range (-jitter, jitter), 
+				                  0f);
             	newObject.transform.position = this.transform.position + randvec;
         	}
         }
@@ -142,9 +143,9 @@ public class Enemy : MonoBehaviour, ICombat {
         	rand = Random.Range(0f,1f);
         	if(0.05f > rand){
             	GameObject newObject = Instantiate(this.upgradedrop, UIController.Instance.transform);
-            	randvec = new Vector3(Random.Range (-0.5, 0.5), 
-				          		Random.Range (-0.5, 0.5), 
-				                  0);
+            	randvec = new Vector3(Random.Range (-jitter, jitter), 
+				          		Random.Range (-jitter, jitter), 
+				                  0f);
             	newObject.transform.position = this.transform.position + randvec;
         	}
 

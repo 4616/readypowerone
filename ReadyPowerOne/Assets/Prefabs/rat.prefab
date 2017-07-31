@@ -108,9 +108,11 @@ MonoBehaviour:
   armor: 0
   attackSpeed: 1
   attackCoolDown: 1
-  bolts: {fileID: 1282703662790732, guid: db05cdc5b0f754b24a74b2621b57f049, type: 2}
+  bolts: {fileID: 0}
+  healthdrop: {fileID: 0}
   explosionenemy: {fileID: 1275435267980758, guid: f5b075fd7b77d40fb828c7d1ed1338ea,
     type: 2}
+  upgradedrop: {fileID: 0}
   rotationTime: 0.75
   rotationTimeRandom: 0.25
   rotationTimer: 0

@@ -112,6 +112,8 @@ MonoBehaviour:
   healthdrop: {fileID: 1487907783280644, guid: 91b5cae17af0e43369e608be8572ec06, type: 2}
   explosionenemy: {fileID: 1275435267980758, guid: f5b075fd7b77d40fb828c7d1ed1338ea,
     type: 2}
+  upgradedrop: {fileID: 1877273859217140, guid: c1b3228567eac4163b0c926918f9f919,
+    type: 2}
   rotationSpeed: 90
 --- !u!212 &212075094613569576
 SpriteRenderer:
