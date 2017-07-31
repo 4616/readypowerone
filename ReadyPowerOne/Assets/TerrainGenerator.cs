@@ -276,8 +276,8 @@ public class CrapRoomFactory: RoomFactory {
 		funkyLayout.Reverse ();
 
 		return new SimpleRoomWithExits(funkyLayout, new List<Vector2> {
-			new Vector2(4, 0), new Vector2(12,0), new Vector2(4, funkyLayout.Count), 
-			new Vector2(12, funkyLayout.Count), new Vector2(funkyLayout[0].Count-1, 6)
+			new Vector2(4, 1), new Vector2(12,1), new Vector2(4, funkyLayout.Count -2), 
+			new Vector2(12, funkyLayout.Count -2), new Vector2(funkyLayout[0].Count-2, 6)
 		});
 	}
 }
@@ -386,7 +386,7 @@ public class RectangleRoomFactory : RoomFactory
 	private Boolean ifEnemies;
 
 	private double enemy1Probability = 0.02;
-	private double enemy2Probability = 0.02;
+	private double enemy2Probability = 0.0;
 
 	private double roomDestWallProbability = 0.3;
 	private double destWallProbability = 0.25;
@@ -409,29 +409,30 @@ public class RectangleRoomFactory : RoomFactory
 			randomEnemyList.Shuffle ();
 			layout [firstEnemyX] [firstEnemyY] = randomEnemyList[0];
 
-			for (int x = 1; x < (width - 1); x++) {
-				for (int y = 1; y < (height - 1); y++) {
-					Double nextDie = rnd.NextDouble ();
-					if (nextDie < destWallProbability) {
-						layout [y] [x] = Terrain.DestWall;
+			if (rnd.NextDouble () < roomDestWallProbability) {
+				for (int x = 1; x < (width - 1); x++) {
+					for (int y = 1; y < (height - 1); y++) {
+						Double nextDie = rnd.NextDouble ();
+						if (nextDie < destWallProbability) {
+							layout [y] [x] = Terrain.DestWall;
+						}
 					}
 				}
 			}
 
 			//Only some of the rooms will have destructable walls
-			if (rnd.NextDouble () < roomDestWallProbability) {
-				for (int x = 1; x < (width - 1); x++) {
-					for (int y = 1; y < (height - 1); y++) {
-						Double nextDie = rnd.NextDouble ();
-						if (nextDie < enemy1Probability) {
-							layout [y] [x] = Terrain.Enemy1;
-						}
-						else if (nextDie < (enemy1Probability + enemy2Probability)) {
-							layout [y] [x] = Terrain.Enemy2;
-						}
+			for (int x = 1; x < (width - 1); x++) {
+				for (int y = 1; y < (height - 1); y++) {
+					Double nextDie = rnd.NextDouble ();
+					if (nextDie < enemy1Probability) {
+						layout [y] [x] = Terrain.Enemy1;
+					}
+					else if (nextDie < (enemy1Probability + enemy2Probability)) {
+						layout [y] [x] = Terrain.Enemy2;
 					}
 				}
 			}
+
 
 		}
 

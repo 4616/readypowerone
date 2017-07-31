@@ -29,7 +29,7 @@ public class Tower : Enemy {
         attackCoolDown = attackSpeed;
 
         Bullet b;
-        if (Cannon.pool.Count > 0) {
+        if (Tower.pool.Count > 0) {
             b = Tower.pool.Dequeue();
             b.gameObject.SetActive(true);
         } else {
