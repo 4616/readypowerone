@@ -68,6 +68,11 @@ MonoBehaviour:
   enemy1: {fileID: 1809688050541602, guid: 2dd63090b5d9d4a5eb7607db97e31337, type: 2}
   enemy2: {fileID: 1926311890349992, guid: c6c6760d00e494629ba0d8f2c691c08f, type: 2}
   coal: {fileID: 1613862024546718, guid: effcbba0ace834f43ba284c91ddb39b2, type: 2}
+  destWall: {fileID: 1095522940876348, guid: 17bbd672baa3b4fafbace8e13e628d71, type: 2}
+  floor: {fileID: 1855446616495024, guid: 3f9fabe3749f94dc5afa207a4c118dcb, type: 2}
+  mapWidth: 50
+  mapHeight: 120
+  blockSize: 2.5
   upgradePanelPrefab: {fileID: 114455520312948892, guid: 69882d20ced394cf8a794264ed863561,
     type: 2}
   resourcePanelPrefab: {fileID: 114038237483264246, guid: 7b4bbed2a659446d083f3b706bdb19f0,
