@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum Terrain {Open,Wall,Coal,Exit,Enemy1,Enemy2,BossEnemy};  //Wall, Open, Coal, Exit
+public enum Terrain {Open,Wall,Coal,Exit,Enemy1,Enemy2,BossEnemy,DestWall};  //Wall, Open, Coal, Exit
 public enum Direction {Left, Top, Right, Bottom};
 
 public static class RoomTools {
@@ -138,10 +138,15 @@ public static class RoomTools {
 	public static SimpleRoom mergeHallway(SimpleRoom parentRoom, Hallway hallway) {
 		List<List<Terrain>> parentLayout = parentRoom.getLayout ();
 
+		Double destWallProbability = 0.05;
+
 		foreach (TerrainCoordinates tc in hallway.terrainCoordinateIterator()) {
 
 			if (parentLayout [tc.Y] [tc.X] == Terrain.Wall) {
-				parentLayout [tc.Y] [tc.X] = tc.Terrain;
+				if (rng.NextDouble () < destWallProbability)
+					parentLayout [tc.Y] [tc.X] = Terrain.DestWall;
+				else
+					parentLayout [tc.Y] [tc.X] = tc.Terrain;
 			}
 		}
 		parentRoom.Layout = parentLayout;
@@ -220,15 +225,16 @@ public class FunkyRoomFactory: RoomFactory {
 		Terrain E = Terrain.Enemy1;
 		Terrain I = Terrain.Enemy2;
 		Terrain C = Terrain.Coal;
+		Terrain D = Terrain.DestWall;
 
 		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
 
 		funkyLayout.Add(new List<Terrain> { W, W, W, W, W, W, W, W, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, E, O, O, O, I, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, W, O, W, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, O, C, O, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, W, O, W, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, W, D, W, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, D, C, D, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, W, D, W, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, I, O, O, O, E, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, W, W, W, W, W, W });
@@ -249,6 +255,7 @@ public class CrapRoomFactory: RoomFactory {
 		Terrain I = Terrain.Enemy2;
 		Terrain C = Terrain.Coal;
 		Terrain B = Terrain.BossEnemy;
+		Terrain D = Terrain.DestWall;
 
 		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
 
@@ -256,11 +263,11 @@ public class CrapRoomFactory: RoomFactory {
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, I, O, O, O, O, O, O, O, O, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, E, B, O, O, I, O, O, O, B, O, O, E, O, O, B, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, O, O, C, O, O, O, O, O, O, O, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, W, W, W, O, W, W, O, O, O, W, O, O, W, W, O, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, W, O, O, O, W, O, W, O, W, O, W, O, W, O, W, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, I, I, W, O, I, I, W, W, O, I, W, W, W, I, W, W, O, I, I, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, W, I, O, O, W, O, W, O, W, O, W, O, W, E, O, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, W, W, W, O, W, O, W, O, W, O, W, O, W, O, O, E, E, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, D, D, D, O, D, D, O, O, O, D, O, O, W, W, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, D, O, O, O, D, O, D, O, D, O, D, O, W, O, W, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, I, I, D, O, I, I, D, D, O, I, D, D, D, I, W, W, O, I, I, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, D, I, O, O, D, O, D, O, D, O, D, O, W, E, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, D, D, D, O, D, O, D, O, D, O, D, O, W, O, O, E, E, W });
 		funkyLayout.Add(new List<Terrain> { W, E, E, O, O, E, O, O, O, O, O, O, O, O, E, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, E, O, O, I, O, O, O, O, O, O, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, W });
@@ -284,10 +291,11 @@ public class ComplexRoomFactory: RoomFactory {
 		Terrain I = Terrain.Enemy2;
 		Terrain C = Terrain.Coal;
 		Terrain B = Terrain.BossEnemy;
+		Terrain D = Terrain.DestWall;
 
 		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
 
-		funkyLayout.Add(new List<Terrain> { W, W, O, W, W, W, W, W, W, W, W, W, W, O, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, D, W, W, W, W, W, W, W, W, W, W, D, W, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, O, O, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, E, O, O, O, I, O, O, O, O, O, O, E, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, O, O, O, O, O, O, O, W });
@@ -295,11 +303,11 @@ public class ComplexRoomFactory: RoomFactory {
 		funkyLayout.Add(new List<Terrain> { W, W, O, W, W, W, O, O, C, O, W, W, W, O, W, W });
 		funkyLayout.Add(new List<Terrain> { W, W, I, W, W, W, W, W, W, W, W, W, W, I, W, W });
 		funkyLayout.Add(new List<Terrain> { W, W, O, W, W, W, W, W, W, W, W, W, W, O, W, W });
-		funkyLayout.Add(new List<Terrain> { W, W, O, W, W, W, W, W, W, W, W, W, W, O, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, D, W, W, W, W, W, W, W, W, W, W, D, W, W });
 		funkyLayout.Add(new List<Terrain> { W, W, O, W, W, W, W, W, W, W, W, W, W, O, W, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, E, O, W, W, W, W, O, O, O, E, O, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, W, W, W, W, O, O, O, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, O, O, O, O, O, O, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, O, O, O, O, D, D, D, O, O, O, O, O, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, W, W, W, W, W, O, W, W, W, W, W, W, W });
 
 		return new SimpleRoomWithExits(funkyLayout, 
@@ -317,16 +325,17 @@ public class DiamondRoomFactory: RoomFactory {
 		Terrain W = Terrain.Wall;
 		Terrain B = Terrain.BossEnemy;
 		Terrain C = Terrain.Coal;
+		Terrain D = Terrain.DestWall;
 
 		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
 
 		funkyLayout.Add(new List<Terrain> { W, W, W, W, O, W, W, W, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, O, O, O, W, W, W });
-		funkyLayout.Add(new List<Terrain> { W, W, O, O, O, O, O, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, O, O, D, O, O, W, W });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, C, O, O, O, W });
-		funkyLayout.Add(new List<Terrain> { O, O, O, C, B, C, O, O, O });
+		funkyLayout.Add(new List<Terrain> { O, O, D, C, B, C, D, O, O });
 		funkyLayout.Add(new List<Terrain> { W, O, O, O, C, O, O, O, W });
-		funkyLayout.Add(new List<Terrain> { W, W, O, O, O, O, O, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, O, O, D, O, O, W, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, O, O, O, W, W, W });
 		funkyLayout.Add(new List<Terrain> { W, W, W, W, O, W, W, W, W });
 
@@ -376,8 +385,11 @@ public class RectangleRoomFactory : RoomFactory
 	public int exitCount;
 	private Boolean ifEnemies;
 
-	private double enemy1Probability = 0.015;
-	private double enemy2Probability = 0.015;
+	private double enemy1Probability = 0.02;
+	private double enemy2Probability = 0.02;
+
+	private double roomDestWallProbability = 0.3;
+	private double destWallProbability = 0.25;
 
 	public override Room getRoom ()
 	{
@@ -397,15 +409,26 @@ public class RectangleRoomFactory : RoomFactory
 			randomEnemyList.Shuffle ();
 			layout [firstEnemyX] [firstEnemyY] = randomEnemyList[0];
 
-
 			for (int x = 1; x < (width - 1); x++) {
 				for (int y = 1; y < (height - 1); y++) {
 					Double nextDie = rnd.NextDouble ();
-					if (nextDie < enemy1Probability) {
-						layout [y] [x] = Terrain.Enemy1;
+					if (nextDie < destWallProbability) {
+						layout [y] [x] = Terrain.DestWall;
 					}
-					else if (nextDie < (enemy1Probability + enemy2Probability)) {
-						layout [y] [x] = Terrain.Enemy2;
+				}
+			}
+
+			//Only some of the rooms will have destructable walls
+			if (rnd.NextDouble () < roomDestWallProbability) {
+				for (int x = 1; x < (width - 1); x++) {
+					for (int y = 1; y < (height - 1); y++) {
+						Double nextDie = rnd.NextDouble ();
+						if (nextDie < enemy1Probability) {
+							layout [y] [x] = Terrain.Enemy1;
+						}
+						else if (nextDie < (enemy1Probability + enemy2Probability)) {
+							layout [y] [x] = Terrain.Enemy2;
+						}
 					}
 				}
 			}
@@ -620,6 +643,9 @@ public class Hallway {
 		int ySign = Math.Sign (Y2 - Y1);
 
 		int currentX = X1;
+
+
+
 		int currentY = Y1;
 //		yield return new TerrainCoordinates (currentX, currentY, Terrain.Open);
 

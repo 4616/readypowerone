@@ -21,7 +21,7 @@ public class Player : MonoBehaviour, ICombat {
     public float phaserCost = 2f;
 	public float moveCost = .1f;
     public float drillCost = 10f;
-    public GameObject explosion;
+    public GameObject explosionplayer;
 
     public static Player GetPlayer() {
         return player_;
@@ -30,6 +30,14 @@ public class Player : MonoBehaviour, ICombat {
     public void Start() {
         //DropDrill();
         player_ = this;
+
+		this.transform.position = new Vector3 (UIController.Instance.mapWidth * UIController.Instance.blockSize / 2, 10, 0);
+
+		Upgrade.upgrades.Add(new Upgrade(
+			"Max Battery",
+			"Increase max battery capacity by 20",
+			() => energyMax += 20f
+		));
 
         Upgrade.upgrades.Add(new Upgrade(
             "Move Speed",
@@ -158,7 +166,7 @@ public class Player : MonoBehaviour, ICombat {
 
 		UIController.Instance.updateHealth(health);
 		UIController.Instance.floatText (damage, this.transform);
-        GameObject ex = Instantiate (explosion, this.transform.position, this.transform.rotation);
+        GameObject ex = Instantiate (explosionplayer, this.transform.position, this.transform.rotation);
         Object.Destroy(ex, 0.5f);
 
 		if (health <= 0f) {

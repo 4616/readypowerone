@@ -11,6 +11,12 @@ public class UIController : MonoBehaviour {
 	public GameObject enemy1;
 	public GameObject enemy2;
 	public GameObject coal;
+	public GameObject destWall;
+
+	public int mapWidth = 50;
+	public int mapHeight = 120;
+	public float blockSize = 2.5f;
+
 
 	public UpgradePanelBehavior upgradePanelPrefab;
 	public ResourcesPanelBehavior resourcePanelPrefab;
@@ -21,7 +27,7 @@ public class UIController : MonoBehaviour {
 
 	private float lastDraw = 0f;
 	private float DrawAmount = 0f;
-	private float blockSize = 2.5f;
+
 		
 	public static UIController Instance { get; private set; }
 
@@ -43,7 +49,8 @@ public class UIController : MonoBehaviour {
 		//Instantiate (pausePanel, this.transform);
 		resourcePanel = Instantiate (resourcePanelPrefab, this.transform);
 
-		Room room = TerrainGenerator.GenerateLevel (50, 120, 0);
+		Room room = TerrainGenerator.GenerateLevel (mapWidth, mapHeight, 0);
+
 
 		for (int y = 0; y < room.getHeight(); y++) {
 			for (int x = 0; x < room.getWidth(); x++) {
@@ -60,6 +67,9 @@ public class UIController : MonoBehaviour {
 				}
 				if (t == Terrain.Enemy2 && this.enemy2 != null) {
 					newObject = Instantiate (this.enemy2, this.transform);
+				}
+				if (t == Terrain.DestWall && this.enemy2 != null) {
+					newObject = Instantiate (this.destWall, this.transform);
 				}
 				// if (t == Terrain.Coal && this.coal != null) {
 				// 	newObject = Instantiate (this.coal, this.transform); //comment out to remove drills
@@ -82,25 +92,24 @@ public class UIController : MonoBehaviour {
 
 	void Update() {
 		if (!Paused && Input.GetKeyDown(KeyCode.P) ) {
-			Pause();
+			openUpgradeMenu();
 		}
 		else if (Paused && Input.GetKeyDown(KeyCode.P) ) {
-			unPause();
+			closeUpgradeMenu();
 		}
 	}
 	
-	void Pause(){
-		upgradeMenu ();
+	void openUpgradeMenu(){
+		upgradePanel = Instantiate (upgradePanelPrefab, this.transform);
 		Paused = true;
-		//pausePanel.SetActive (true);
 
 		Time.timeScale = 0f;
 	}
 
-	void unPause(){
-		
+	public void closeUpgradeMenu(){
+		Debug.Log("close");
+		Destroy (upgradePanel.gameObject);
 		Paused = false;
-		//pausePanel.SetActive (false);
 
 		Time.timeScale = 1f;
 	}
@@ -134,11 +143,6 @@ public class UIController : MonoBehaviour {
 		} 
 
 	}
-
-	public void upgradeMenu(){
-		GameObject um = Instantiate (upgradePanelPrefab.gameObject, this.transform);
-
-		//um.GetComponent<UpgradePanelBehavior>().
-	}
+		
 
 }
