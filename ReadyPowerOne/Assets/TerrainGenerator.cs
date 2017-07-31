@@ -348,30 +348,56 @@ public class DiamondRoomFactory: RoomFactory {
 	}
 }
 
-public class LineRoomFactory: RoomFactory {
+public class FinalRoomFactory: RoomFactory {
 	public override Room getRoom () {
 
 		Terrain O = Terrain.Open;
 		Terrain W = Terrain.Wall;
 		Terrain E = Terrain.Enemy1;
 		Terrain C = Terrain.Coal;
+		Terrain D = Terrain.DestWall;
+		Terrain B = Terrain.BossEnemy;
+		Terrain X = Terrain.Exit;
+		Terrain S = Terrain.Spawner;
 
 		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
 
-		funkyLayout.Add(new List<Terrain> { W, W, W });
-		funkyLayout.Add(new List<Terrain> { W, C, W });
-		funkyLayout.Add(new List<Terrain> { W, E, W });
-		funkyLayout.Add(new List<Terrain> { W, E, W });
-		funkyLayout.Add(new List<Terrain> { W, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, W });
-		funkyLayout.Add(new List<Terrain> { W, O, W });
+		funkyLayout.Add(new List<Terrain> { W, W, W, W, W, W, W, W, W });
+		funkyLayout.Add(new List<Terrain> { W, O, O, D, D, D, O, O, W });
+		funkyLayout.Add(new List<Terrain> { W, B, D, D, X, D, D, B, W });
+		funkyLayout.Add(new List<Terrain> { W, O, S, D, D, D, S, O, W });
+		funkyLayout.Add(new List<Terrain> { W, W, O, O, D, O, O, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, W, O, O, O, W, W, W });
+		funkyLayout.Add(new List<Terrain> { W, W, W, W, O, W, W, W, W });
 
 		return new SimpleRoomWithExits(funkyLayout, new List<Vector2> {new Vector2(2, 1)});
 	}
 }
+
+//public class FinalRoomFactory: RoomFactory {
+//	public override Room getRoom () {
+//
+//		Terrain O = Terrain.Open;
+//		Terrain W = Terrain.Wall;
+//		Terrain E = Terrain.Enemy1;
+//		Terrain C = Terrain.Coal;
+//
+//		List<List<Terrain>> funkyLayout = new List<List<Terrain>>();
+//
+//		funkyLayout.Add(new List<Terrain> { W, W, W });
+//		funkyLayout.Add(new List<Terrain> { W, C, W });
+//		funkyLayout.Add(new List<Terrain> { W, E, W });
+//		funkyLayout.Add(new List<Terrain> { W, E, W });
+//		funkyLayout.Add(new List<Terrain> { W, O, W });
+//		funkyLayout.Add(new List<Terrain> { W, O, W });
+//		funkyLayout.Add(new List<Terrain> { W, O, W });
+//		funkyLayout.Add(new List<Terrain> { W, O, W });
+//		funkyLayout.Add(new List<Terrain> { W, O, W });
+//		funkyLayout.Add(new List<Terrain> { W, O, W });
+//
+//		return new SimpleRoomWithExits(funkyLayout, new List<Vector2> {new Vector2(2, 1)});
+//	}
+//}
 
 public abstract class RoomFactory
 {
@@ -746,8 +772,10 @@ public static class TerrainGenerator
 
 		RoomFactory startingRoomFactory = new RectangleRoomFactory (6, 6, 1, false);
 
-		placedRoomCoordinates.Add(new RoomCoordinates(startingRoomFactory.getRoom(), width / 2 - 3, height - 10));
 		placedRoomCoordinates.Add(new RoomCoordinates(startingRoomFactory.getRoom(), width / 2 - 3, 2));
+		placedRoomCoordinates.Add(new RoomCoordinates((new FinalRoomFactory()).getRoom(), width / 2 - 4, height-10));
+
+		//placedRoomCoordinates.Add(new RoomCoordinates(startingRoomFactory.getRoom(), width / 2 - 3, 2));
 
 		DiamondRoomFactory bossFactory = new DiamondRoomFactory ();
 

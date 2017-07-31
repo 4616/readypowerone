@@ -102,7 +102,7 @@ MonoBehaviour:
   spawnTime: 5
   spawnCooldown: 0
   health: 200
-  enemyPrefab: {fileID: 114963874435354416, guid: 18893815215848a41b0fbd2dd03e9ed4,
+  enemyPrefab: {fileID: 114198694049240360, guid: c6c6760d00e494629ba0d8f2c691c08f,
     type: 2}
 --- !u!212 &212781787422261284
 SpriteRenderer:

@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour, ICombat {
 	public float attackSpeed = 1f;
 	public float attackCoolDown = 1f;
 	public GameObject bolts;
+	public GameObject healthdrop;
 	public GameObject explosionenemy;
 
 
@@ -110,9 +111,11 @@ public class Enemy : MonoBehaviour, ICombat {
     }
 
     public void Die (){
-    	//Debug.Log("Enemy dead!");
-    	GameObject newObject = Instantiate (this.bolts, UIController.Instance.transform);
-        newObject.transform.position = this.transform.position;
+        //Debug.Log("Enemy dead!");
+        if (bolts != null) {
+            GameObject newObject = Instantiate(this.bolts, UIController.Instance.transform);
+            newObject.transform.position = this.transform.position;
+        }
     	Object.Destroy(this.gameObject);
     }
 }
