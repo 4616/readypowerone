@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour {
 	public GameObject enemy2;
 	public GameObject coal;
 	public GameObject destWall;
+	public GameObject floor;
 
 	public int mapWidth = 50;
 	public int mapHeight = 120;
@@ -68,8 +69,12 @@ public class UIController : MonoBehaviour {
 				if (t == Terrain.Enemy2 && this.enemy2 != null) {
 					newObject = Instantiate (this.enemy2, this.transform);
 				}
-				if (t == Terrain.DestWall && this.enemy2 != null) {
+				if (t == Terrain.DestWall && this.destWall != null) {
 					newObject = Instantiate (this.destWall, this.transform);
+				}
+				if (t != Terrain.Wall && this.floor != null) {
+					GameObject floors = Instantiate (this.floor, this.transform);
+					floors.transform.position = new Vector3 (x * blockSize, y * blockSize, 1);
 				}
 				// if (t == Terrain.Coal && this.coal != null) {
 				// 	newObject = Instantiate (this.coal, this.transform); //comment out to remove drills
