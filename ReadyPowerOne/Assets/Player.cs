@@ -28,6 +28,9 @@ public class Player : MonoBehaviour, ICombat {
     }
 
     public void Start() {
+        UIController.Instance.updateBolts(bolts);
+        UIController.Instance.updateEnergy(energy);
+        UIController.Instance.updateHealth(health);
         //DropDrill();
         player_ = this;
 
@@ -239,7 +242,6 @@ public class Player : MonoBehaviour, ICombat {
     public void GainEnergy(float amount){
         //Debug.Log(amount);
         energy = AtOrBelowMax(energy, amount, energyMax);
-        energy += amount;
         UIController.Instance.updateEnergy(energy);
         //Debug.Log(energy);
 
