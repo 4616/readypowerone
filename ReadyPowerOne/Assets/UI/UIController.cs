@@ -23,10 +23,12 @@ public class UIController : MonoBehaviour {
 
 	public UpgradePanelBehavior upgradePanelPrefab;
 	public ResourcesPanelBehavior resourcePanelPrefab;
+    public GameObject startPanelPrefab;
 	public GameObject floatingTextPrefab;
 
 	private UpgradePanelBehavior upgradePanel;
 	private ResourcesPanelBehavior resourcePanel;
+    private GameObject startPanel;
 
 	private float lastDraw = 0f;
 	private float DrawAmount = 0f;
@@ -51,8 +53,9 @@ public class UIController : MonoBehaviour {
 	void Start () {
 		//Instantiate (pausePanel, this.transform);
 		resourcePanel = Instantiate (resourcePanelPrefab, this.transform);
+        startPanel = Instantiate(startPanelPrefab, this.transform);
 
-		Room room = TerrainGenerator.GenerateLevel (mapWidth, mapHeight, 0);
+        Room room = TerrainGenerator.GenerateLevel (mapWidth, mapHeight, 0);
 
 
 		for (int y = 0; y < room.getHeight(); y++) {
@@ -112,6 +115,10 @@ public class UIController : MonoBehaviour {
 		else if (Paused && Input.GetKeyDown(KeyCode.P) ) {
 			closeUpgradeMenu();
 		}
+
+        if(Input.GetKey(KeyCode.Space)) {
+            startPanel.SetActive(false);
+        }
 	}
 	
 	void openUpgradeMenu(){
