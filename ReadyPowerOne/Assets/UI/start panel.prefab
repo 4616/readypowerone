@@ -121,18 +121,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Welcome,
-
-
-
-    Use WASD to move
-
-    Use Left-click to shoot
-
-    Use Right-click to attack with energy lance.
-
-
-    Press SPACE to begin!'
+  m_Text: "You are running out of power in this bitter fight to get to the end before
+    you are killed by enemy robots or run out of the volts and bolts necessary to
+    drill for more energy.\n\nUse W\n     ASD to move.\nUse mouse to rotate and aim.\nUse
+    Left-click to shoot.\nUse Right-click to attack with energy lance.\nQ drops a
+    drill  (costs volts and bolts).\nPress SPACE to begin!"
 --- !u!114 &114989307534739588
 MonoBehaviour:
   m_ObjectHideFlags: 1
